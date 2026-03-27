@@ -1,0 +1,7 @@
+### Static analysis
+
+| Scope  | Variable | Role    | Location |
+| :------| :--------| :-------| :--------|
+| module | format   | stepper | line 3   |
+format '4s' needs 4 bytes
+format '3i4s5d' needs 56 bytes

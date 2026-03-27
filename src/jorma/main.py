@@ -28,7 +28,14 @@ def main() -> None:
         action="store_true",
         help="Run file as __main__ to collect dynamic role information",
     )
+    parser.add_argument(
+        "--stderr",
+        action="store_true",
+        help="Write all output to stderr instead of stdout",
+    )
     args = parser.parse_args()
+
+    out = sys.stderr if args.stderr else sys.stdout
 
     path: Path = args.program
     if not path.exists():
@@ -49,10 +56,10 @@ def main() -> None:
 
     wants_dynamic = args.run or args.func_name is not None
     if wants_dynamic:
-        print("### Static analysis\n")
+        print("### Static analysis\n", file=out)
     output = format_static(results, args.fmt)
     if output:
-        print(output)
+        print(output, file=out)
 
     if args.func_name is not None:
         try:
@@ -62,8 +69,8 @@ def main() -> None:
             sys.exit(1)
         dyn_output = format_dynamic(dynamic, args.fmt)
         if dyn_output:
-            print("\n### Dynamic analysis\n")
-            print(dyn_output)
+            print("\n### Dynamic analysis\n", file=out)
+            print(dyn_output, file=out)
     elif args.run:
         try:
             dynamic = run_as_main(path)
@@ -72,5 +79,5 @@ def main() -> None:
             sys.exit(1)
         dyn_output = format_dynamic(dynamic, args.fmt)
         if dyn_output:
-            print("\n### Dynamic analysis\n")
-            print(dyn_output)
+            print("\n### Dynamic analysis\n", file=out)
+            print(dyn_output, file=out)

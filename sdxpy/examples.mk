@@ -2,7 +2,7 @@
 # Each jorma.mk must define THIS_DIR, LESSON, and PY_FILES before including
 # this file.
 
-JORMA      := uv run jorma
+JORMA := uv run jorma
 
 .PHONY: all
 all: index.md
@@ -16,7 +16,3 @@ index.md: $(PY_FILES)
 	        printf '\n'; \
 	    done; \
 	} > $@
-
-.PHONY: clean
-clean:
-	rm -f index.md

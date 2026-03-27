@@ -8,6 +8,3 @@ TARGETS=\
   oop.out
 
 include ../examples.mk
-
-dynamic.out: dynamic.tll
-func.out: func.tll

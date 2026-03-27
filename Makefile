@@ -38,7 +38,7 @@ analyze:
 	@for dir in sdxpy/*/; do \
 	    if [ -f "$$dir/jorma.mk" ]; then \
 	        echo "=== $$dir ==="; \
-	        $(MAKE) -C "$$dir" -f jorma.mk -B --no-print-directory; \
+	        cd $$dir && $(MAKE) -f jorma.mk; \
 	    fi; \
 	done
 

@@ -10,6 +10,3 @@ TARGETS=\
   variable_unpacking.out
 
 include ../examples.mk
-
-pack_unicode.py: variable_packing.py
-variable_unpacking.py: variable_packing.py
