@@ -1,21 +1,31 @@
 """Command-line entry point for jorma."""
 
+import argparse
 import sys
 from pathlib import Path
 
 from .dynamic import run_dynamic
-from .static import analyze, _print_static
+from .static import analyze, format_static
 
 
 def main() -> None:
-    if len(sys.argv) < 2:
-        print(f"Usage: {sys.argv[0]} <program.py> [func_name [arg …]]", file=sys.stderr)
-        sys.exit(1)
+    parser = argparse.ArgumentParser(
+        prog="jorma",
+        description="Analyse variable roles in a Python program.",
+    )
+    parser.add_argument("program", type=Path, help="Python source file to analyse")
+    parser.add_argument("func_name", nargs="?", help="Function to trace dynamically")
+    parser.add_argument("func_args", nargs="*", help="Arguments to pass to func_name")
+    parser.add_argument(
+        "--format",
+        choices=["markdown", "html", "csv"],
+        default="markdown",
+        dest="fmt",
+        help="Output format (default: markdown)",
+    )
+    args = parser.parse_args()
 
-    path = Path(sys.argv[1])
-    func_name = sys.argv[2] if len(sys.argv) > 2 else None
-    func_args = sys.argv[3:] if len(sys.argv) > 3 else []
-
+    path: Path = args.program
     if not path.exists():
         print(f"Error: '{path}' not found", file=sys.stderr)
         sys.exit(1)
@@ -32,14 +42,16 @@ def main() -> None:
         print(f"Syntax error in '{path}': {exc}", file=sys.stderr)
         sys.exit(1)
 
-    if func_name is not None:
+    if args.func_name is not None:
         print("=== Static Analysis ===")
-    _print_static(results)
+    output = format_static(results, args.fmt)
+    if output:
+        print(output)
 
-    if func_name is not None:
+    if args.func_name is not None:
         print("\n=== Dynamic Analysis ===")
         try:
-            dynamic = run_dynamic(path, func_name, func_args)
+            dynamic = run_dynamic(path, args.func_name, args.func_args)
         except Exception as exc:
             print(f"Error during dynamic analysis ({type(exc).__name__}): {exc}", file=sys.stderr)
             sys.exit(1)

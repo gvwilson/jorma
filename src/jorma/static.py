@@ -3,6 +3,8 @@
 import ast
 import sys
 
+from prettytable import PrettyTable, TableStyle
+
 from .constants import (
     CONTAINER,
     CONTAINER_METHODS,
@@ -426,15 +428,25 @@ def analyze(source: str) -> list[tuple[VarInfo, str]]:
     return results
 
 
-def _print_static(results: list[tuple[VarInfo, str]]) -> None:
-    """Print static-analysis results grouped by scope."""
+def format_static(results: list[tuple[VarInfo, str]], fmt: str = "markdown") -> str:
+    """Format static-analysis results as a table in the requested format.
+
+    fmt must be one of: 'markdown', 'html', 'csv'.
+    Returns an empty string (and prints a warning) when results is empty.
+    """
     if not results:
         print("Warning: no variables found.", file=sys.stderr)
-        return
-    current_scope = None
+        return ""
+
+    table = PrettyTable(["Scope", "Variable", "Role", "Location"])
+    table.align = "l"
     for v, role in results:
-        if v.scope != current_scope:
-            current_scope = v.scope
-            print(f"\n[{v.scope}]")
-        line_tag = f"line {v.first_line}" if v.first_line else "?"
-        print(f"  {v.name:<24} {role:<22}  ({line_tag})")
+        table.add_row([v.scope, v.name, role, f"line {v.first_line}" if v.first_line else "?"])
+
+    if fmt == "html":
+        return table.get_html_string()
+    if fmt == "csv":
+        return table.get_csv_string().rstrip("\r\n")
+    # default: markdown
+    table.set_style(TableStyle.MARKDOWN)
+    return str(table)

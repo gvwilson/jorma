@@ -20,7 +20,7 @@ from .constants import (
     UNKNOWN,
 )
 from .dynamic import DynamicTracer, run_dynamic, trace_function
-from .static import analyze, _print_static
+from .static import analyze, format_static
 from .varinfo import VarInfo
 
 __version__ = "0.1.0"
