@@ -1,12 +1,6 @@
 """Shared helpers for roles tests."""
 
-import sys
-from pathlib import Path
-
-# Allow importing roles from the project root
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from roles import analyze, trace_function
+from jorma import analyze, trace_function
 
 
 def role_of(source: str, name: str, scope: str = "module") -> str:

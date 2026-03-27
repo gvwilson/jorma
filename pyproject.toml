@@ -1,9 +1,28 @@
 [project]
-name = "roles"
+name = "jorma"
 description = "roles of variables"
-version = "0.1.0"
+dynamic = ["version"]
 requires-python = ">=3.13"
-dependencies = [
+dependencies = []
+
+[project.scripts]
+jorma = "jorma.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/jorma"]
+
+[tool.hatch.version]
+path = "src/jorma/__init__.py"
+
+[dependency-groups]
+dev = [
+    "build>=1.4.2",
+    "coverage>=7.13.5",
     "pytest",
-    "ruff"
+    "ruff",
+    "twine>=6.2.0",
 ]

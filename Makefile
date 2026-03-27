@@ -23,3 +23,20 @@ fix:
 ## format: format code
 format:
 	@ruff format .
+
+## test: test code
+test:
+	python -m pytest tests
+
+## coverage: run tests with coverage
+coverage:
+	@python -m coverage run -m pytest tests
+	@python -m coverage report --show-missing
+
+## package: build support package
+package:
+	python -m build
+
+## publish: publish using ~/.pypirc credentials
+publish:
+	twine upload --verbose dist/*

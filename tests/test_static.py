@@ -3,7 +3,7 @@
 import pytest
 from conftest import role_of
 
-from roles import (
+from jorma import (
     CONTAINER,
     FIXED_VALUE,
     GATHERER,

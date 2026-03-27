@@ -3,7 +3,7 @@
 import pytest
 from conftest import dynamic_role_of
 
-from roles import FOLLOWER, PHASE
+from jorma import FOLLOWER, PHASE
 
 
 # ---------------------------------------------------------------------------
@@ -50,7 +50,7 @@ def test_phase_not_detected_for_boolean():
             flag = not flag
 
     result = {}
-    from roles import trace_function
+    from jorma import trace_function
 
     result = trace_function(run)
     for (name, _scope), role in result.items():
@@ -66,7 +66,7 @@ def test_phase_not_detected_for_stepper():
             state += 1
 
     result = {}
-    from roles import trace_function
+    from jorma import trace_function
 
     result = trace_function(run)
     for (name, _scope), role in result.items():
@@ -110,7 +110,7 @@ def test_follower_not_detected_for_independent():
             x = i
             y = i * 10
 
-    from roles import trace_function
+    from jorma import trace_function
 
     result = trace_function(run)
     for (name, _scope), role in result.items():
