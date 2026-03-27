@@ -23,4 +23,4 @@ from .dynamic import DynamicTracer, run_as_main, run_dynamic, trace_function
 from .static import analyze, format_dynamic, format_static
 from .varinfo import VarInfo
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"

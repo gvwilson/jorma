@@ -50,7 +50,10 @@ class DynamicTracer:
         event: str,
         arg: object,
     ) -> object:
-        if event == "call" and str(Path(frame.f_code.co_filename).parent) == self._target_dir:
+        if (
+            event == "call"
+            and str(Path(frame.f_code.co_filename).parent) == self._target_dir
+        ):
             self._prev[id(frame)] = {}
             return self._line_tracer
         return None

@@ -65,7 +65,10 @@ def main() -> None:
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(prog="jorma", description="Analyse variable roles",)
+    parser = argparse.ArgumentParser(
+        prog="jorma",
+        description="Analyse variable roles",
+    )
     parser.add_argument("program", type=Path, help="Python source file to analyse")
     parser.add_argument("func_name", nargs="?", help="Function to trace dynamically")
     parser.add_argument("func_args", nargs="*", help="Arguments to pass to func_name")
