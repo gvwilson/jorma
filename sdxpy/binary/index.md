@@ -39,6 +39,12 @@
 | :------| :--------| :-----------| :--------|
 | module | result   | fixed value | line 3   |
 
+### Dynamic analysis
+
+| Variable | Scope              | Role     |
+| :--------| :------------------| :--------|
+| body     | module.pack_string | snapshot |
+
 ## pack_unpack.py
 
 ### Static analysis
@@ -64,6 +70,12 @@
 | module.pack_string | format    | fixed value | line 7   |
 | module.pack_string | body      | fixed value | line 8   |
 
+### Dynamic analysis
+
+| Variable | Scope              | Role     |
+| :--------| :------------------| :--------|
+| body     | module.pack_string | snapshot |
+
 ## variable_unpacking.py
 
 ### Static analysis
@@ -78,4 +90,11 @@
 | module.unpack_string | length   | fixed value | line 7   |
 | module.unpack_string | format   | fixed value | line 8   |
 | module.unpack_string | result   | fixed value | line 9   |
+
+### Dynamic analysis
+
+| Variable | Scope                | Role     |
+| :--------| :--------------------| :--------|
+| body     | module.pack_string   | snapshot |
+| result   | module.unpack_string | snapshot |
 

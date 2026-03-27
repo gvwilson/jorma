@@ -14,6 +14,12 @@
 | module.BetterIterator.__init__ | text     | fixed value | line 2   |
 | module.BetterIterator.__iter__ | self     | fixed value | line 5   |
 
+### Dynamic analysis
+
+| Variable     | Scope  | Role            |
+| :------------| :------| :---------------|
+| BetterCursor | module | generator state |
+
 ## callable.py
 
 ### Static analysis
@@ -67,6 +73,14 @@
 | module.subber                   | a             | fixed value | line 21  |
 | module.subber                   | b             | fixed value | line 21  |
 
+### Dynamic analysis
+
+| Variable      | Scope                                              | Role     |
+| :-------------| :--------------------------------------------------| :--------|
+| exc_traceback | module.run_tests.check_no_lasting_effects.__exit__ | snapshot |
+| exc_type      | module.run_tests.check_no_lasting_effects.__exit__ | snapshot |
+| exc_value     | module.run_tests.check_no_lasting_effects.__exit__ | snapshot |
+
 ## mock_object.py
 
 ### Static analysis
@@ -107,6 +121,12 @@
 | module.NaiveIterator.__next__ | self     | fixed value | line 9   |
 | module.NaiveIterator._advance | self     | fixed value | line 15  |
 
+### Dynamic analysis
+
+| Variable      | Scope  | Role            |
+| :-------------| :------| :---------------|
+| NaiveIterator | module | generator state |
+
 ## test_better_iterator.py
 
 ### Static analysis
@@ -121,6 +141,12 @@
 | module.test_naive_buffer_nested_loop | result   | gatherer    | line 18  |
 | module.test_naive_buffer_nested_loop | _        | stepper     | line 19  |
 | module.test_naive_buffer_nested_loop | inner    | stepper     | line 20  |
+
+### Dynamic analysis
+
+| Variable     | Scope  | Role            |
+| :------------| :------| :---------------|
+| BetterCursor | module | generator state |
 
 ## test_naive_iterator.py
 
@@ -137,6 +163,12 @@
 | module.test_naive_buffer_nested_loop  | result   | gatherer    | line 25  |
 | module.test_naive_buffer_nested_loop  | outer    | stepper     | line 26  |
 | module.test_naive_buffer_nested_loop  | inner    | stepper     | line 27  |
+
+### Dynamic analysis
+
+| Variable      | Scope  | Role            |
+| :-------------| :------| :---------------|
+| NaiveIterator | module | generator state |
 
 ## util.py
 

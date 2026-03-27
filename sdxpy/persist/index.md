@@ -245,18 +245,37 @@
 
 ### Dynamic analysis
 
-| Variable | Scope                                                               | Role  |
-| :--------| :-------------------------------------------------------------------| :-----|
-| f        | module.save.save_list._write.<genexpr>                              | phase |
-| f        | module.save.save_list.save._write.<genexpr>                         | phase |
-| f        | module.save.save_list.save.save_list._write.<genexpr>               | phase |
-| f        | module.save.save_list.save.save_list.save._write.<genexpr>          | phase |
-| f        | module.save.save_list.save.save_list.save.save_str._write.<genexpr> | phase |
+| Variable | Scope                                                               | Role            |
+| :--------| :-------------------------------------------------------------------| :---------------|
+| .0       | module.save.save_list._write.<genexpr>                              | generator state |
+| .0       | module.save.save_list.save._write.<genexpr>                         | generator state |
+| .0       | module.save.save_list.save.save_list._write.<genexpr>               | generator state |
+| .0       | module.save.save_list.save.save_list.save._write.<genexpr>          | generator state |
+| .0       | module.save.save_list.save.save_list.save.save_str._write.<genexpr> | generator state |
+| f        | module.save.save_list._write.<genexpr>                              | phase           |
+| f        | module.save.save_list.save._write.<genexpr>                         | phase           |
+| f        | module.save.save_list.save.save_list._write.<genexpr>               | phase           |
+| f        | module.save.save_list.save.save_list.save._write.<genexpr>          | phase           |
+| f        | module.save.save_list.save.save_list.save.save_str._write.<genexpr> | phase           |
+| line     | module.save.save_list.save.save_list.save.save_str                  | snapshot        |
+| writer   | module.__init__                                                     | generator state |
+| writer   | module.__init__.__init__                                            | generator state |
 
 ## save_builtin.py
 
 ### Static analysis
 
+
+### Dynamic analysis
+
+| Variable | Scope                      | Role            |
+| :--------| :--------------------------| :---------------|
+| line     | module.save.save           | snapshot        |
+| line     | module.save.save.save      | snapshot        |
+| writer   | module.save                | generator state |
+| writer   | module.save.save           | generator state |
+| writer   | module.save.save.save      | generator state |
+| writer   | module.save.save.save.save | generator state |
 
 ## shared.py
 
@@ -281,6 +300,12 @@
 | module.test_duplicated_string | fixture  | fixed value | line 19  |
 | module.test_no_aliasing       | fixture  | fixed value | line 14  |
 
+### Dynamic analysis
+
+| Variable | Scope  | Role            |
+| :--------| :------| :---------------|
+| StringIO | module | generator state |
+
 ## test_aliasing_wrong.py
 
 ### Static analysis
@@ -296,6 +321,12 @@
 | module.test_aliasing_shared_child | shared   | fixed value | line 20  |
 | module.test_aliasing_shared_child | fixture  | fixed value | line 21  |
 | module.test_aliasing_shared_child | result   | fixed value | line 22  |
+
+### Dynamic analysis
+
+| Variable | Scope  | Role            |
+| :--------| :------| :---------------|
+| StringIO | module | generator state |
 
 ## test_builtin.py
 
@@ -334,4 +365,10 @@
 | module.test_save_str_single   | fixture  | fixed value | line 60  |
 | module.test_save_str_single   | expected | fixed value | line 65  |
 | module.test_save_str_single   | output   | fixed value | line 72  |
+
+### Dynamic analysis
+
+| Variable | Scope  | Role            |
+| :--------| :------| :---------------|
+| StringIO | module | generator state |
 

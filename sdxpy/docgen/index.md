@@ -10,6 +10,13 @@
 | module.add    | right    | fixed value | line 1   |
 | module.double | x        | fixed value | line 5   |
 
+### Dynamic analysis
+
+| Variable | Scope             | Role     |
+| :--------| :-----------------| :--------|
+| left     | module.double.add | snapshot |
+| right    | module.double.add | snapshot |
+
 ## doc_extract.py
 
 ### Static analysis

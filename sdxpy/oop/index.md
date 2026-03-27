@@ -8,6 +8,12 @@
 | :------| :--------| :-----------| :--------|
 | module | alias    | fixed value | line 5   |
 
+### Dynamic analysis
+
+| Variable | Scope  | Role     |
+| :--------| :------| :--------|
+| alias    | module | snapshot |
+
 ## inherit_class.py
 
 ### Static analysis

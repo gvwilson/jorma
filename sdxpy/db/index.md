@@ -197,6 +197,12 @@
 | module.Experiment.unpack_multi | size       | fixed value | line 47  |
 | module.Experiment.unpack_multi | split      | fixed value | line 48  |
 
+### Dynamic analysis
+
+| Variable         | Scope           | Role     |
+| :----------------| :---------------| :--------|
+| MAX_READINGS_NUM | module.BasicRec | snapshot |
+
 ## record_original.py
 
 ### Static analysis
@@ -218,6 +224,12 @@
 | module.BasicRec.__str__  | joined           | fixed value | line 22  |
 | module.BasicRec.key      | record           | fixed value | line 9   |
 
+### Dynamic analysis
+
+| Variable         | Scope           | Role     |
+| :----------------| :---------------| :--------|
+| MAX_READINGS_NUM | module.BasicRec | snapshot |
+
 ## show_packed_records.py
 
 ### Static analysis
@@ -228,10 +240,13 @@
 
 ### Dynamic analysis
 
-| Variable | Scope                     | Role  |
-| :--------| :-------------------------| :-----|
-| r        | module.__init__.<genexpr> | phase |
-| r        | module.pack.<genexpr>     | phase |
+| Variable         | Scope                     | Role            |
+| :----------------| :-------------------------| :---------------|
+| .0               | module.__init__.<genexpr> | generator state |
+| .0               | module.pack.<genexpr>     | generator state |
+| MAX_READINGS_NUM | module.BasicRec           | snapshot        |
+| r                | module.__init__.<genexpr> | phase           |
+| r                | module.pack.<genexpr>     | phase           |
 
 ## test_db_original.py
 
@@ -248,4 +263,10 @@
 | module.test_add_two_then_get_both     | ex02     | fixed value | line 35  |
 | module.test_construct                 | db       | fixed value | line 22  |
 | module.test_get_nothing_from_empty_db | db       | fixed value | line 26  |
+
+### Dynamic analysis
+
+| Variable         | Scope           | Role     |
+| :----------------| :---------------| :--------|
+| MAX_READINGS_NUM | module.BasicRec | snapshot |
 

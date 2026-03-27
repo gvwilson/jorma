@@ -7,7 +7,7 @@ import sys
 import types
 from pathlib import Path
 
-from .constants import FOLLOWER, PHASE
+from .constants import FOLLOWER, GENERATOR_STATE, PHASE, SNAPSHOT
 
 # Maximum number of distinct scalar states to still classify as a phase variable.
 # Sajaniemi's definition implies a small, enumerated set; 6 is a practical limit.
@@ -34,6 +34,8 @@ class DynamicTracer:
         self.sequences: dict[tuple[str, str], list] = {}
         # context[key][i] = {other_name: value_before_i-th_change}
         self.contexts: dict[tuple[str, str], list[dict]] = {}
+        # curr_contexts[key][i] = {other_name: value_after_i-th_change}
+        self.curr_contexts: dict[tuple[str, str], list[dict]] = {}
         # is_update[key][i] = True if this was an update to an existing var
         # (False = first assignment / initialization)
         self.is_update: dict[tuple[str, str], list[bool]] = {}
@@ -72,10 +74,13 @@ class DynamicTracer:
             if key not in self.sequences:
                 self.sequences[key] = []
                 self.contexts[key] = []
+                self.curr_contexts[key] = []
                 self.is_update[key] = []
             self.sequences[key].append(new_val)
             # Context snapshot: values of all *other* locals just before this change
             self.contexts[key].append({k: prev[k] for k in prev if k != name})
+            # Current context: values of all *other* locals just after this change
+            self.curr_contexts[key].append({k: curr[k] for k in curr if k != name})
             # Track whether this is an update (variable already existed) or
             # a first assignment; follower detection skips first assignments.
             self.is_update[key].append(name in prev)
@@ -146,14 +151,42 @@ class DynamicTracer:
                 return False
         return bool(candidates)
 
+    def _check_snapshot(self, key: tuple[str, str], values: list) -> bool:
+        """True if var consistently receives the current value of some other var.
+
+        Unlike follower (which tracks another var's *previous* value), snapshot
+        captures the value of another var as it stands at the moment of assignment.
+        All observations (including first assignment) are considered.
+        """
+        curr_ctxs = self.curr_contexts.get(key, [])
+        if not curr_ctxs:
+            return False
+        candidates: set | None = None
+        for new_val, ctx in zip(values, curr_ctxs):
+            matching = {
+                other_name
+                for other_name, ctx_val in ctx.items()
+                if _safe_eq(ctx_val, new_val)
+            }
+            candidates = matching if candidates is None else candidates & matching
+            if not candidates:
+                return False
+        return bool(candidates)
+
+    def _check_generator_state(self, values: list) -> bool:
+        """True if any observed value is an iterator (has __next__)."""
+        return any(hasattr(v, "__next__") for v in values)
+
     def detect_roles(self) -> dict[tuple[str, str], str]:
         """Return dynamic role assignments for variables with enough observations."""
         result: dict[tuple[str, str], str] = {}
         for key, values in self.sequences.items():
-            if len(values) < 2:
-                continue
             if self._check_follower(key, values):
                 result[key] = FOLLOWER
+            elif self._check_generator_state(values):
+                result[key] = GENERATOR_STATE
+            elif self._check_snapshot(key, values):
+                result[key] = SNAPSHOT
             elif self._check_phase(values):
                 result[key] = PHASE
         return result

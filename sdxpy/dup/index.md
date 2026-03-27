@@ -18,6 +18,12 @@
 | module.same_bytes      | left_bytes  | fixed value | line 5   |
 | module.same_bytes      | right_bytes | fixed value | line 6   |
 
+### Dynamic analysis
+
+| Variable | Scope                  | Role     |
+| :--------| :----------------------| :--------|
+| matches  | module.find_duplicates | snapshot |
+
 ## brute_force_2.py
 
 ### Static analysis
@@ -37,6 +43,12 @@
 | module.same_bytes      | right_name  | fixed value        | line 4   |
 | module.same_bytes      | left_bytes  | fixed value        | line 5   |
 | module.same_bytes      | right_bytes | fixed value        | line 6   |
+
+### Dynamic analysis
+
+| Variable | Scope                  | Role     |
+| :--------| :----------------------| :--------|
+| matches  | module.find_duplicates | snapshot |
 
 ## dup.py
 

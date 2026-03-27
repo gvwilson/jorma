@@ -40,6 +40,10 @@ analyze:
 		$(MAKE) -C $$dir; \
 	done
 
+## count: count occurrences of roles
+count:
+	python bin/count_roles.py sdxpy/*/index.md
+
 ## package: build support package
 package:
 	python -m build
