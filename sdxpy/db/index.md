@@ -2,6 +2,9 @@
 
 ## blocked.py
 
+Error during dynamic analysis (ModuleNotFoundError): No module named 'interface'
+### Static analysis
+
 | Scope                        | Variable          | Role        | Location |
 | :----------------------------| :-----------------| :-----------| :--------|
 | module.Blocked               | RECORDS_PER_BLOCK | fixed value | line 5   |
@@ -28,6 +31,9 @@
 | module.Blocked.num_records   | self              | fixed value | line 20  |
 
 ## blocked_file.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'blocked'
+### Static analysis
 
 | Scope                            | Variable   | Role               | Location |
 | :--------------------------------| :----------| :------------------| :--------|
@@ -73,6 +79,9 @@
 
 ## cleanup.py
 
+Error during dynamic analysis (ModuleNotFoundError): No module named 'blocked_file'
+### Static analysis
+
 | Scope                         | Variable     | Role               | Location |
 | :-----------------------------| :------------| :------------------| :--------|
 | module.Cleanup._cleanup       | self         | fixed value        | line 11  |
@@ -96,6 +105,9 @@
 
 ## file_backed.py
 
+Error during dynamic analysis (ModuleNotFoundError): No module named 'interface'
+### Static analysis
+
 | Scope                      | Variable   | Role        | Location |
 | :--------------------------| :----------| :-----------| :--------|
 | module.FileBacked.__init__ | filename   | fixed value | line 7   |
@@ -116,6 +128,8 @@
 
 ## interface.py
 
+### Static analysis
+
 | Scope                    | Variable   | Role        | Location |
 | :------------------------| :----------| :-----------| :--------|
 | module.Database.__init__ | record_cls | fixed value | line 2   |
@@ -127,6 +141,8 @@
 
 ## interface_original.py
 
+### Static analysis
+
 | Scope                    | Variable | Role        | Location |
 | :------------------------| :--------| :-----------| :--------|
 | module.Database.__init__ | key_func | fixed value | line 2   |
@@ -137,6 +153,9 @@
 | module.Database.get      | self     | fixed value | line 10  |
 
 ## just_dict_original.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'interface_original'
+### Static analysis
 
 | Scope                    | Variable | Role        | Location |
 | :------------------------| :--------| :-----------| :--------|
@@ -150,6 +169,9 @@
 
 ## just_dict_refactored.py
 
+Error during dynamic analysis (ModuleNotFoundError): No module named 'interface'
+### Static analysis
+
 | Scope                              | Variable   | Role        | Location |
 | :----------------------------------| :----------| :-----------| :--------|
 | module.JustDictRefactored.__init__ | record_cls | fixed value | line 4   |
@@ -161,6 +183,9 @@
 | module.JustDictRefactored.get      | self       | fixed value | line 12  |
 
 ## record.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'record_original'
+### Static analysis
 
 | Scope                          | Variable   | Role        | Location |
 | :------------------------------| :----------| :-----------| :--------|
@@ -181,6 +206,8 @@
 
 ## record_original.py
 
+### Static analysis
+
 | Scope                    | Variable         | Role        | Location |
 | :------------------------| :----------------| :-----------| :--------|
 | module.BasicRec          | MAX_NAME_LEN     | fixed value | line 2   |
@@ -200,11 +227,17 @@
 
 ## show_packed_records.py
 
+Error during dynamic analysis (ModuleNotFoundError): No module named 'record'
+### Static analysis
+
 | Scope  | Variable | Role        | Location |
 | :------| :--------| :-----------| :--------|
 | module | ex       | fixed value | line 3   |
 
 ## test_db_original.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'record_original'
+### Static analysis
 
 | Scope                                 | Variable | Role        | Location |
 | :-------------------------------------| :--------| :-----------| :--------|

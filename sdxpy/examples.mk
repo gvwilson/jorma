@@ -12,7 +12,7 @@ index.md: $(PY_FILES)
 	    printf '# Variable Role Analysis: %s\n\n' "$(LESSON)"; \
 	    for f in $(PY_FILES); do \
 	        printf '## %s\n\n' "$$f"; \
-	        $(JORMA) --format markdown "$(THIS_DIR)$$f" 2>&1 || true; \
+	        $(JORMA) --format markdown --run "$(THIS_DIR)$$f" 2>&1 || true; \
 	        printf '\n'; \
 	    done; \
 	} > $@

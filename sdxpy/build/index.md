@@ -2,6 +2,9 @@
 
 ## build_better.py
 
+Error during dynamic analysis (IndexError): list index out of range
+### Static analysis
+
 | Scope                          | Variable  | Role               | Location |
 | :------------------------------| :---------| :------------------| :--------|
 | module                         | reader    | fixed value        | line 68  |
@@ -41,6 +44,9 @@
 
 ## build_simple.py
 
+Error during dynamic analysis (IndexError): list index out of range
+### Static analysis
+
 | Scope                       | Variable    | Role               | Location |
 | :---------------------------| :-----------| :------------------| :--------|
 | module                      | builder     | fixed value        | line 57  |
@@ -70,6 +76,9 @@
 
 ## build_time.py
 
+Error during dynamic analysis (ModuleNotFoundError): No module named 'build_better'
+### Static analysis
+
 | Scope                          | Variable | Role        | Location |
 | :------------------------------| :--------| :-----------| :--------|
 | module                         | reader   | fixed value | line 27  |
@@ -89,6 +98,9 @@
 | module.BuildTime._refresh      | self     | fixed value | line 13  |
 
 ## test_build_better.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'build_better'
+### Static analysis
 
 | Scope                   | Variable | Role        | Location |
 | :-----------------------| :--------| :-----------| :--------|
@@ -110,6 +122,9 @@
 | module.test_single      | config   | fixed value | line 10  |
 
 ## test_build_time.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'build_time'
+### Static analysis
 
 | Scope                                 | Variable | Role        | Location |
 | :-------------------------------------| :--------| :-----------| :--------|

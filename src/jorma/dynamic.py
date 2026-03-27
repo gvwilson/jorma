@@ -188,6 +188,28 @@ def run_dynamic(
     return tracer.detect_roles()
 
 
+def run_as_main(path: Path) -> dict[tuple[str, str], str]:
+    """Run path as __main__ under tracing; return detected dynamic roles."""
+    spec = importlib.util.spec_from_file_location("__main__", path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Cannot load '{path}'")
+    module = importlib.util.module_from_spec(spec)
+    module.__name__ = "__main__"
+    tracer = DynamicTracer()
+    old_trace = sys.gettrace()
+    old_argv = sys.argv
+    sys.argv = [str(path)]
+    sys.settrace(tracer.tracer)
+    try:
+        spec.loader.exec_module(module)  # type: ignore[union-attr]
+    except SystemExit:
+        pass  # scripts that call sys.exit() are fine
+    finally:
+        sys.settrace(old_trace)
+        sys.argv = old_argv
+    return tracer.detect_roles()
+
+
 def trace_function(
     func: object,
     *args: object,

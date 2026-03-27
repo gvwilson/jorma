@@ -2,6 +2,8 @@
 
 ## env.py
 
+### Static analysis
+
 | Scope               | Variable | Role        | Location |
 | :-------------------| :--------| :-----------| :--------|
 | module.Env.__init__ | initial  | fixed value | line 3   |
@@ -16,6 +18,9 @@
 
 ## example_call.py
 
+Error during dynamic analysis (NameError): name 'read_html' is not defined
+### Static analysis
+
 | Scope  | Variable | Role        | Location |
 | :------| :--------| :-----------| :--------|
 | module | data     | fixed value | line 1   |
@@ -23,6 +28,9 @@
 | module | expander | fixed value | line 4   |
 
 ## expander.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'bs4'
+### Static analysis
 
 | Scope                      | Variable  | Role        | Location |
 | :--------------------------| :---------| :-----------| :--------|
@@ -49,6 +57,9 @@
 
 ## template.py
 
+Error during dynamic analysis (ModuleNotFoundError): No module named 'bs4'
+### Static analysis
+
 | Scope       | Variable  | Role        | Location |
 | :-----------| :---------| :-----------| :--------|
 | module.main | reader    | fixed value | line 7   |
@@ -58,6 +69,8 @@
 | module.main | expander  | fixed value | line 14  |
 
 ## visitor.py
+
+### Static analysis
 
 | Scope                   | Variable | Role        | Location |
 | :-----------------------| :--------| :-----------| :--------|
@@ -73,6 +86,8 @@
 
 ## z_if.py
 
+### Static analysis
+
 | Scope        | Variable | Role        | Location |
 | :------------| :--------| :-----------| :--------|
 | module.close | expander | fixed value | line 7   |
@@ -82,6 +97,8 @@
 | module.open  | check    | fixed value | line 2   |
 
 ## z_loop.py
+
+### Static analysis
 
 | Scope        | Variable    | Role        | Location |
 | :------------| :-----------| :-----------| :--------|
@@ -97,6 +114,8 @@
 
 ## z_num.py
 
+### Static analysis
+
 | Scope        | Variable | Role        | Location |
 | :------------| :--------| :-----------| :--------|
 | module.close | expander | fixed value | line 5   |
@@ -105,6 +124,8 @@
 | module.open  | node     | fixed value | line 1   |
 
 ## z_var.py
+
+### Static analysis
 
 | Scope        | Variable | Role        | Location |
 | :------------| :--------| :-----------| :--------|

@@ -3,12 +3,17 @@
 ## add_example.py
 
 Warning: no variables found.
+### Static analysis
+
 
 ## ex_assign_expr.py
 
 Syntax error in '/Users/gvwilson/jorma/sdxpy/interp/ex_assign_expr.py': invalid syntax (<unknown>, line 2)
 
 ## expr.py
+
+Error during dynamic analysis (AssertionError): Usage: expr.py filename
+### Static analysis
 
 | Scope         | Variable | Role        | Location |
 | :-------------| :--------| :-----------| :--------|
@@ -23,6 +28,9 @@ Syntax error in '/Users/gvwilson/jorma/sdxpy/interp/ex_assign_expr.py': invalid 
 | module.main   | result   | fixed value | line 39  |
 
 ## vars.py
+
+Error during dynamic analysis (AssertionError): Usage: vars.py filename
+### Static analysis
 
 | Scope         | Variable | Role               | Location |
 | :-------------| :--------| :------------------| :--------|
@@ -49,6 +57,9 @@ Syntax error in '/Users/gvwilson/jorma/sdxpy/interp/ex_assign_expr.py': invalid 
 | module.main   | result   | fixed value        | line 64  |
 
 ## vars_reflect.py
+
+Error during dynamic analysis (AssertionError): Usage: vars_reflect.py filename
+### Static analysis
 
 | Scope         | Variable | Role               | Location |
 | :-------------| :--------| :------------------| :--------|
@@ -77,6 +88,9 @@ Syntax error in '/Users/gvwilson/jorma/sdxpy/interp/ex_assign_expr.py': invalid 
 | module.main   | result   | fixed value        | line 61  |
 
 ## vars_table.py
+
+Error during dynamic analysis (AssertionError): Usage: vars_table.py filename
+### Static analysis
 
 | Scope         | Variable | Role               | Location |
 | :-------------| :--------| :------------------| :--------|

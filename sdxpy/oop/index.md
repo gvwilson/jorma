@@ -2,11 +2,16 @@
 
 ## func_obj.py
 
+### Static analysis
+
 | Scope  | Variable | Role        | Location |
 | :------| :--------| :-----------| :--------|
 | module | alias    | fixed value | line 7   |
+in example
 
 ## inherit_class.py
+
+### Static analysis
 
 | Scope                   | Variable    | Role               | Location |
 | :-----------------------| :-----------| :------------------| :--------|
@@ -34,8 +39,12 @@
 | module.square_new       | name        | fixed value        | line 35  |
 | module.square_new       | side        | fixed value        | line 35  |
 | module.square_perimeter | thing       | fixed value        | line 20  |
+sq: 0.56
+ci: 0.40
 
 ## inherit_constructor.py
+
+### Static analysis
 
 | Scope                   | Variable    | Role               | Location |
 | :-----------------------| :-----------| :------------------| :--------|
@@ -65,8 +74,12 @@
 | module.square_new       | name        | fixed value        | line 33  |
 | module.square_new       | side        | fixed value        | line 33  |
 | module.square_perimeter | thing       | fixed value        | line 26  |
+sq: 0.56
+ci: 0.40
 
 ## inherit_original.py
+
+### Static analysis
 
 | Scope                   | Variable | Role               | Location |
 | :-----------------------| :--------| :------------------| :--------|
@@ -90,8 +103,12 @@
 | module.Square.__init__  | side     | fixed value        | line 19  |
 | module.Square.area      | self     | fixed value        | line 26  |
 | module.Square.perimeter | self     | fixed value        | line 23  |
+sq: 0.56
+ci: 0.40
 
 ## larger.py
+
+### Static analysis
 
 | Scope                   | Variable    | Role               | Location |
 | :-----------------------| :-----------| :------------------| :--------|
@@ -115,8 +132,12 @@
 | module.square_new       | name        | fixed value        | line 21  |
 | module.square_new       | side        | fixed value        | line 21  |
 | module.square_perimeter | thing       | fixed value        | line 3   |
+is sq larger? False
+is ci larger? True
 
 ## shapes_class.py
+
+### Static analysis
 
 | Scope                   | Variable    | Role               | Location |
 | :-----------------------| :-----------| :------------------| :--------|
@@ -138,8 +159,18 @@
 | module.square_new       | name        | fixed value        | line 16  |
 | module.square_new       | side        | fixed value        | line 16  |
 | module.square_perimeter | thing       | fixed value        | line 4   |
+sq is a Square: 12.00 9.00
+ci is a Circle: 12.57 12.57
+
+### Dynamic analysis
+
+| Variable    | Scope       | Role  |
+| :-----------| :-----------| :-----|
+| method_name | module.call | phase |
 
 ## shapes_dict.py
+
+### Static analysis
 
 | Scope                   | Variable    | Role               | Location |
 | :-----------------------| :-----------| :------------------| :--------|
@@ -158,8 +189,18 @@
 | module.square_new       | name        | fixed value        | line 10  |
 | module.square_new       | side        | fixed value        | line 10  |
 | module.square_perimeter | thing       | fixed value        | line 4   |
+sq 12.00 9.00
+ci 12.57 12.57
+
+### Dynamic analysis
+
+| Variable    | Scope       | Role  |
+| :-----------| :-----------| :-----|
+| method_name | module.call | phase |
 
 ## shapes_original.py
+
+### Static analysis
 
 | Scope                   | Variable | Role               | Location |
 | :-----------------------| :--------| :------------------| :--------|
@@ -182,8 +223,12 @@
 | module.Square.__init__  | side     | fixed value        | line 17  |
 | module.Square.area      | self     | fixed value        | line 24  |
 | module.Square.perimeter | self     | fixed value        | line 21  |
+sq has perimeter 12.00 and area 9.00
+ci has perimeter 12.57 and area 12.57
 
 ## spread.py
+
+### Static analysis
 
 | Scope              | Variable    | Role        | Location |
 | :------------------| :-----------| :-----------| :--------|
@@ -192,12 +237,20 @@
 | module.show_spread | left        | fixed value | line 1   |
 | module.show_spread | middle      | fixed value | line 1   |
 | module.show_spread | right       | fixed value | line 1   |
+left 1 middle 2 right 3
+left 10 middle 20 right 30
 
 ## varargs.py
+
+### Static analysis
 
 | Scope            | Variable | Role        | Location |
 | :----------------| :--------| :-----------| :--------|
 | module.show_args | args     | fixed value | line 1   |
 | module.show_args | kwargs   | fixed value | line 1   |
 | module.show_args | title    | fixed value | line 1   |
+nothing args '()' and kwargs '{}'
+one unnamed argument args '(1,)' and kwargs '{}'
+one named argument args '()' and kwargs '{'second': '2'}'
+one of each args '(3,)' and kwargs '{'fourth': '4'}'
 

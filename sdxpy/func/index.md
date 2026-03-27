@@ -2,12 +2,18 @@
 
 ## closure.py
 
+### Static analysis
+
 | Scope              | Variable   | Role        | Location |
 | :------------------| :----------| :-----------| :--------|
 | module             | has_secret | fixed value | line 6   |
 | module.make_hidden | thing      | fixed value | line 1   |
+hidden thing is 3
 
 ## counter_fail.py
+
+Error during dynamic analysis (UnboundLocalError): cannot access local variable 'value' where it is not associated with a value
+### Static analysis
 
 | Scope                      | Variable | Role        | Location |
 | :--------------------------| :--------| :-----------| :--------|
@@ -18,17 +24,27 @@
 
 ## counter_succeed.py
 
+### Static analysis
+
 | Scope               | Variable | Role        | Location |
 | :-------------------| :--------| :-----------| :--------|
 | module              | c        | fixed value | line 8   |
 | module              | i        | stepper     | line 9   |
 | module.make_counter | value    | fixed value | line 2   |
+1
+2
+3
 
 ## ex_dict_zip.py
 
 Warning: no variables found.
+Error during dynamic analysis (NameError): name 'env' is not defined
+### Static analysis
+
 
 ## example_def.py
+
+### Static analysis
 
 | Scope       | Variable | Role        | Location |
 | :-----------| :--------| :-----------| :--------|
@@ -36,6 +52,9 @@ Warning: no variables found.
 | module.same | num      | fixed value | line 2   |
 
 ## func.py
+
+Error during dynamic analysis (AssertionError): Usage: func.py filename
+### Static analysis
 
 | Scope             | Variable    | Role               | Location |
 | :-----------------| :-----------| :------------------| :--------|
@@ -107,13 +126,21 @@ Warning: no variables found.
 
 ## inner.py
 
+### Static analysis
+
 | Scope              | Variable | Role        | Location |
 | :------------------| :--------| :-----------| :--------|
 | module.outer       | value    | fixed value | line 1   |
 | module.outer       | i        | stepper     | line 6   |
 | module.outer.inner | current  | fixed value | line 2   |
+outer value is 10
+inner sum is 10
+inner sum is 11
+inner sum is 12
 
 ## oop.py
+
+### Static analysis
 
 | Scope                     | Variable      | Role        | Location |
 | :-------------------------| :-------------| :-----------| :--------|
@@ -121,4 +148,6 @@ Warning: no variables found.
 | module.make_object        | initial_value | fixed value | line 1   |
 | module.make_object        | private       | fixed value | line 2   |
 | module.make_object.setter | new_value     | fixed value | line 7   |
+initial value 0
+object now contains 99
 

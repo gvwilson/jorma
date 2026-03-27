@@ -2,6 +2,8 @@
 
 ## architecture.py
 
+### Static analysis
+
 | Scope  | Variable | Role        | Location |
 | :------| :--------| :-----------| :--------|
 | module | NUM_REG  | fixed value | line 1   |
@@ -12,6 +14,9 @@
 | module | OP_WIDTH | fixed value | line 20  |
 
 ## arrays.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'architecture'
+### Static analysis
 
 | Scope                                 | Variable       | Role               | Location |
 | :-------------------------------------| :--------------| :------------------| :--------|
@@ -39,6 +44,9 @@
 | module.DataAllocator.assemble         | program        | fixed value        | line 20  |
 
 ## assembler.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'architecture'
+### Static analysis
 
 | Scope                         | Variable      | Role               | Location |
 | :-----------------------------| :-------------| :------------------| :--------|
@@ -90,6 +98,9 @@
 | module.main                   | instruction   | stepper            | line 104 |
 
 ## vm.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'architecture'
+### Static analysis
 
 | Scope                            | Variable    | Role               | Location |
 | :--------------------------------| :-----------| :------------------| :--------|

@@ -2,6 +2,9 @@
 
 ## attrs.py
 
+Error during dynamic analysis (ModuleNotFoundError): No module named 'bs4'
+### Static analysis
+
 | Scope          | Variable | Role        | Location |
 | :--------------| :--------| :-----------| :--------|
 | module         | text     | fixed value | line 10  |
@@ -10,6 +13,9 @@
 | module.display | child    | stepper     | line 5   |
 
 ## catalog.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'bs4'
+### Static analysis
 
 | Scope                     | Variable  | Role        | Location |
 | :-------------------------| :---------| :-----------| :--------|
@@ -26,6 +32,9 @@
 | module.Catalog._tag_enter | child     | stepper     | line 14  |
 
 ## check.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'yaml'
+### Static analysis
 
 | Scope                   | Variable | Role        | Location |
 | :-----------------------| :--------| :-----------| :--------|
@@ -49,6 +58,9 @@
 
 ## contains.py
 
+Error during dynamic analysis (ModuleNotFoundError): No module named 'bs4'
+### Static analysis
+
 | Scope          | Variable | Role        | Location |
 | :--------------| :--------| :-----------| :--------|
 | module         | reader   | fixed value | line 19  |
@@ -63,11 +75,17 @@
 
 ## ex_flatten.py
 
+Error during dynamic analysis (NameError): name 'Flatten' is not defined
+### Static analysis
+
 | Scope  | Variable | Role    | Location |
 | :------| :--------| :-------| :--------|
 | module | node     | stepper | line 1   |
 
 ## parse.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'bs4'
+### Static analysis
 
 | Scope          | Variable | Role        | Location |
 | :--------------| :--------| :-----------| :--------|
@@ -77,6 +95,9 @@
 | module.display | child    | stepper     | line 8   |
 
 ## visitor.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'bs4'
+### Static analysis
 
 | Scope                     | Variable | Role        | Location |
 | :-------------------------| :--------| :-----------| :--------|

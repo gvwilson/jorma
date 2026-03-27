@@ -4,8 +4,8 @@ import argparse
 import sys
 from pathlib import Path
 
-from .dynamic import run_dynamic
-from .static import analyze, format_static
+from .dynamic import run_as_main, run_dynamic
+from .static import analyze, format_dynamic, format_static
 
 
 def main() -> None:
@@ -22,6 +22,11 @@ def main() -> None:
         default="markdown",
         dest="fmt",
         help="Output format (default: markdown)",
+    )
+    parser.add_argument(
+        "--run",
+        action="store_true",
+        help="Run file as __main__ to collect dynamic role information",
     )
     args = parser.parse_args()
 
@@ -42,21 +47,30 @@ def main() -> None:
         print(f"Syntax error in '{path}': {exc}", file=sys.stderr)
         sys.exit(1)
 
-    if args.func_name is not None:
-        print("=== Static Analysis ===")
+    wants_dynamic = args.run or args.func_name is not None
+    if wants_dynamic:
+        print("### Static analysis\n")
     output = format_static(results, args.fmt)
     if output:
         print(output)
 
     if args.func_name is not None:
-        print("\n=== Dynamic Analysis ===")
         try:
             dynamic = run_dynamic(path, args.func_name, args.func_args)
         except Exception as exc:
             print(f"Error during dynamic analysis ({type(exc).__name__}): {exc}", file=sys.stderr)
             sys.exit(1)
-        if not dynamic:
-            print("  (no phase or follower variables detected)")
-        else:
-            for (name, scope), role in sorted(dynamic.items()):
-                print(f"  [{scope}]  {name:<24} {role}")
+        dyn_output = format_dynamic(dynamic, args.fmt)
+        if dyn_output:
+            print("\n### Dynamic analysis\n")
+            print(dyn_output)
+    elif args.run:
+        try:
+            dynamic = run_as_main(path)
+        except Exception as exc:
+            print(f"Error during dynamic analysis ({type(exc).__name__}): {exc}", file=sys.stderr)
+            sys.exit(1)
+        dyn_output = format_dynamic(dynamic, args.fmt)
+        if dyn_output:
+            print("\n### Dynamic analysis\n")
+            print(dyn_output)

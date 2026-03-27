@@ -450,3 +450,23 @@ def format_static(results: list[tuple[VarInfo, str]], fmt: str = "markdown") -> 
     # default: markdown
     table.set_style(TableStyle.MARKDOWN)
     return str(table)
+
+
+def format_dynamic(roles: dict[tuple[str, str], str], fmt: str = "markdown") -> str:
+    """Format dynamic-analysis results as a table.
+
+    fmt must be one of: 'markdown', 'html', 'csv'.
+    Returns an empty string when no dynamic roles were detected.
+    """
+    if not roles:
+        return ""
+    table = PrettyTable(["Variable", "Scope", "Role"])
+    table.align = "l"
+    for (name, scope), role in sorted(roles.items()):
+        table.add_row([name, scope, role])
+    if fmt == "html":
+        return table.get_html_string()
+    if fmt == "csv":
+        return table.get_csv_string().rstrip("\r\n")
+    table.set_style(TableStyle.MARKDOWN)
+    return str(table)

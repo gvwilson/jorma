@@ -2,6 +2,9 @@
 
 ## alternative_design.py
 
+Error during dynamic analysis (TypeError): decorator() missing 1 required positional argument: 'label'
+### Static analysis
+
 | Scope                   | Variable | Role        | Location |
 | :-----------------------| :--------| :-----------| :--------|
 | module.decorator        | func     | fixed value | line 1   |
@@ -10,6 +13,8 @@
 | module.double           | x        | fixed value | line 8   |
 
 ## better_iterator.py
+
+### Static analysis
 
 | Scope                          | Variable | Role        | Location |
 | :------------------------------| :--------| :-----------| :--------|
@@ -23,6 +28,8 @@
 
 ## callable.py
 
+### Static analysis
+
 | Scope                 | Variable | Role        | Location |
 | :---------------------| :--------| :-----------| :--------|
 | module                | add_3    | fixed value | line 8   |
@@ -31,8 +38,11 @@
 | module.Adder.__call__ | self     | fixed value | line 5   |
 | module.Adder.__init__ | self     | fixed value | line 2   |
 | module.Adder.__init__ | value    | fixed value | line 2   |
+add_3(8): 11
 
 ## decorator_param.py
+
+### Static analysis
 
 | Scope                        | Variable | Role        | Location |
 | :----------------------------| :--------| :-----------| :--------|
@@ -40,16 +50,27 @@
 | module.wrap                  | label    | fixed value | line 1   |
 | module.wrap._decorate        | func     | fixed value | line 2   |
 | module.wrap._decorate._inner | args     | fixed value | line 3   |
+++ wrapping
+original: example
+-- wrapping
 
 ## decorator_simple.py
+
+### Static analysis
 
 | Scope              | Variable | Role        | Location |
 | :------------------| :--------| :-----------| :--------|
 | module.original    | message  | fixed value | line 9   |
 | module.wrap        | func     | fixed value | line 1   |
 | module.wrap._inner | args     | fixed value | line 2   |
+before call
+original: example
+after call
 
 ## ex_timer.py
+
+Error during dynamic analysis (NameError): name 'Timer' is not defined
+### Static analysis
 
 | Scope  | Variable | Role        | Location |
 | :------| :--------| :-----------| :--------|
@@ -60,6 +81,9 @@
 Syntax error in '/Users/gvwilson/jorma/sdxpy/protocols/ex_with.py': invalid character '…' (U+2026) (<unknown>, line 1)
 
 ## mock_context.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'mock_object'
+### Static analysis
 
 | Scope                           | Variable      | Role        | Location |
 | :-------------------------------| :-------------| :-----------| :--------|
@@ -77,6 +101,9 @@ Syntax error in '/Users/gvwilson/jorma/sdxpy/protocols/ex_with.py': invalid char
 | module.subber                   | b             | fixed value | line 22  |
 
 ## mock_object.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'util'
+### Static analysis
 
 | Scope                          | Variable | Role        | Location |
 | :------------------------------| :--------| :-----------| :--------|
@@ -96,11 +123,15 @@ Syntax error in '/Users/gvwilson/jorma/sdxpy/protocols/ex_with.py': invalid char
 
 ## mock_time.py
 
+### Static analysis
+
 | Scope          | Variable | Role        | Location |
 | :--------------| :--------| :-----------| :--------|
 | module.elapsed | since    | fixed value | line 3   |
 
 ## naive_iterator.py
+
+### Static analysis
 
 | Scope                         | Variable | Role        | Location |
 | :-----------------------------| :--------| :-----------| :--------|
@@ -111,6 +142,9 @@ Syntax error in '/Users/gvwilson/jorma/sdxpy/protocols/ex_with.py': invalid char
 | module.NaiveIterator._advance | self     | fixed value | line 18  |
 
 ## test_naive_iterator.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'naive_iterator'
+### Static analysis
 
 | Scope                                 | Variable | Role        | Location |
 | :-------------------------------------| :--------| :-----------| :--------|
@@ -126,22 +160,1024 @@ Syntax error in '/Users/gvwilson/jorma/sdxpy/protocols/ex_with.py': invalid char
 
 ## wrap_capture.py
 
+### Static analysis
+
 | Scope                 | Variable | Role        | Location |
 | :---------------------| :--------| :-----------| :--------|
 | module                | original | unknown     | line 11  |
 | module.logging        | func     | fixed value | line 4   |
 | module.logging._inner | value    | fixed value | line 5   |
 | module.original       | value    | fixed value | line 1   |
+before call
+original: example
+after call
 
 ## wrap_infinite.py
+
+### Static analysis
 
 | Scope           | Variable | Role        | Location |
 | :---------------| :--------| :-----------| :--------|
 | module          | original | fixed value | line 9   |
 | module.logging  | value    | fixed value | line 4   |
 | module.original | value    | fixed value | line 1   |
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before callError during dynamic analysis (RecursionError): maximum recursion depth exceeded
+
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
+before call
 
 ## wrap_param.py
+
+### Static analysis
 
 | Scope                 | Variable | Role        | Location |
 | :---------------------| :--------| :-----------| :--------|
@@ -150,4 +1186,7 @@ Syntax error in '/Users/gvwilson/jorma/sdxpy/protocols/ex_with.py': invalid char
 | module.logging        | label    | fixed value | line 4   |
 | module.logging._inner | value    | fixed value | line 5   |
 | module.original       | value    | fixed value | line 1   |
+++ call
+original: example
+-- call
 

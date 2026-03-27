@@ -2,6 +2,8 @@
 
 ## easy_mode.py
 
+### Static analysis
+
 | Scope                   | Variable | Role        | Location |
 | :-----------------------| :--------| :-----------| :--------|
 | module.Block.__init__   | height   | fixed value | line 3   |
@@ -19,6 +21,9 @@
 | module.Row.get_width    | self     | fixed value | line 19  |
 
 ## placed.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'easy_mode'
+### Static analysis
 
 | Scope                       | Variable  | Role               | Location |
 | :---------------------------| :---------| :------------------| :--------|
@@ -50,6 +55,8 @@
 
 ## render.py
 
+### Static analysis
+
 | Scope              | Variable | Role        | Location |
 | :------------------| :--------| :-----------| :--------|
 | module.draw        | fill     | gatherer    | line 19  |
@@ -68,6 +75,9 @@
 
 ## rendered.py
 
+Error during dynamic analysis (ModuleNotFoundError): No module named 'placed'
+### Static analysis
+
 | Scope                    | Variable | Role        | Location |
 | :------------------------| :--------| :-----------| :--------|
 | module.Renderable.render | fill     | fixed value | line 5   |
@@ -77,6 +87,9 @@
 | module.Renderable.render | iy       | stepper     | line 7   |
 
 ## test_easy_mode.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'easy_mode'
+### Static analysis
 
 | Scope                                          | Variable | Role        | Location |
 | :----------------------------------------------| :--------| :-----------| :--------|
@@ -88,6 +101,9 @@
 
 ## test_placed.py
 
+Error during dynamic analysis (ModuleNotFoundError): No module named 'placed'
+### Static analysis
+
 | Scope                                        | Variable | Role        | Location |
 | :--------------------------------------------| :--------| :-----------| :--------|
 | module.test_places_a_column_of_two_blocks    | fixture  | fixed value | line 27  |
@@ -97,6 +113,9 @@
 | module.test_places_a_single_unit_block       | fixture  | fixed value | line 6   |
 
 ## test_rendered.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'render'
+### Static analysis
 
 | Scope                                         | Variable | Role        | Location |
 | :---------------------------------------------| :--------| :-----------| :--------|
@@ -108,6 +127,9 @@
 | module.test_renders_a_single_unit_block       | fixture  | fixed value | line 7   |
 
 ## test_wrapped.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'wrapped'
+### Static analysis
 
 | Scope                                                                 | Variable | Role        | Location |
 | :---------------------------------------------------------------------| :--------| :-----------| :--------|
@@ -127,6 +149,9 @@
 | module.test_wraps_a_single_unit_block                                 | wrapped  | fixed value | line 5   |
 
 ## wrapped.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'placed'
+### Static analysis
 
 | Scope                       | Variable    | Role               | Location |
 | :---------------------------| :-----------| :------------------| :--------|

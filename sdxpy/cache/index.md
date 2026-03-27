@@ -2,6 +2,9 @@
 
 ## cache_base.py
 
+Error during dynamic analysis (ModuleNotFoundError): No module named 'exceptions'
+### Static analysis
+
 | Scope                             | Variable     | Role        | Location |
 | :---------------------------------| :------------| :-----------| :--------|
 | module.CacheBase                  | CACHE_SUFFIX | fixed value | line 9   |
@@ -27,6 +30,9 @@
 
 ## cache_filesystem.py
 
+Error during dynamic analysis (ModuleNotFoundError): No module named 'cache_base'
+### Static analysis
+
 | Scope                       | Variable   | Role        | Location |
 | :---------------------------| :----------| :-----------| :--------|
 | module.CacheFilesystem._add | identifier | fixed value | line 8   |
@@ -35,6 +41,9 @@
 | module.CacheFilesystem._add | cache_path | fixed value | line 9   |
 
 ## cache_io.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'cache_base'
+### Static analysis
 
 | Scope             | Variable        | Role        | Location |
 | :-----------------| :---------------| :-----------| :--------|
@@ -50,6 +59,9 @@
 | module.cache_save | writer          | fixed value | line 22  |
 
 ## cache_limited.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'cache_filesystem'
+### Static analysis
 
 | Scope                                   | Variable     | Role        | Location |
 | :---------------------------------------| :------------| :-----------| :--------|
@@ -78,6 +90,8 @@
 
 ## index_base.py
 
+### Static analysis
+
 | Scope                              | Variable    | Role        | Location |
 | :----------------------------------| :-----------| :-----------| :--------|
 | module                             | CacheEntry  | fixed value | line 7   |
@@ -100,7 +114,19 @@
 | module.IndexBase.set_index_dir     | index_dir   | fixed value | line 20  |
 | module.IndexBase.set_index_dir     | self        | fixed value | line 20  |
 
+### Dynamic analysis
+
+| Variable | Scope                                                                                  | Role  |
+| :--------| :--------------------------------------------------------------------------------------| :-----|
+| fullname | module._find_and_load._find_and_load_unlocked._find_spec.find_spec                     | phase |
+| name     | module.namedtuple                                                                      | phase |
+| name     | module.namedtuple.<genexpr>                                                            | phase |
+| suffix   | module._find_and_load._find_and_load_unlocked._find_spec.find_spec._get_spec.find_spec | phase |
+
 ## index_csv.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'exceptions'
+### Static analysis
 
 | Scope                             | Variable   | Role               | Location |
 | :---------------------------------| :----------| :------------------| :--------|
@@ -120,6 +146,9 @@
 | module.IndexCSV.save              | when       | most-recent holder | line 35  |
 
 ## test_cache_filesystem.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'cache_filesystem'
+### Static analysis
 
 | Scope                                                      | Variable     | Role               | Location |
 | :----------------------------------------------------------| :------------| :------------------| :--------|
@@ -151,6 +180,9 @@
 | module.test_filesystem_two_files_present_after_add         | filename     | most-recent holder | line 39  |
 
 ## test_cache_limited.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'cache_limited'
+### Static analysis
 
 | Scope                                                   | Variable     | Role               | Location |
 | :-------------------------------------------------------| :------------| :------------------| :--------|
@@ -199,6 +231,9 @@
 | module.test_limited_two_files_present_after_add         | filename     | most-recent holder | line 44  |
 
 ## test_index_csv.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'index_base'
+### Static analysis
 
 | Scope                           | Variable   | Role        | Location |
 | :-------------------------------| :----------| :-----------| :--------|

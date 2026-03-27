@@ -2,6 +2,9 @@
 
 ## dump_ast.py
 
+Error during dynamic analysis (IndexError): list index out of range
+### Static analysis
+
 | Scope  | Variable | Role        | Location |
 | :------| :--------| :-----------| :--------|
 | module | reader   | fixed value | line 4   |
@@ -10,11 +13,16 @@
 
 ## ex_redundant.py
 
+### Static analysis
+
 | Scope  | Variable | Role        | Location |
 | :------| :--------| :-----------| :--------|
 | module | x        | fixed value | line 1   |
 
 ## find_duplicate_keys.py
+
+Error during dynamic analysis (IndexError): list index out of range
+### Static analysis
 
 | Scope                               | Variable | Role        | Location |
 | :-----------------------------------| :--------| :-----------| :--------|
@@ -33,6 +41,9 @@
 | module.FindDuplicateKeys.visit_Dict | problems | fixed value | line 12  |
 
 ## find_unused_variables.py
+
+Error during dynamic analysis (IndexError): list index out of range
+### Static analysis
 
 | Scope                                        | Variable | Role        | Location |
 | :--------------------------------------------| :--------| :-----------| :--------|
@@ -59,17 +70,24 @@
 
 ## function_keys.py
 
+### Static analysis
+
 | Scope  | Variable                    | Role        | Location |
 | :------| :---------------------------| :-----------| :--------|
 | module | actually_has_duplicate_keys | fixed value | line 4   |
 
 ## has_duplicate_keys.py
 
+### Static analysis
+
 | Scope  | Variable       | Role        | Location |
 | :------| :--------------| :-----------| :--------|
 | module | has_duplicates | fixed value | line 1   |
+{'third': 6, 'fourth': 5}
 
 ## has_unused_variables.py
+
+### Static analysis
 
 | Scope             | Variable   | Role        | Location |
 | :-----------------| :----------| :-----------| :--------|
@@ -85,12 +103,18 @@
 
 ## simple.py
 
+### Static analysis
+
 | Scope         | Variable | Role        | Location |
 | :-------------| :--------| :-----------| :--------|
 | module        | result   | fixed value | line 4   |
 | module.double | x        | fixed value | line 1   |
+6
 
 ## walk_ast.py
+
+Error during dynamic analysis (IndexError): list index out of range
+### Static analysis
 
 | Scope                                 | Variable  | Role        | Location |
 | :-------------------------------------| :---------| :-----------| :--------|

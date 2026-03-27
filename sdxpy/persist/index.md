@@ -2,6 +2,9 @@
 
 ## aliasing.py
 
+Error during dynamic analysis (ModuleNotFoundError): No module named 'objects'
+### Static analysis
+
 | Scope                       | Variable | Role               | Location |
 | :---------------------------| :--------| :------------------| :--------|
 | module.LoadAlias.__init__   | reader   | fixed value        | line 57  |
@@ -72,6 +75,9 @@
 
 ## aliasing_wrong.py
 
+Error during dynamic analysis (ModuleNotFoundError): No module named 'objects'
+### Static analysis
+
 | Scope                       | Variable | Role        | Location |
 | :---------------------------| :--------| :-----------| :--------|
 | module.LoadAlias.__init__   | reader   | fixed value | line 59  |
@@ -114,6 +120,8 @@
 
 ## attr.py
 
+### Static analysis
+
 | Scope                   | Variable | Role        | Location |
 | :-----------------------| :--------| :-----------| :--------|
 | module                  | ex       | fixed value | line 8   |
@@ -121,8 +129,14 @@
 | module.Example.__init__ | label    | fixed value | line 2   |
 | module.Example.__init__ | self     | fixed value | line 2   |
 | module.Example.get_size | self     | fixed value | line 5   |
+ex has missing False
+ex has label True with value thing
+ex has get_size True
+result of calling method 5
 
 ## builtin.py
+
+### Static analysis
 
 | Scope       | Variable | Role               | Location |
 | :-----------| :--------| :------------------| :--------|
@@ -147,6 +161,8 @@
 
 ## ex_aliasing.py
 
+### Static analysis
+
 | Scope  | Variable | Role        | Location |
 | :------| :--------| :-----------| :--------|
 | module | shared   | fixed value | line 1   |
@@ -154,11 +170,15 @@
 
 ## ex_circular.py
 
+### Static analysis
+
 | Scope  | Variable | Role | Location |
 | :------| :--------| :----| :--------|
 | module | fixture  | log  | line 1   |
 
 ## objects.py
+
+### Static analysis
 
 | Scope                         | Variable | Role               | Location |
 | :-----------------------------| :--------| :------------------| :--------|
@@ -220,6 +240,9 @@
 
 ## save_aliasing.py
 
+Error during dynamic analysis (ModuleNotFoundError): No module named 'aliasing'
+### Static analysis
+
 | Scope  | Variable | Role        | Location |
 | :------| :--------| :-----------| :--------|
 | module | word     | fixed value | line 5   |
@@ -230,8 +253,14 @@
 ## save_builtin.py
 
 Warning: no variables found.
+Error during dynamic analysis (ModuleNotFoundError): No module named 'builtin'
+### Static analysis
+
 
 ## test_aliasing_wrong.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'aliasing_wrong'
+### Static analysis
 
 | Scope                             | Variable | Role        | Location |
 | :---------------------------------| :--------| :-----------| :--------|
@@ -246,6 +275,9 @@ Warning: no variables found.
 | module.test_aliasing_shared_child | result   | fixed value | line 25  |
 
 ## test_builtin.py
+
+Error during dynamic analysis (ModuleNotFoundError): No module named 'builtin'
+### Static analysis
 
 | Scope                         | Variable | Role        | Location |
 | :-----------------------------| :--------| :-----------| :--------|

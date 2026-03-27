@@ -2,6 +2,8 @@
 
 ## glob_any.py
 
+### Static analysis
+
 | Scope               | Variable | Role        | Location |
 | :-------------------| :--------| :-----------| :--------|
 | module.Any.__init__ | rest     | fixed value | line 2   |
@@ -12,6 +14,8 @@
 | module.Any.match    | i        | stepper     | line 8   |
 
 ## glob_either.py
+
+### Static analysis
 
 | Scope                  | Variable | Role        | Location |
 | :----------------------| :--------| :-----------| :--------|
@@ -25,6 +29,8 @@
 
 ## glob_lit.py
 
+### Static analysis
+
 | Scope               | Variable | Role        | Location |
 | :-------------------| :--------| :-----------| :--------|
 | module.Lit.__init__ | chars    | fixed value | line 2   |
@@ -36,6 +42,8 @@
 | module.Lit.match    | end      | fixed value | line 7   |
 
 ## glob_null.py
+
+### Static analysis
 
 | Scope                  | Variable | Role               | Location |
 | :----------------------| :--------| :------------------| :--------|
@@ -75,16 +83,28 @@
 ## test_glob_any.py
 
 Warning: no variables found.
+Error during dynamic analysis (ModuleNotFoundError): No module named 'glob_lit'
+### Static analysis
+
 
 ## test_glob_either.py
 
 Warning: no variables found.
+Error during dynamic analysis (ModuleNotFoundError): No module named 'glob_lit'
+### Static analysis
+
 
 ## test_glob_lit.py
 
 Warning: no variables found.
+Error during dynamic analysis (ModuleNotFoundError): No module named 'glob_lit'
+### Static analysis
+
 
 ## test_glob_problem.py
 
 Warning: no variables found.
+Error during dynamic analysis (ModuleNotFoundError): No module named 'glob_lit'
+### Static analysis
+
 
