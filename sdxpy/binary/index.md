@@ -1,63 +1,92 @@
-# Binary Data
+# Variable Role Analysis: binary
 
 ## binary_notation.py
 
-*No variables identified by jorma.*
+```
+Warning: no variables found.
+```
 
 ## bit_mask.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| mask | module | fixed value |
-| val | module | unknown |
+```
 
-## pack_unpack.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| fmt | module | fixed value |
-| x | module | fixed value |
-| y | module | fixed value |
-| binary | module | fixed value |
-| normal | module | fixed value |
-
-## pack_count.py
-
-*No variables identified by jorma.*
-
-## ex_dynamic_format.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| format | module | fixed value |
-
-## variable_packing.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| result | module | fixed value |
-| as_string | module.pack_string | fixed value |
-| as_bytes | module.pack_string | fixed value |
-| header | module.pack_string | fixed value |
-| format | module.pack_string | fixed value |
-| body | module.pack_string | fixed value |
-
-## variable_unpacking.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| buffer | module | fixed value |
-| result | module | fixed value |
-| buffer | module.unpack_string | fixed value |
-| body | module.unpack_string | fixed value |
-| header | module.unpack_string | fixed value |
-| length | module.unpack_string | fixed value |
-| format | module.unpack_string | fixed value |
-| result | module.unpack_string | fixed value |
+[module]
+  mask                     fixed value             (line 1)
+  val                      unknown                 (line 2)
+```
 
 ## calcsize.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| format | module | stepper |
+```
+
+[module]
+  format                   stepper                 (line 3)
+```
+
+## ex_dynamic_format.py
+
+```
+
+[module]
+  format                   fixed value             (line 1)
+```
+
+## pack_count.py
+
+```
+Warning: no variables found.
+```
+
+## pack_unpack.py
+
+```
+
+[module]
+  fmt                      fixed value             (line 3)
+  x                        fixed value             (line 4)
+  y                        fixed value             (line 5)
+  binary                   fixed value             (line 7)
+  normal                   fixed value             (line 10)
+```
+
+## variable_packing.py
+
+```
+
+[module]
+  result                   fixed value             (line 14)
+
+[module.pack_string]
+  as_string                fixed value             (line 4)
+  as_bytes                 fixed value             (line 5)
+  header                   fixed value             (line 6)
+  format                   fixed value             (line 7)
+  body                     fixed value             (line 8)
+```
+
+## variable_unpacking.py
+
+```
+
+[module]
+  buffer                   fixed value             (line 12)
+  result                   fixed value             (line 13)
+
+[module.unpack_string]
+  buffer                   fixed value             (line 5)
+  body                     fixed value             (line 6)
+  header                   fixed value             (line 6)
+  length                   fixed value             (line 7)
+  format                   fixed value             (line 8)
+  result                   fixed value             (line 9)
+```
+
+## Programs Not Analyzed
+
+The following programs are referenced in the lesson Makefile
+but are not present in this directory:
+
+- dynamic_format.py
+- hex_notation.py
+- pack_unicode.py
 

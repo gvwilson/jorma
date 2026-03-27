@@ -1,220 +1,330 @@
-# A Database
-
-## interface_original.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| key_func | module.Database.__init__ | fixed value |
-| self | module.Database.__init__ | fixed value |
-| record | module.Database.add | fixed value |
-| self | module.Database.add | fixed value |
-| key | module.Database.get | fixed value |
-| self | module.Database.get | fixed value |
-
-## just_dict_original.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| key_func | module.JustDict.__init__ | fixed value |
-| self | module.JustDict.__init__ | fixed value |
-| record | module.JustDict.add | fixed value |
-| self | module.JustDict.add | fixed value |
-| key | module.JustDict.add | fixed value |
-| key | module.JustDict.get | fixed value |
-| self | module.JustDict.get | fixed value |
-
-## record_original.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| MAX_NAME_LEN | module.BasicRec | fixed value |
-| TIMESTAMP_LEN | module.BasicRec | fixed value |
-| MAX_READING | module.BasicRec | fixed value |
-| MAX_READING_LEN | module.BasicRec | fixed value |
-| MAX_READINGS_NUM | module.BasicRec | fixed value |
-| other | module.BasicRec.__eq__ | fixed value |
-| self | module.BasicRec.__eq__ | fixed value |
-| name | module.BasicRec.__init__ | fixed value |
-| readings | module.BasicRec.__init__ | fixed value |
-| self | module.BasicRec.__init__ | fixed value |
-| timestamp | module.BasicRec.__init__ | fixed value |
-| self | module.BasicRec.__str__ | fixed value |
-| joined | module.BasicRec.__str__ | fixed value |
-| record | module.BasicRec.key | fixed value |
-
-## test_db_original.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| db | module.test_add_then_get | container |
-| ex01 | module.test_add_then_get | fixed value |
-| db | module.test_add_then_overwrite | container |
-| ex01 | module.test_add_then_overwrite | fixed value |
-| db | module.test_add_two_then_get_both | container |
-| ex01 | module.test_add_two_then_get_both | fixed value |
-| ex02 | module.test_add_two_then_get_both | fixed value |
-| db | module.test_construct | fixed value |
-| db | module.test_get_nothing_from_empty_db | fixed value |
-
-## interface.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| record_cls | module.Database.__init__ | fixed value |
-| self | module.Database.__init__ | fixed value |
-| record | module.Database.add | fixed value |
-| self | module.Database.add | fixed value |
-| key | module.Database.get | fixed value |
-| self | module.Database.get | fixed value |
-
-## just_dict_refactored.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| record_cls | module.JustDictRefactored.__init__ | fixed value |
-| self | module.JustDictRefactored.__init__ | fixed value |
-| record | module.JustDictRefactored.add | fixed value |
-| self | module.JustDictRefactored.add | fixed value |
-| key | module.JustDictRefactored.add | fixed value |
-| key | module.JustDictRefactored.get | fixed value |
-| self | module.JustDictRefactored.get | fixed value |
-
-## record.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| RECORD_LEN | module.Experiment | fixed value |
-| record | module.Experiment.key | fixed value |
-| record | module.Experiment.pack | fixed value |
-| readings | module.Experiment.pack | fixed value |
-| result | module.Experiment.pack | unknown |
-| records | module.Experiment.pack_multi | fixed value |
-| raw | module.Experiment.unpack | fixed value |
-| parts | module.Experiment.unpack | fixed value |
-| name | module.Experiment.unpack | fixed value |
-| timestamp | module.Experiment.unpack | fixed value |
-| readings | module.Experiment.unpack | fixed value |
-| raw | module.Experiment.unpack_multi | fixed value |
-| size | module.Experiment.unpack_multi | fixed value |
-| split | module.Experiment.unpack_multi | fixed value |
-
-## show_packed_records.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| ex | module | fixed value |
-
-## file_backed.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| filename | module.FileBacked.__init__ | fixed value |
-| record_cls | module.FileBacked.__init__ | fixed value |
-| self | module.FileBacked.__init__ | fixed value |
-| self | module.FileBacked._load | fixed value |
-| reader | module.FileBacked._load | fixed value |
-| raw | module.FileBacked._load | fixed value |
-| records | module.FileBacked._load | fixed value |
-| self | module.FileBacked._save | fixed value |
-| packed | module.FileBacked._save | fixed value |
-| writer | module.FileBacked._save | fixed value |
-| record | module.FileBacked.add | fixed value |
-| self | module.FileBacked.add | fixed value |
-| key | module.FileBacked.add | fixed value |
-| key | module.FileBacked.get | fixed value |
-| self | module.FileBacked.get | fixed value |
+# Variable Role Analysis: db
 
 ## blocked.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| RECORDS_PER_BLOCK | module.Blocked | fixed value |
-| record_cls | module.Blocked.__init__ | fixed value |
-| self | module.Blocked.__init__ | fixed value |
-| block_id | module.Blocked._get_block | fixed value |
-| self | module.Blocked._get_block | fixed value |
-| self | module.Blocked._get_block_id | fixed value |
-| seq_id | module.Blocked._get_block_id | fixed value |
-| self | module.Blocked._next_seq_id | fixed value |
-| seq_id | module.Blocked._next_seq_id | fixed value |
-| record | module.Blocked.add | fixed value |
-| self | module.Blocked.add | fixed value |
-| key | module.Blocked.add | fixed value |
-| seq_id | module.Blocked.add | fixed value |
-| block_id | module.Blocked.add | fixed value |
-| block | module.Blocked.add | fixed value |
-| key | module.Blocked.get | fixed value |
-| self | module.Blocked.get | fixed value |
-| seq_id | module.Blocked.get | fixed value |
-| block_id | module.Blocked.get | fixed value |
-| block | module.Blocked.get | fixed value |
-| self | module.Blocked.num_blocks | fixed value |
-| self | module.Blocked.num_records | fixed value |
+```
+
+[module.Blocked]
+  RECORDS_PER_BLOCK        fixed value             (line 5)
+
+[module.Blocked.__init__]
+  record_cls               fixed value             (line 11)
+  self                     fixed value             (line 11)
+
+[module.Blocked._get_block]
+  block_id                 fixed value             (line 53)
+  self                     fixed value             (line 53)
+
+[module.Blocked._get_block_id]
+  self                     fixed value             (line 50)
+  seq_id                   fixed value             (line 50)
+
+[module.Blocked._next_seq_id]
+  self                     fixed value             (line 45)
+  seq_id                   fixed value             (line 46)
+
+[module.Blocked.add]
+  record                   fixed value             (line 25)
+  self                     fixed value             (line 25)
+  key                      fixed value             (line 26)
+  seq_id                   fixed value             (line 27)
+  block_id                 fixed value             (line 29)
+  block                    fixed value             (line 30)
+
+[module.Blocked.get]
+  key                      fixed value             (line 35)
+  self                     fixed value             (line 35)
+  seq_id                   fixed value             (line 38)
+  block_id                 fixed value             (line 39)
+  block                    fixed value             (line 40)
+
+[module.Blocked.num_blocks]
+  self                     fixed value             (line 17)
+
+[module.Blocked.num_records]
+  self                     fixed value             (line 20)
+```
 
 ## blocked_file.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| db_dir | module.BlockedFile.__init__ | fixed value |
-| record_cls | module.BlockedFile.__init__ | fixed value |
-| self | module.BlockedFile.__init__ | fixed value |
-| self | module.BlockedFile._build_index | fixed value |
-| seq_id | module.BlockedFile._build_index | stepper |
-| block_id | module.BlockedFile._build_index | stepper |
-| filename | module.BlockedFile._build_index | stepper |
-| record | module.BlockedFile._build_index | stepper |
-| key | module.BlockedFile._build_index | most-recent holder |
-| block_id | module.BlockedFile._get_filename | fixed value |
-| self | module.BlockedFile._get_filename | fixed value |
-| key | module.BlockedFile._load | fixed value |
-| self | module.BlockedFile._load | fixed value |
-| seq_id | module.BlockedFile._load | fixed value |
-| block_id | module.BlockedFile._load | fixed value |
-| filename | module.BlockedFile._load | fixed value |
-| block_id | module.BlockedFile._load_block | fixed value |
-| filename | module.BlockedFile._load_block | fixed value |
-| self | module.BlockedFile._load_block | fixed value |
-| reader | module.BlockedFile._load_block | fixed value |
-| raw | module.BlockedFile._load_block | fixed value |
-| records | module.BlockedFile._load_block | fixed value |
-| base | module.BlockedFile._load_block | fixed value |
-| block | module.BlockedFile._load_block | fixed value |
-| i | module.BlockedFile._load_block | stepper |
-| r | module.BlockedFile._load_block | stepper |
-| record | module.BlockedFile._save | fixed value |
-| self | module.BlockedFile._save | fixed value |
-| key | module.BlockedFile._save | fixed value |
-| seq_id | module.BlockedFile._save | fixed value |
-| block_id | module.BlockedFile._save | fixed value |
-| block | module.BlockedFile._save | fixed value |
-| packed | module.BlockedFile._save | fixed value |
-| filename | module.BlockedFile._save | fixed value |
-| writer | module.BlockedFile._save | fixed value |
-| record | module.BlockedFile.add | fixed value |
-| self | module.BlockedFile.add | fixed value |
-| key | module.BlockedFile.get | fixed value |
-| self | module.BlockedFile.get | fixed value |
+```
+
+[module.BlockedFile.__init__]
+  db_dir                   fixed value             (line 7)
+  record_cls               fixed value             (line 7)
+  self                     fixed value             (line 7)
+
+[module.BlockedFile._build_index]
+  self                     fixed value             (line 59)
+  seq_id                   stepper                 (line 60)
+  block_id                 stepper                 (line 61)
+  filename                 stepper                 (line 61)
+  record                   stepper                 (line 65)
+  key                      most-recent holder      (line 66)
+
+[module.BlockedFile._get_filename]
+  block_id                 fixed value             (line 55)
+  self                     fixed value             (line 55)
+
+[module.BlockedFile._load]
+  key                      fixed value             (line 38)
+  self                     fixed value             (line 38)
+  seq_id                   fixed value             (line 39)
+  block_id                 fixed value             (line 40)
+  filename                 fixed value             (line 41)
+
+[module.BlockedFile._load_block]
+  block_id                 fixed value             (line 44)
+  filename                 fixed value             (line 44)
+  self                     fixed value             (line 44)
+  reader                   fixed value             (line 45)
+  raw                      fixed value             (line 46)
+  records                  fixed value             (line 48)
+  base                     fixed value             (line 49)
+  block                    fixed value             (line 50)
+  i                        stepper                 (line 51)
+  r                        stepper                 (line 51)
+
+[module.BlockedFile._save]
+  record                   fixed value             (line 24)
+  self                     fixed value             (line 24)
+  key                      fixed value             (line 25)
+  seq_id                   fixed value             (line 26)
+  block_id                 fixed value             (line 27)
+  block                    fixed value             (line 29)
+  packed                   fixed value             (line 30)
+  filename                 fixed value             (line 32)
+  writer                   fixed value             (line 33)
+
+[module.BlockedFile.add]
+  record                   fixed value             (line 12)
+  self                     fixed value             (line 12)
+
+[module.BlockedFile.get]
+  key                      fixed value             (line 16)
+  self                     fixed value             (line 16)
+```
 
 ## cleanup.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| self | module.Cleanup._cleanup | fixed value |
-| new_seq | module.Cleanup._cleanup | fixed value |
-| keep | module.Cleanup._cleanup | fixed value |
-| renaming | module.Cleanup._cleanup | fixed value |
-| garbage_ids | module.Cleanup._cleanup | fixed value |
-| new_index | module.Cleanup._cleanup | fixed value |
-| garbage_ids | module.Cleanup._delete_blocks | fixed value |
-| self | module.Cleanup._delete_blocks | fixed value |
-| i | module.Cleanup._delete_blocks | stepper |
-| filename | module.Cleanup._delete_blocks | most-recent holder |
-| renaming | module.Cleanup._rename_blocks | fixed value |
-| self | module.Cleanup._rename_blocks | fixed value |
-| new_id | module.Cleanup._rename_blocks | stepper |
-| old_id | module.Cleanup._rename_blocks | stepper |
-| old_filename | module.Cleanup._rename_blocks | most-recent holder |
-| new_filename | module.Cleanup._rename_blocks | most-recent holder |
-| record | module.Cleanup.add | fixed value |
-| self | module.Cleanup.add | fixed value |
+```
+
+[module.Cleanup._cleanup]
+  self                     fixed value             (line 11)
+  new_seq                  fixed value             (line 12)
+  keep                     fixed value             (line 15)
+  renaming                 fixed value             (line 17)
+  garbage_ids              fixed value             (line 18)
+  new_index                fixed value             (line 26)
+
+[module.Cleanup._delete_blocks]
+  garbage_ids              fixed value             (line 33)
+  self                     fixed value             (line 33)
+  i                        stepper                 (line 34)
+  filename                 most-recent holder      (line 35)
+
+[module.Cleanup._rename_blocks]
+  renaming                 fixed value             (line 39)
+  self                     fixed value             (line 39)
+  new_id                   stepper                 (line 40)
+  old_id                   stepper                 (line 40)
+  old_filename             most-recent holder      (line 41)
+  new_filename             most-recent holder      (line 42)
+
+[module.Cleanup.add]
+  record                   fixed value             (line 6)
+  self                     fixed value             (line 6)
+```
+
+## file_backed.py
+
+```
+
+[module.FileBacked.__init__]
+  filename                 fixed value             (line 7)
+  record_cls               fixed value             (line 7)
+  self                     fixed value             (line 7)
+
+[module.FileBacked._load]
+  self                     fixed value             (line 29)
+  reader                   fixed value             (line 31)
+  raw                      fixed value             (line 32)
+  records                  fixed value             (line 33)
+
+[module.FileBacked._save]
+  self                     fixed value             (line 24)
+  packed                   fixed value             (line 25)
+  writer                   fixed value             (line 26)
+
+[module.FileBacked.add]
+  record                   fixed value             (line 14)
+  self                     fixed value             (line 14)
+  key                      fixed value             (line 15)
+
+[module.FileBacked.get]
+  key                      fixed value             (line 19)
+  self                     fixed value             (line 19)
+```
+
+## interface.py
+
+```
+
+[module.Database.__init__]
+  record_cls               fixed value             (line 2)
+  self                     fixed value             (line 2)
+
+[module.Database.add]
+  record                   fixed value             (line 6)
+  self                     fixed value             (line 6)
+
+[module.Database.get]
+  key                      fixed value             (line 10)
+  self                     fixed value             (line 10)
+```
+
+## interface_original.py
+
+```
+
+[module.Database.__init__]
+  key_func                 fixed value             (line 2)
+  self                     fixed value             (line 2)
+
+[module.Database.add]
+  record                   fixed value             (line 6)
+  self                     fixed value             (line 6)
+
+[module.Database.get]
+  key                      fixed value             (line 10)
+  self                     fixed value             (line 10)
+```
+
+## just_dict_original.py
+
+```
+
+[module.JustDict.__init__]
+  key_func                 fixed value             (line 4)
+  self                     fixed value             (line 4)
+
+[module.JustDict.add]
+  record                   fixed value             (line 8)
+  self                     fixed value             (line 8)
+  key                      fixed value             (line 9)
+
+[module.JustDict.get]
+  key                      fixed value             (line 12)
+  self                     fixed value             (line 12)
+```
+
+## just_dict_refactored.py
+
+```
+
+[module.JustDictRefactored.__init__]
+  record_cls               fixed value             (line 4)
+  self                     fixed value             (line 4)
+
+[module.JustDictRefactored.add]
+  record                   fixed value             (line 8)
+  self                     fixed value             (line 8)
+  key                      fixed value             (line 9)
+
+[module.JustDictRefactored.get]
+  key                      fixed value             (line 12)
+  self                     fixed value             (line 12)
+```
+
+## record.py
+
+```
+
+[module.Experiment]
+  RECORD_LEN               fixed value             (line 5)
+
+[module.Experiment.key]
+  record                   fixed value             (line 16)
+
+[module.Experiment.pack]
+  record                   fixed value             (line 22)
+  readings                 fixed value             (line 24)
+  result                   unknown                 (line 25)
+
+[module.Experiment.pack_multi]
+  records                  fixed value             (line 44)
+
+[module.Experiment.unpack]
+  raw                      fixed value             (line 33)
+  parts                    fixed value             (line 35)
+  name                     fixed value             (line 36)
+  timestamp                fixed value             (line 37)
+  readings                 fixed value             (line 38)
+
+[module.Experiment.unpack_multi]
+  raw                      fixed value             (line 48)
+  size                     fixed value             (line 49)
+  split                    fixed value             (line 50)
+```
+
+## record_original.py
+
+```
+
+[module.BasicRec]
+  MAX_NAME_LEN             fixed value             (line 2)
+  TIMESTAMP_LEN            fixed value             (line 3)
+  MAX_READING              fixed value             (line 4)
+  MAX_READING_LEN          fixed value             (line 5)
+  MAX_READINGS_NUM         fixed value             (line 6)
+
+[module.BasicRec.__eq__]
+  other                    fixed value             (line 26)
+  self                     fixed value             (line 26)
+
+[module.BasicRec.__init__]
+  name                     fixed value             (line 13)
+  readings                 fixed value             (line 13)
+  self                     fixed value             (line 13)
+  timestamp                fixed value             (line 13)
+
+[module.BasicRec.__str__]
+  self                     fixed value             (line 22)
+  joined                   fixed value             (line 23)
+
+[module.BasicRec.key]
+  record                   fixed value             (line 9)
+```
+
+## show_packed_records.py
+
+```
+
+[module]
+  ex                       fixed value             (line 3)
+```
+
+## test_db_original.py
+
+```
+
+[module.test_add_then_get]
+  db                       container               (line 27)
+  ex01                     fixed value             (line 27)
+
+[module.test_add_then_overwrite]
+  db                       container               (line 37)
+  ex01                     fixed value             (line 37)
+
+[module.test_add_two_then_get_both]
+  db                       container               (line 31)
+  ex01                     fixed value             (line 31)
+  ex02                     fixed value             (line 31)
+
+[module.test_construct]
+  db                       fixed value             (line 21)
+
+[module.test_get_nothing_from_empty_db]
+  db                       fixed value             (line 24)
+```
 

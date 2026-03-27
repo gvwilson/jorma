@@ -1,124 +1,203 @@
-# Functions and Closures
-
-## example_def.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| double | module | fixed value |
-| num | module.same | fixed value |
-
-## func.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| OPERATIONS | module | fixed value |
-| env | module.do | fixed value |
-| instruction | module.do | fixed value |
-| args | module.do | fixed value |
-| op | module.do | fixed value |
-| args | module.do_add | fixed value |
-| env | module.do_add | fixed value |
-| left | module.do_add | fixed value |
-| right | module.do_add | fixed value |
-| args | module.do_call | fixed value |
-| env | module.do_call | container |
-| name | module.do_call | fixed value |
-| values | module.do_call | fixed value |
-| func | module.do_call | fixed value |
-| body | module.do_call | fixed value |
-| params | module.do_call | fixed value |
-| result | module.do_call | fixed value |
-| args | module.do_comment | fixed value |
-| env | module.do_comment | fixed value |
-| args | module.do_func | fixed value |
-| env | module.do_func | fixed value |
-| params | module.do_func | fixed value |
-| body | module.do_func | fixed value |
-| args | module.do_get | fixed value |
-| env | module.do_get | fixed value |
-| args | module.do_gt | fixed value |
-| env | module.do_gt | fixed value |
-| args | module.do_if | fixed value |
-| env | module.do_if | fixed value |
-| cond | module.do_if | fixed value |
-| choice | module.do_if | fixed value |
-| args | module.do_leq | fixed value |
-| env | module.do_leq | fixed value |
-| args | module.do_neg | fixed value |
-| env | module.do_neg | fixed value |
-| args | module.do_not | fixed value |
-| env | module.do_not | fixed value |
-| args | module.do_or | fixed value |
-| env | module.do_or | fixed value |
-| temp | module.do_or | fixed value |
-| args | module.do_print | unknown |
-| env | module.do_print | fixed value |
-| args | module.do_repeat | fixed value |
-| env | module.do_repeat | fixed value |
-| count | module.do_repeat | fixed value |
-| i | module.do_repeat | stepper |
-| result | module.do_repeat | most-recent holder |
-| args | module.do_seq | fixed value |
-| env | module.do_seq | fixed value |
-| a | module.do_seq | stepper |
-| result | module.do_seq | most-recent holder |
-| args | module.do_set | fixed value |
-| env | module.do_set | fixed value |
-| name | module.do_set | fixed value |
-| value | module.do_set | fixed value |
-| env | module.env_get | fixed value |
-| name | module.env_get | fixed value |
-| e | module.env_get | stepper |
-| env | module.env_set | fixed value |
-| name | module.env_set | fixed value |
-| value | module.env_set | fixed value |
-| e | module.env_set | stepper |
-| reader | module.main | fixed value |
-| program | module.main | fixed value |
-| result | module.main | fixed value |
-
-## ex_dict_zip.py
-
-*No variables identified by jorma.*
-
-## inner.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| value | module.outer | fixed value |
-| i | module.outer | stepper |
-| current | module.outer.inner | fixed value |
+# Variable Role Analysis: func
 
 ## closure.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| has_secret | module | fixed value |
-| thing | module.make_hidden | fixed value |
+```
 
-## oop.py
+[module]
+  has_secret               fixed value             (line 6)
 
-| Variable | Scope | Role |
-|---|---|---|
-| object | module | fixed value |
-| initial_value | module.make_object | fixed value |
-| private | module.make_object | fixed value |
-| new_value | module.make_object.setter | fixed value |
+[module.make_hidden]
+  thing                    fixed value             (line 1)
+```
 
 ## counter_fail.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| c | module | fixed value |
-| i | module | stepper |
-| value | module.make_counter | fixed value |
-| value | module.make_counter._inner | unknown |
+```
+
+[module]
+  c                        fixed value             (line 8)
+  i                        stepper                 (line 9)
+
+[module.make_counter]
+  value                    fixed value             (line 2)
+
+[module.make_counter._inner]
+  value                    unknown                 (line 4)
+```
 
 ## counter_succeed.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| c | module | fixed value |
-| i | module | stepper |
-| value | module.make_counter | fixed value |
+```
+
+[module]
+  c                        fixed value             (line 8)
+  i                        stepper                 (line 9)
+
+[module.make_counter]
+  value                    fixed value             (line 2)
+```
+
+## ex_dict_zip.py
+
+```
+Warning: no variables found.
+```
+
+## example_def.py
+
+```
+
+[module]
+  double                   fixed value             (line 15)
+
+[module.same]
+  num                      fixed value             (line 2)
+```
+
+## func.py
+
+```
+
+[module]
+  OPERATIONS               fixed value             (line 100)
+
+[module.do]
+  env                      fixed value             (line 106)
+  instruction              fixed value             (line 106)
+  args                     fixed value             (line 109)
+  op                       fixed value             (line 109)
+
+[module.do_add]
+  args                     fixed value             (line 4)
+  env                      fixed value             (line 4)
+  left                     fixed value             (line 6)
+  right                    fixed value             (line 7)
+
+[module.do_call]
+  args                     fixed value             (line 11)
+  env                      container               (line 11)
+  name                     fixed value             (line 14)
+  values                   fixed value             (line 15)
+  func                     fixed value             (line 18)
+  body                     fixed value             (line 20)
+  params                   fixed value             (line 20)
+  result                   fixed value             (line 25)
+
+[module.do_comment]
+  args                     fixed value             (line 32)
+  env                      fixed value             (line 32)
+
+[module.do_func]
+  args                     fixed value             (line 36)
+  env                      fixed value             (line 36)
+  params                   fixed value             (line 38)
+  body                     fixed value             (line 39)
+
+[module.do_get]
+  args                     fixed value             (line 43)
+  env                      fixed value             (line 43)
+
+[module.do_gt]
+  args                     fixed value             (line 47)
+  env                      fixed value             (line 47)
+
+[module.do_if]
+  args                     fixed value             (line 51)
+  env                      fixed value             (line 51)
+  cond                     fixed value             (line 53)
+  choice                   fixed value             (line 54)
+
+[module.do_leq]
+  args                     fixed value             (line 57)
+  env                      fixed value             (line 57)
+
+[module.do_neg]
+  args                     fixed value             (line 61)
+  env                      fixed value             (line 61)
+
+[module.do_not]
+  args                     fixed value             (line 65)
+  env                      fixed value             (line 65)
+
+[module.do_or]
+  args                     fixed value             (line 69)
+  env                      fixed value             (line 69)
+  temp                     fixed value             (line 71)
+
+[module.do_print]
+  args                     unknown                 (line 75)
+  env                      fixed value             (line 75)
+
+[module.do_repeat]
+  args                     fixed value             (line 80)
+  env                      fixed value             (line 80)
+  count                    fixed value             (line 82)
+  i                        stepper                 (line 83)
+  result                   most-recent holder      (line 84)
+
+[module.do_seq]
+  args                     fixed value             (line 87)
+  env                      fixed value             (line 87)
+  a                        stepper                 (line 88)
+  result                   most-recent holder      (line 89)
+
+[module.do_set]
+  args                     fixed value             (line 92)
+  env                      fixed value             (line 92)
+  name                     fixed value             (line 94)
+  value                    fixed value             (line 95)
+
+[module.env_get]
+  env                      fixed value             (line 113)
+  name                     fixed value             (line 113)
+  e                        stepper                 (line 115)
+
+[module.env_set]
+  env                      fixed value             (line 120)
+  name                     fixed value             (line 120)
+  value                    fixed value             (line 120)
+  e                        stepper                 (line 122)
+
+[module.main]
+  reader                   fixed value             (line 130)
+  program                  fixed value             (line 131)
+  result                   fixed value             (line 132)
+```
+
+## inner.py
+
+```
+
+[module.outer]
+  value                    fixed value             (line 1)
+  i                        stepper                 (line 6)
+
+[module.outer.inner]
+  current                  fixed value             (line 2)
+```
+
+## oop.py
+
+```
+
+[module]
+  object                   fixed value             (line 12)
+
+[module.make_object]
+  initial_value            fixed value             (line 1)
+  private                  fixed value             (line 2)
+
+[module.make_object.setter]
+  new_value                fixed value             (line 7)
+```
+
+## Programs Not Analyzed
+
+The following programs are referenced in the lesson Makefile
+but are not present in this directory:
+
+- adder.py
+- closure_list.py
+- dynamic.py
 

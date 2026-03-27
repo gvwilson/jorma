@@ -1,111 +1,172 @@
-# A Code Linter
-
-## simple.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| result | module | fixed value |
-| x | module.double | fixed value |
+# Variable Role Analysis: lint
 
 ## dump_ast.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| reader | module | fixed value |
-| source | module | fixed value |
-| tree | module | fixed value |
+```
 
-## walk_ast.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| reader | module | fixed value |
-| source | module | fixed value |
-| tree | module | fixed value |
-| collector | module | fixed value |
-| self | module.CollectNames.__init__ | fixed value |
-| name | module.CollectNames.add | fixed value |
-| node | module.CollectNames.add | fixed value |
-| self | module.CollectNames.add | fixed value |
-| loc | module.CollectNames.add | fixed value |
-| node | module.CollectNames.position | fixed value |
-| self | module.CollectNames.position | fixed value |
-| node | module.CollectNames.visit_Assign | fixed value |
-| self | module.CollectNames.visit_Assign | container |
-| var | module.CollectNames.visit_Assign | stepper |
-| node | module.CollectNames.visit_FunctionDef | fixed value |
-| self | module.CollectNames.visit_FunctionDef | container |
-
-## has_duplicate_keys.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| has_duplicates | module | fixed value |
-
-## find_duplicate_keys.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| reader | module | fixed value |
-| source | module | fixed value |
-| tree | module | fixed value |
-| finder | module | fixed value |
-| node | module.FindDuplicateKeys.report | fixed value |
-| problems | module.FindDuplicateKeys.report | fixed value |
-| self | module.FindDuplicateKeys.report | fixed value |
-| msg | module.FindDuplicateKeys.report | fixed value |
-| node | module.FindDuplicateKeys.visit_Dict | fixed value |
-| self | module.FindDuplicateKeys.visit_Dict | fixed value |
-| seen | module.FindDuplicateKeys.visit_Dict | fixed value |
-| key | module.FindDuplicateKeys.visit_Dict | stepper |
-| problems | module.FindDuplicateKeys.visit_Dict | fixed value |
-
-## function_keys.py
-
-*No variables identified by jorma.*
-
-## find_unused_variables.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| Scope | module | fixed value |
-| reader | module | fixed value |
-| source | module | fixed value |
-| tree | module | fixed value |
-| finder | module | fixed value |
-| self | module.FindUnusedVariables.__init__ | fixed value |
-| scope | module.FindUnusedVariables.check | fixed value |
-| self | module.FindUnusedVariables.check | fixed value |
-| unused | module.FindUnusedVariables.check | fixed value |
-| names | module.FindUnusedVariables.check | fixed value |
-| name | module.FindUnusedVariables.search | fixed value |
-| node | module.FindUnusedVariables.search | fixed value |
-| self | module.FindUnusedVariables.search | fixed value |
-| scope | module.FindUnusedVariables.search | fixed value |
-| node | module.FindUnusedVariables.visit_FunctionDef | fixed value |
-| self | module.FindUnusedVariables.visit_FunctionDef | fixed value |
-| node | module.FindUnusedVariables.visit_Module | fixed value |
-| self | module.FindUnusedVariables.visit_Module | fixed value |
-| node | module.FindUnusedVariables.visit_Name | fixed value |
-| self | module.FindUnusedVariables.visit_Name | fixed value |
-
-## has_unused_variables.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| used | module | fixed value |
-| distractor | module | fixed value |
-| not_used | module | fixed value |
-| param | module.has_unused | fixed value |
-| used | module.has_unused | fixed value |
-| not_used | module.has_unused | fixed value |
-| distractor | module.has_unused | fixed value |
-| param | module.no_unused | fixed value |
-| result | module.no_unused | fixed value |
+[module]
+  reader                   fixed value             (line 4)
+  source                   fixed value             (line 5)
+  tree                     fixed value             (line 7)
+```
 
 ## ex_redundant.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| x | module | fixed value |
+```
+
+[module]
+  x                        fixed value             (line 1)
+```
+
+## find_duplicate_keys.py
+
+```
+
+[module]
+  reader                   fixed value             (line 22)
+  source                   fixed value             (line 23)
+  tree                     fixed value             (line 24)
+  finder                   fixed value             (line 25)
+
+[module.FindDuplicateKeys.report]
+  node                     fixed value             (line 16)
+  problems                 fixed value             (line 16)
+  self                     fixed value             (line 16)
+  msg                      fixed value             (line 18)
+
+[module.FindDuplicateKeys.visit_Dict]
+  node                     fixed value             (line 7)
+  self                     fixed value             (line 7)
+  seen                     fixed value             (line 8)
+  key                      stepper                 (line 9)
+  problems                 fixed value             (line 12)
+```
+
+## find_unused_variables.py
+
+```
+
+[module]
+  Scope                    fixed value             (line 6)
+  reader                   fixed value             (line 50)
+  source                   fixed value             (line 51)
+  tree                     fixed value             (line 52)
+  finder                   fixed value             (line 53)
+
+[module.FindUnusedVariables.__init__]
+  self                     fixed value             (line 11)
+
+[module.FindUnusedVariables.check]
+  scope                    fixed value             (line 29)
+  self                     fixed value             (line 29)
+  unused                   fixed value             (line 30)
+  names                    fixed value             (line 32)
+
+[module.FindUnusedVariables.search]
+  name                     fixed value             (line 23)
+  node                     fixed value             (line 23)
+  self                     fixed value             (line 23)
+  scope                    fixed value             (line 26)
+
+[module.FindUnusedVariables.visit_FunctionDef]
+  node                     fixed value             (line 18)
+  self                     fixed value             (line 18)
+
+[module.FindUnusedVariables.visit_Module]
+  node                     fixed value             (line 15)
+  self                     fixed value             (line 15)
+
+[module.FindUnusedVariables.visit_Name]
+  node                     fixed value             (line 37)
+  self                     fixed value             (line 37)
+```
+
+## function_keys.py
+
+```
+
+[module]
+  actually_has_duplicate_keys fixed value             (line 4)
+```
+
+## has_duplicate_keys.py
+
+```
+
+[module]
+  has_duplicates           fixed value             (line 1)
+```
+
+## has_unused_variables.py
+
+```
+
+[module]
+  used                     fixed value             (line 1)
+  distractor               fixed value             (line 2)
+  not_used                 fixed value             (line 3)
+
+[module.has_unused]
+  param                    fixed value             (line 11)
+  used                     fixed value             (line 12)
+  not_used                 fixed value             (line 13)
+  distractor               fixed value             (line 14)
+
+[module.no_unused]
+  param                    fixed value             (line 6)
+  result                   fixed value             (line 7)
+```
+
+## simple.py
+
+```
+
+[module]
+  result                   fixed value             (line 4)
+
+[module.double]
+  x                        fixed value             (line 1)
+```
+
+## walk_ast.py
+
+```
+
+[module]
+  reader                   fixed value             (line 30)
+  source                   fixed value             (line 31)
+  tree                     fixed value             (line 32)
+  collector                fixed value             (line 33)
+
+[module.CollectNames.__init__]
+  self                     fixed value             (line 7)
+
+[module.CollectNames.add]
+  name                     fixed value             (line 20)
+  node                     fixed value             (line 20)
+  self                     fixed value             (line 20)
+  loc                      fixed value             (line 21)
+
+[module.CollectNames.position]
+  node                     fixed value             (line 25)
+  self                     fixed value             (line 25)
+
+[module.CollectNames.visit_Assign]
+  node                     fixed value             (line 11)
+  self                     container               (line 11)
+  var                      stepper                 (line 12)
+
+[module.CollectNames.visit_FunctionDef]
+  node                     fixed value             (line 16)
+  self                     container               (line 16)
+```
+
+## Programs Not Analyzed
+
+The following programs are referenced in the lesson Makefile
+but are not present in this directory:
+
+- double.py
+- dump_ast_double.py
+- dump_ast_simple.py
 

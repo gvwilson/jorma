@@ -1,217 +1,340 @@
-# A File Cache
-
-## index_base.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| CacheEntry | module | fixed value |
-| TIME_FORMAT | module.IndexBase | fixed value |
-| index_dir | module.IndexBase.__init__ | fixed value |
-| self | module.IndexBase.__init__ | fixed value |
-| self | module.IndexBase._initialize_index | fixed value |
-| identifier | module.IndexBase.add | fixed value |
-| self | module.IndexBase.add | fixed value |
-| index | module.IndexBase.add | log |
-| entry | module.IndexBase.add | fixed value |
-| self | module.IndexBase.get_index_dir | fixed value |
-| identifier | module.IndexBase.has | fixed value |
-| self | module.IndexBase.has | fixed value |
-| index | module.IndexBase.has | fixed value |
-| self | module.IndexBase.known | fixed value |
-| self | module.IndexBase.load | fixed value |
-| index | module.IndexBase.save | fixed value |
-| self | module.IndexBase.save | fixed value |
-| index_dir | module.IndexBase.set_index_dir | fixed value |
-| self | module.IndexBase.set_index_dir | fixed value |
-
-## index_csv.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| INDEX_FILE | module.IndexCSV | fixed value |
-| self | module.IndexCSV._initialize_index | fixed value |
-| self | module.IndexCSV._make_index_path | fixed value |
-| self | module.IndexCSV.load | fixed value |
-| index_path | module.IndexCSV.load | fixed value |
-| stream | module.IndexCSV.load | fixed value |
-| reader | module.IndexCSV.load | fixed value |
-| index | module.IndexCSV.save | fixed value |
-| self | module.IndexCSV.save | fixed value |
-| index_path | module.IndexCSV.save | fixed value |
-| stream | module.IndexCSV.save | fixed value |
-| writer | module.IndexCSV.save | fixed value |
-| entry | module.IndexCSV.save | stepper |
-| when | module.IndexCSV.save | most-recent holder |
-
-## test_index_csv.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| CACHE_DIR | module | fixed value |
-| INDEX_FILE | module | fixed value |
-| LOCAL_DIR | module | fixed value |
-| fs | module.disk | fixed value |
-| disk | module.test_csv_has_entry | fixed value |
-| right_now | module.test_csv_has_entry | fixed value |
-| index | module.test_csv_has_entry | container |
-| disk | module.test_csv_loads_initially | fixed value |
-| index | module.test_csv_loads_initially | fixed value |
-| disk | module.test_csv_saves_changes | fixed value |
-| right_now | module.test_csv_saves_changes | fixed value |
-| index | module.test_csv_saves_changes | container |
+# Variable Role Analysis: cache
 
 ## cache_base.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| CACHE_SUFFIX | module.CacheBase | fixed value |
-| cache_dir | module.CacheBase.__init__ | fixed value |
-| index | module.CacheBase.__init__ | fixed value |
-| self | module.CacheBase.__init__ | fixed value |
-| identifier | module.CacheBase._add | fixed value |
-| local_path | module.CacheBase._add | fixed value |
-| self | module.CacheBase._add | fixed value |
-| identifier | module.CacheBase._make_cache_path | fixed value |
-| self | module.CacheBase._make_cache_path | fixed value |
-| local_path | module.CacheBase._make_identifier | fixed value |
-| self | module.CacheBase._make_identifier | fixed value |
-| reader | module.CacheBase._make_identifier | fixed value |
-| local_path | module.CacheBase.add | fixed value |
-| self | module.CacheBase.add | fixed value |
-| identifier | module.CacheBase.add | fixed value |
-| identifier | module.CacheBase.get_cache_path | fixed value |
-| self | module.CacheBase.get_cache_path | fixed value |
-| identifier | module.CacheBase.has | fixed value |
-| self | module.CacheBase.has | fixed value |
-| self | module.CacheBase.known | fixed value |
+```
+
+[module.CacheBase]
+  CACHE_SUFFIX             fixed value             (line 9)
+
+[module.CacheBase.__init__]
+  cache_dir                fixed value             (line 11)
+  index                    fixed value             (line 11)
+  self                     fixed value             (line 11)
+
+[module.CacheBase._add]
+  identifier               fixed value             (line 40)
+  local_path               fixed value             (line 40)
+  self                     fixed value             (line 40)
+
+[module.CacheBase._make_cache_path]
+  identifier               fixed value             (line 36)
+  self                     fixed value             (line 36)
+
+[module.CacheBase._make_identifier]
+  local_path               fixed value             (line 32)
+  self                     fixed value             (line 32)
+  reader                   fixed value             (line 33)
+
+[module.CacheBase.add]
+  local_path               fixed value             (line 15)
+  self                     fixed value             (line 15)
+  identifier               fixed value             (line 16)
+
+[module.CacheBase.get_cache_path]
+  identifier               fixed value             (line 21)
+  self                     fixed value             (line 21)
+
+[module.CacheBase.has]
+  identifier               fixed value             (line 26)
+  self                     fixed value             (line 26)
+
+[module.CacheBase.known]
+  self                     fixed value             (line 29)
+```
 
 ## cache_filesystem.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| identifier | module.CacheFilesystem._add | fixed value |
-| local_path | module.CacheFilesystem._add | fixed value |
-| self | module.CacheFilesystem._add | fixed value |
-| cache_path | module.CacheFilesystem._add | fixed value |
+```
 
-## test_cache_filesystem.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| CACHE_DIR | module | fixed value |
-| fs | module.disk | fixed value |
-| cache | module.test_filesystem_duplicate_content_only_saved_once | container |
-| disk | module.test_filesystem_duplicate_content_only_saved_once | fixed value |
-| contents | module.test_filesystem_duplicate_content_only_saved_once | fixed value |
-| ident_first | module.test_filesystem_duplicate_content_only_saved_once | fixed value |
-| ident_second | module.test_filesystem_duplicate_content_only_saved_once | fixed value |
-| cache | module.test_filesystem_file_can_be_reloaded_after_deletion | container |
-| disk | module.test_filesystem_file_can_be_reloaded_after_deletion | fixed value |
-| ident | module.test_filesystem_file_can_be_reloaded_after_deletion | fixed value |
-| reader | module.test_filesystem_file_can_be_reloaded_after_deletion | fixed value |
-| cache | module.test_filesystem_no_files_before_add | fixed value |
-| disk | module.test_filesystem_no_files_before_add | fixed value |
-| cache | module.test_filesystem_single_file_can_be_reloaded | container |
-| disk | module.test_filesystem_single_file_can_be_reloaded | fixed value |
-| ident | module.test_filesystem_single_file_can_be_reloaded | fixed value |
-| reader | module.test_filesystem_single_file_can_be_reloaded | fixed value |
-| cache | module.test_filesystem_single_file_present_after_add | container |
-| disk | module.test_filesystem_single_file_present_after_add | fixed value |
-| ident | module.test_filesystem_single_file_present_after_add | fixed value |
-| cache_path | module.test_filesystem_single_file_present_after_add | fixed value |
-| cache | module.test_filesystem_two_files_present_after_add | container |
-| disk | module.test_filesystem_two_files_present_after_add | fixed value |
-| names | module.test_filesystem_two_files_present_after_add | fixed value |
-| name | module.test_filesystem_two_files_present_after_add | stepper |
-| filename | module.test_filesystem_two_files_present_after_add | most-recent holder |
-
-## cache_limited.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| archive_dir | module.CacheLimited.__init__ | fixed value |
-| cache_dir | module.CacheLimited.__init__ | fixed value |
-| index | module.CacheLimited.__init__ | fixed value |
-| local_limit | module.CacheLimited.__init__ | fixed value |
-| self | module.CacheLimited.__init__ | fixed value |
-| identifier | module.CacheLimited._add | fixed value |
-| local_path | module.CacheLimited._add | fixed value |
-| self | module.CacheLimited._add | fixed value |
-| identifier | module.CacheLimited._add_archive | fixed value |
-| local_path | module.CacheLimited._add_archive | fixed value |
-| self | module.CacheLimited._add_archive | fixed value |
-| archive_path | module.CacheLimited._add_archive | fixed value |
-| self | module.CacheLimited._ensure_cache_space | fixed value |
-| cache_dir | module.CacheLimited._ensure_cache_space | fixed value |
-| cache_files | module.CacheLimited._ensure_cache_space | container |
-| choice | module.CacheLimited._ensure_cache_space | fixed value |
-| identifier | module.CacheLimited._make_archive_path | fixed value |
-| self | module.CacheLimited._make_archive_path | fixed value |
-| identifier | module.CacheLimited.get_cache_path | fixed value |
-| self | module.CacheLimited.get_cache_path | fixed value |
-| cache_path | module.CacheLimited.get_cache_path | fixed value |
-| archive_path | module.CacheLimited.get_cache_path | fixed value |
-
-## test_cache_limited.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| CACHE_DIR | module | fixed value |
-| ARCHIVE_DIR | module | fixed value |
-| LOCAL_LIMIT | module | fixed value |
-| disk | module.cache | fixed value |
-| index | module.cache | fixed value |
-| fs | module.disk | fixed value |
-| cache | module.test_limited_all_files_can_be_retrieved | container |
-| disk | module.test_limited_all_files_can_be_retrieved | fixed value |
-| names | module.test_limited_all_files_can_be_retrieved | fixed value |
-| idents | module.test_limited_all_files_can_be_retrieved | fixed value |
-| name | module.test_limited_all_files_can_be_retrieved | stepper |
-| local_file | module.test_limited_all_files_can_be_retrieved | most-recent holder |
-| ident | module.test_limited_all_files_can_be_retrieved | stepper |
-| cache_path | module.test_limited_all_files_can_be_retrieved | most-recent holder |
-| cache | module.test_limited_duplicate_content_only_saved_once | container |
-| disk | module.test_limited_duplicate_content_only_saved_once | fixed value |
-| contents | module.test_limited_duplicate_content_only_saved_once | fixed value |
-| ident_first | module.test_limited_duplicate_content_only_saved_once | fixed value |
-| ident_second | module.test_limited_duplicate_content_only_saved_once | fixed value |
-| cache | module.test_limited_file_can_be_reloaded_after_deletion | container |
-| disk | module.test_limited_file_can_be_reloaded_after_deletion | fixed value |
-| ident | module.test_limited_file_can_be_reloaded_after_deletion | fixed value |
-| reader | module.test_limited_file_can_be_reloaded_after_deletion | fixed value |
-| cache | module.test_limited_local_cache_size_stays_small | container |
-| disk | module.test_limited_local_cache_size_stays_small | fixed value |
-| names | module.test_limited_local_cache_size_stays_small | fixed value |
-| name | module.test_limited_local_cache_size_stays_small | stepper |
-| local_file | module.test_limited_local_cache_size_stays_small | most-recent holder |
-| cache | module.test_limited_no_files_before_add | fixed value |
-| cache | module.test_limited_single_file_can_be_reloaded | container |
-| disk | module.test_limited_single_file_can_be_reloaded | fixed value |
-| ident | module.test_limited_single_file_can_be_reloaded | fixed value |
-| reader | module.test_limited_single_file_can_be_reloaded | fixed value |
-| cache | module.test_limited_single_file_present_after_add | container |
-| disk | module.test_limited_single_file_present_after_add | fixed value |
-| ident | module.test_limited_single_file_present_after_add | fixed value |
-| cache_path | module.test_limited_single_file_present_after_add | fixed value |
-| archive_path | module.test_limited_single_file_present_after_add | fixed value |
-| cache | module.test_limited_two_files_present_after_add | container |
-| disk | module.test_limited_two_files_present_after_add | fixed value |
-| names | module.test_limited_two_files_present_after_add | fixed value |
-| name | module.test_limited_two_files_present_after_add | stepper |
-| filename | module.test_limited_two_files_present_after_add | most-recent holder |
+[module.CacheFilesystem._add]
+  identifier               fixed value             (line 8)
+  local_path               fixed value             (line 8)
+  self                     fixed value             (line 8)
+  cache_path               fixed value             (line 9)
+```
 
 ## cache_io.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| cache | module.cache_open | fixed value |
-| filename | module.cache_open | unknown |
-| reader | module.cache_open | fixed value |
-| identifier | module.cache_open | fixed value |
-| cache_path | module.cache_open | fixed value |
-| cache | module.cache_save | container |
-| filename | module.cache_save | fixed value |
-| identifier | module.cache_save | fixed value |
-| identifier_file | module.cache_save | fixed value |
-| writer | module.cache_save | fixed value |
+```
+
+[module.cache_open]
+  cache                    fixed value             (line 6)
+  filename                 unknown                 (line 6)
+  reader                   fixed value             (line 12)
+  identifier               fixed value             (line 13)
+  cache_path               fixed value             (line 14)
+
+[module.cache_save]
+  cache                    container               (line 19)
+  filename                 fixed value             (line 19)
+  identifier               fixed value             (line 20)
+  identifier_file          fixed value             (line 21)
+  writer                   fixed value             (line 22)
+```
+
+## cache_limited.py
+
+```
+
+[module.CacheLimited.__init__]
+  archive_dir              fixed value             (line 8)
+  cache_dir                fixed value             (line 8)
+  index                    fixed value             (line 8)
+  local_limit              fixed value             (line 8)
+  self                     fixed value             (line 8)
+
+[module.CacheLimited._add]
+  identifier               fixed value             (line 40)
+  local_path               fixed value             (line 40)
+  self                     fixed value             (line 40)
+
+[module.CacheLimited._add_archive]
+  identifier               fixed value             (line 46)
+  local_path               fixed value             (line 46)
+  self                     fixed value             (line 46)
+  archive_path             fixed value             (line 47)
+
+[module.CacheLimited._ensure_cache_space]
+  self                     fixed value             (line 25)
+  cache_dir                fixed value             (line 27)
+  cache_files              container               (line 29)
+  choice                   fixed value             (line 34)
+
+[module.CacheLimited._make_archive_path]
+  identifier               fixed value             (line 51)
+  self                     fixed value             (line 51)
+
+[module.CacheLimited.get_cache_path]
+  identifier               fixed value             (line 15)
+  self                     fixed value             (line 15)
+  cache_path               fixed value             (line 16)
+  archive_path             fixed value             (line 19)
+```
+
+## index_base.py
+
+```
+
+[module]
+  CacheEntry               fixed value             (line 7)
+
+[module.IndexBase]
+  TIME_FORMAT              fixed value             (line 12)
+
+[module.IndexBase.__init__]
+  index_dir                fixed value             (line 14)
+  self                     fixed value             (line 14)
+
+[module.IndexBase._initialize_index]
+  self                     fixed value             (line 48)
+
+[module.IndexBase.add]
+  identifier               fixed value             (line 31)
+  self                     fixed value             (line 31)
+  index                    log                     (line 32)
+  entry                    fixed value             (line 33)
+
+[module.IndexBase.get_index_dir]
+  self                     fixed value             (line 17)
+
+[module.IndexBase.has]
+  identifier               fixed value             (line 24)
+  self                     fixed value             (line 24)
+  index                    fixed value             (line 25)
+
+[module.IndexBase.known]
+  self                     fixed value             (line 28)
+
+[module.IndexBase.load]
+  self                     fixed value             (line 40)
+
+[module.IndexBase.save]
+  index                    fixed value             (line 44)
+  self                     fixed value             (line 44)
+
+[module.IndexBase.set_index_dir]
+  index_dir                fixed value             (line 20)
+  self                     fixed value             (line 20)
+```
+
+## index_csv.py
+
+```
+
+[module.IndexCSV]
+  INDEX_FILE               fixed value             (line 40)
+
+[module.IndexCSV._initialize_index]
+  self                     fixed value             (line 42)
+
+[module.IndexCSV._make_index_path]
+  self                     fixed value             (line 45)
+
+[module.IndexCSV.load]
+  self                     fixed value             (line 10)
+  index_path               fixed value             (line 14)
+  stream                   fixed value             (line 18)
+  reader                   fixed value             (line 19)
+
+[module.IndexCSV.save]
+  index                    fixed value             (line 27)
+  self                     fixed value             (line 27)
+  index_path               fixed value             (line 31)
+  stream                   fixed value             (line 32)
+  writer                   fixed value             (line 33)
+  entry                    stepper                 (line 34)
+  when                     most-recent holder      (line 35)
+```
+
+## test_cache_filesystem.py
+
+```
+
+[module]
+  CACHE_DIR                fixed value             (line 10)
+
+[module.disk]
+  fs                       fixed value             (line 13)
+
+[module.test_filesystem_duplicate_content_only_saved_once]
+  cache                    container               (line 59)
+  disk                     fixed value             (line 59)
+  contents                 fixed value             (line 60)
+  ident_first              fixed value             (line 62)
+  ident_second             fixed value             (line 64)
+
+[module.test_filesystem_file_can_be_reloaded_after_deletion]
+  cache                    container               (line 51)
+  disk                     fixed value             (line 51)
+  ident                    fixed value             (line 53)
+  reader                   fixed value             (line 55)
+
+[module.test_filesystem_no_files_before_add]
+  cache                    fixed value             (line 23)
+  disk                     fixed value             (line 23)
+
+[module.test_filesystem_single_file_can_be_reloaded]
+  cache                    container               (line 45)
+  disk                     fixed value             (line 45)
+  ident                    fixed value             (line 47)
+  reader                   fixed value             (line 48)
+
+[module.test_filesystem_single_file_present_after_add]
+  cache                    container               (line 27)
+  disk                     fixed value             (line 27)
+  ident                    fixed value             (line 29)
+  cache_path               fixed value             (line 32)
+
+[module.test_filesystem_two_files_present_after_add]
+  cache                    container               (line 36)
+  disk                     fixed value             (line 36)
+  names                    fixed value             (line 37)
+  name                     stepper                 (line 38)
+  filename                 most-recent holder      (line 39)
+```
+
+## test_cache_limited.py
+
+```
+
+[module]
+  CACHE_DIR                fixed value             (line 10)
+  ARCHIVE_DIR              fixed value             (line 11)
+  LOCAL_LIMIT              fixed value             (line 12)
+
+[module.cache]
+  disk                     fixed value             (line 21)
+  index                    fixed value             (line 22)
+
+[module.disk]
+  fs                       fixed value             (line 15)
+
+[module.test_limited_all_files_can_be_retrieved]
+  cache                    container               (line 83)
+  disk                     fixed value             (line 83)
+  names                    fixed value             (line 84)
+  idents                   fixed value             (line 86)
+  name                     stepper                 (line 88)
+  local_file               most-recent holder      (line 89)
+  ident                    stepper                 (line 93)
+  cache_path               most-recent holder      (line 96)
+
+[module.test_limited_duplicate_content_only_saved_once]
+  cache                    container               (line 63)
+  disk                     fixed value             (line 63)
+  contents                 fixed value             (line 64)
+  ident_first              fixed value             (line 66)
+  ident_second             fixed value             (line 68)
+
+[module.test_limited_file_can_be_reloaded_after_deletion]
+  cache                    container               (line 55)
+  disk                     fixed value             (line 55)
+  ident                    fixed value             (line 57)
+  reader                   fixed value             (line 59)
+
+[module.test_limited_local_cache_size_stays_small]
+  cache                    container               (line 72)
+  disk                     fixed value             (line 72)
+  names                    fixed value             (line 73)
+  name                     stepper                 (line 75)
+  local_file               most-recent holder      (line 76)
+
+[module.test_limited_no_files_before_add]
+  cache                    fixed value             (line 25)
+
+[module.test_limited_single_file_can_be_reloaded]
+  cache                    container               (line 49)
+  disk                     fixed value             (line 49)
+  ident                    fixed value             (line 51)
+  reader                   fixed value             (line 52)
+
+[module.test_limited_single_file_present_after_add]
+  cache                    container               (line 29)
+  disk                     fixed value             (line 29)
+  ident                    fixed value             (line 31)
+  cache_path               fixed value             (line 34)
+  archive_path             fixed value             (line 36)
+
+[module.test_limited_two_files_present_after_add]
+  cache                    container               (line 40)
+  disk                     fixed value             (line 40)
+  names                    fixed value             (line 41)
+  name                     stepper                 (line 43)
+  filename                 most-recent holder      (line 44)
+```
+
+## test_index_csv.py
+
+```
+
+[module]
+  CACHE_DIR                fixed value             (line 10)
+  INDEX_FILE               fixed value             (line 11)
+  LOCAL_DIR                fixed value             (line 12)
+
+[module.disk]
+  fs                       fixed value             (line 15)
+
+[module.test_csv_has_entry]
+  disk                     fixed value             (line 37)
+  right_now                fixed value             (line 38)
+  index                    container               (line 39)
+
+[module.test_csv_loads_initially]
+  disk                     fixed value             (line 20)
+  index                    fixed value             (line 21)
+
+[module.test_csv_saves_changes]
+  disk                     fixed value             (line 27)
+  right_now                fixed value             (line 28)
+  index                    container               (line 29)
+```
+
+## Programs Not Analyzed
+
+The following programs are referenced in the lesson Makefile
+but are not present in this directory:
+
+- test_io.py
 

@@ -1,110 +1,152 @@
-# Transferring Files
+# Variable Role Analysis: ftp
 
 ## client_all.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| CHUNK_SIZE | module | fixed value |
-| SERVER_ADDRESS | module | fixed value |
-| message | module | fixed value |
-| sock | module | fixed value |
-| received | module | fixed value |
-| received_str | module | fixed value |
+```
 
-## server_raw.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| CHUNK_SIZE | module | fixed value |
-| host | module.handler | fixed value |
-| port | module.handler | fixed value |
-| server_socket | module.handler | fixed value |
-| address | module.handler | fixed value |
-| conn | module.handler | fixed value |
-| data | module.handler | fixed value |
-| msg | module.handler | fixed value |
-
-## server_lib.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| CHUNK_SIZE | module | fixed value |
-| SERVER_ADDRESS | module | fixed value |
-| server | module | fixed value |
-| self | module.MyHandler.handle | fixed value |
-| data | module.MyHandler.handle | fixed value |
-| cli | module.MyHandler.handle | fixed value |
-| msg | module.MyHandler.handle | fixed value |
-
-## server_chunk.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| CHUNK_SIZE | module | fixed value |
-| host | module | fixed value |
-| port | module | fixed value |
-| server | module | fixed value |
-| self | module.FileHandler.handle | fixed value |
-| data | module.FileHandler.handle | gatherer |
-| latest | module.FileHandler.handle | most-recent holder |
+[module]
+  CHUNK_SIZE               fixed value             (line 3)
+  SERVER_ADDRESS           fixed value             (line 4)
+  message                  fixed value             (line 6)
+  sock                     fixed value             (line 8)
+  received                 fixed value             (line 13)
+  received_str             fixed value             (line 14)
+```
 
 ## client_chunk.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| CHUNK_SIZE | module | fixed value |
-| SERVER_ADDRESS | module | fixed value |
-| filename | module | fixed value |
-| host | module | fixed value |
-| port | module | fixed value |
-| filename | module.main | fixed value |
-| host | module.main | fixed value |
-| port | module.main | fixed value |
-| conn | module.main | fixed value |
-| bytes_sent | module.main | fixed value |
-| bytes_received | module.main | fixed value |
-| host | module.make_socket | fixed value |
-| port | module.make_socket | fixed value |
-| conn | module.make_socket | fixed value |
-| conn | module.receive_ack | fixed value |
-| received | module.receive_ack | fixed value |
-| conn | module.send_file | fixed value |
-| filename | module.send_file | fixed value |
-| reader | module.send_file | fixed value |
-| data | module.send_file | fixed value |
-| total | module.send_file | gatherer |
-| sent | module.send_file | most-recent holder |
+```
+
+[module]
+  CHUNK_SIZE               fixed value             (line 4)
+  SERVER_ADDRESS           fixed value             (line 5)
+  filename                 fixed value             (line 47)
+  host                     fixed value             (line 47)
+  port                     fixed value             (line 47)
+
+[module.main]
+  filename                 fixed value             (line 37)
+  host                     fixed value             (line 37)
+  port                     fixed value             (line 37)
+  conn                     fixed value             (line 38)
+  bytes_sent               fixed value             (line 39)
+  bytes_received           fixed value             (line 41)
+
+[module.make_socket]
+  host                     fixed value             (line 8)
+  port                     fixed value             (line 8)
+  conn                     fixed value             (line 9)
+
+[module.receive_ack]
+  conn                     fixed value             (line 31)
+  received                 fixed value             (line 32)
+
+[module.send_file]
+  conn                     fixed value             (line 15)
+  filename                 fixed value             (line 15)
+  reader                   fixed value             (line 16)
+  data                     fixed value             (line 17)
+  total                    gatherer                (line 19)
+  sent                     most-recent holder      (line 21)
+```
 
 ## logging_handler.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| BLOCK_SIZE | module | fixed value |
-| host | module | fixed value |
-| port | module | fixed value |
-| server | module | fixed value |
-| args | module.LoggingHandler.debug | fixed value |
-| self | module.LoggingHandler.debug | fixed value |
-| self | module.LoggingHandler.handle | fixed value |
-| data | module.LoggingHandler.handle | gatherer |
-| latest | module.LoggingHandler.handle | most-recent holder |
+```
+
+[module]
+  BLOCK_SIZE               fixed value             (line 3)
+  host                     fixed value             (line 28)
+  port                     fixed value             (line 28)
+  server                   fixed value             (line 29)
+
+[module.LoggingHandler.debug]
+  args                     fixed value             (line 21)
+  self                     fixed value             (line 21)
+
+[module.LoggingHandler.handle]
+  self                     fixed value             (line 7)
+  data                     gatherer                (line 9)
+  latest                   most-recent holder      (line 11)
+```
+
+## server_chunk.py
+
+```
+
+[module]
+  CHUNK_SIZE               fixed value             (line 4)
+  host                     fixed value             (line 23)
+  port                     fixed value             (line 23)
+  server                   fixed value             (line 24)
+
+[module.FileHandler.handle]
+  self                     fixed value             (line 8)
+  data                     gatherer                (line 10)
+  latest                   most-recent holder      (line 12)
+```
+
+## server_lib.py
+
+```
+
+[module]
+  CHUNK_SIZE               fixed value             (line 3)
+  SERVER_ADDRESS           fixed value             (line 4)
+  server                   fixed value             (line 15)
+
+[module.MyHandler.handle]
+  self                     fixed value             (line 7)
+  data                     fixed value             (line 8)
+  cli                      fixed value             (line 9)
+  msg                      fixed value             (line 10)
+```
+
+## server_raw.py
+
+```
+
+[module]
+  CHUNK_SIZE               fixed value             (line 3)
+
+[module.handler]
+  host                     fixed value             (line 6)
+  port                     fixed value             (line 6)
+  server_socket            fixed value             (line 7)
+  address                  fixed value             (line 11)
+  conn                     fixed value             (line 11)
+  data                     fixed value             (line 14)
+  msg                      fixed value             (line 15)
+```
 
 ## test_server.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| message | module.MockHandler.__init__ | fixed value |
-| self | module.MockHandler.__init__ | fixed value |
-| args | module.MockHandler.debug | fixed value |
-| self | module.MockHandler.debug | fixed value |
-| message | module.MockRequest.__init__ | fixed value |
-| self | module.MockRequest.__init__ | fixed value |
-| max_bytes | module.MockRequest.recv | fixed value |
-| self | module.MockRequest.recv | fixed value |
-| top | module.MockRequest.recv | fixed value |
-| result | module.MockRequest.recv | fixed value |
-| outgoing | module.MockRequest.sendall | fixed value |
-| self | module.MockRequest.sendall | fixed value |
-| msg | module.test_short | fixed value |
-| handler | module.test_short | fixed value |
+```
+
+[module.MockHandler.__init__]
+  message                  fixed value             (line 23)
+  self                     fixed value             (line 23)
+
+[module.MockHandler.debug]
+  args                     fixed value             (line 26)
+  self                     fixed value             (line 26)
+
+[module.MockRequest.__init__]
+  message                  fixed value             (line 5)
+  self                     fixed value             (line 5)
+
+[module.MockRequest.recv]
+  max_bytes                fixed value             (line 10)
+  self                     fixed value             (line 10)
+  top                      fixed value             (line 12)
+  result                   fixed value             (line 13)
+
+[module.MockRequest.sendall]
+  outgoing                 fixed value             (line 17)
+  self                     fixed value             (line 17)
+
+[module.test_short]
+  msg                      fixed value             (line 32)
+  handler                  fixed value             (line 33)
+```
 

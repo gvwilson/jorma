@@ -1,84 +1,120 @@
-# Running Tests
-
-## func_list.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| everything | module | fixed value |
-| func | module | stepper |
-
-## signature.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| func | module | stepper |
-| value | module.one | fixed value |
-
-## manual.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| TESTS | module | fixed value |
-| all_tests | module.run_tests | fixed value |
-| results | module.run_tests | fixed value |
-| test | module.run_tests | stepper |
-| value | module.sign | fixed value |
-
-## globals.py
-
-*No variables identified by jorma.*
-
-## globals_plus.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| my_variable | module | fixed value |
-
-## find_test_funcs.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| prefix | module.find_tests | fixed value |
-| func | module.find_tests | stepper |
-| name | module.find_tests | stepper |
-| value | module.sign | fixed value |
-
-## runner.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| results | module.run_tests | fixed value |
-| name | module.run_tests | stepper |
-| test | module.run_tests | stepper |
-| value | module.sign | fixed value |
-
-## ex_loop_globals_2.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| name | module | stepper |
-
-## type_int.py
-
-*No variables identified by jorma.*
-
-## type_func.py
-
-*No variables identified by jorma.*
-
-## type_len.py
-
-*No variables identified by jorma.*
+# Variable Role Analysis: test
 
 ## callable.py
 
-*No variables identified by jorma.*
+```
+Warning: no variables found.
+```
+
+## ex_loop_globals_2.py
+
+```
+
+[module]
+  name                     stepper                 (line 1)
+```
+
+## find_test_funcs.py
+
+```
+
+[module.find_tests]
+  prefix                   fixed value             (line 20)
+  func                     stepper                 (line 21)
+  name                     stepper                 (line 21)
+
+[module.sign]
+  value                    fixed value             (line 1)
+```
+
+## func_list.py
+
+```
+
+[module]
+  everything               fixed value             (line 10)
+  func                     stepper                 (line 11)
+```
+
+## globals.py
+
+```
+Warning: no variables found.
+```
+
+## globals_plus.py
+
+```
+
+[module]
+  my_variable              fixed value             (line 2)
+```
 
 ## locals.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| high | module.show_locals | fixed value |
-| low | module.show_locals | fixed value |
-| i | module.show_locals | stepper |
+```
+
+[module.show_locals]
+  high                     fixed value             (line 1)
+  low                      fixed value             (line 1)
+  i                        stepper                 (line 3)
+```
+
+## manual.py
+
+```
+
+[module]
+  TESTS                    fixed value             (line 40)
+
+[module.run_tests]
+  all_tests                fixed value             (line 24)
+  results                  fixed value             (line 25)
+  test                     stepper                 (line 26)
+
+[module.sign]
+  value                    fixed value             (line 2)
+```
+
+## runner.py
+
+```
+
+[module.run_tests]
+  results                  fixed value             (line 21)
+  name                     stepper                 (line 22)
+  test                     stepper                 (line 22)
+
+[module.sign]
+  value                    fixed value             (line 1)
+```
+
+## signature.py
+
+```
+
+[module]
+  func                     stepper                 (line 7)
+
+[module.one]
+  value                    fixed value             (line 4)
+```
+
+## type_func.py
+
+```
+Warning: no variables found.
+```
+
+## type_int.py
+
+```
+Warning: no variables found.
+```
+
+## type_len.py
+
+```
+Warning: no variables found.
+```
 

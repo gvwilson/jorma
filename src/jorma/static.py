@@ -1,6 +1,7 @@
 """Static analysis: AST visitor, role determination, and public analyze()."""
 
 import ast
+import sys
 
 from .constants import (
     CONTAINER,
@@ -428,7 +429,7 @@ def analyze(source: str) -> list[tuple[VarInfo, str]]:
 def _print_static(results: list[tuple[VarInfo, str]]) -> None:
     """Print static-analysis results grouped by scope."""
     if not results:
-        print("No variables found.")
+        print("Warning: no variables found.", file=sys.stderr)
         return
     current_scope = None
     for v, role in results:

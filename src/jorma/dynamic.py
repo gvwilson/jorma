@@ -174,6 +174,8 @@ def run_dynamic(
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)  # type: ignore[union-attr]
 
+    if not hasattr(module, func_name):
+        raise AttributeError(f"'{path}' has no function '{func_name}'")
     func = getattr(module, func_name)
     tracer = DynamicTracer()
     old_trace = sys.gettrace()

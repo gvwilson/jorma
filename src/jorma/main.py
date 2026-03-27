@@ -41,7 +41,7 @@ def main() -> None:
         try:
             dynamic = run_dynamic(path, func_name, func_args)
         except Exception as exc:
-            print(f"Error during dynamic analysis: {exc}", file=sys.stderr)
+            print(f"Error during dynamic analysis ({type(exc).__name__}): {exc}", file=sys.stderr)
             sys.exit(1)
         if not dynamic:
             print("  (no phase or follower variables detected)")

@@ -1,115 +1,171 @@
-# A Template Expander
-
-## example_call.py
-
-| Variable | Scope | Role |
-|---|---|---|
-| data | module | fixed value |
-| dom | module | fixed value |
-| expander | module | fixed value |
+# Variable Role Analysis: template
 
 ## env.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| initial | module.Env.__init__ | fixed value |
-| self | module.Env.__init__ | fixed value |
-| self | module.Env.__str__ | fixed value |
-| name | module.Env.find | fixed value |
-| self | module.Env.find | fixed value |
-| frame | module.Env.find | stepper |
-| self | module.Env.pop | fixed value |
-| frame | module.Env.push | fixed value |
-| self | module.Env.push | fixed value |
+```
 
-## visitor.py
+[module.Env.__init__]
+  initial                  fixed value             (line 3)
+  self                     fixed value             (line 3)
 
-| Variable | Scope | Role |
-|---|---|---|
-| root | module.Visitor.__init__ | fixed value |
-| self | module.Visitor.__init__ | fixed value |
-| node | module.Visitor.close | fixed value |
-| self | module.Visitor.close | fixed value |
-| node | module.Visitor.open | fixed value |
-| self | module.Visitor.open | fixed value |
-| node | module.Visitor.walk | fixed value |
-| self | module.Visitor.walk | fixed value |
-| child | module.Visitor.walk | stepper |
+[module.Env.__str__]
+  self                     fixed value             (line 19)
+
+[module.Env.find]
+  name                     fixed value             (line 12)
+  self                     fixed value             (line 12)
+  frame                    stepper                 (line 13)
+
+[module.Env.pop]
+  self                     fixed value             (line 9)
+
+[module.Env.push]
+  frame                    fixed value             (line 6)
+  self                     fixed value             (line 6)
+```
+
+## example_call.py
+
+```
+
+[module]
+  data                     fixed value             (line 1)
+  dom                      fixed value             (line 3)
+  expander                 fixed value             (line 4)
+```
 
 ## expander.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| HANDLERS | module | fixed value |
-| root | module.Expander.__init__ | fixed value |
-| self | module.Expander.__init__ | fixed value |
-| variables | module.Expander.__init__ | fixed value |
-| node | module.Expander.close | fixed value |
-| self | module.Expander.close | fixed value |
-| node | module.Expander.getHandler | fixed value |
-| self | module.Expander.getHandler | fixed value |
-| possible | module.Expander.getHandler | fixed value |
-| self | module.Expander.getResult | fixed value |
-| node | module.Expander.hasHandler | fixed value |
-| self | module.Expander.hasHandler | fixed value |
-| node | module.Expander.open | fixed value |
-| self | module.Expander.open | fixed value |
-| self | module.Expander.output | fixed value |
-| text | module.Expander.output | fixed value |
-| closing | module.Expander.showTag | fixed value |
-| node | module.Expander.showTag | fixed value |
-| self | module.Expander.showTag | fixed value |
-| name | module.Expander.showTag | stepper |
+```
 
-## z_num.py
+[module]
+  HANDLERS                 fixed value             (line 11)
 
-| Variable | Scope | Role |
-|---|---|---|
-| expander | module.close | fixed value |
-| node | module.close | fixed value |
-| expander | module.open | fixed value |
-| node | module.open | fixed value |
+[module.Expander.__init__]
+  root                     fixed value             (line 22)
+  self                     fixed value             (line 22)
+  variables                fixed value             (line 22)
 
-## z_var.py
+[module.Expander.close]
+  node                     fixed value             (line 42)
+  self                     fixed value             (line 42)
 
-| Variable | Scope | Role |
-|---|---|---|
-| expander | module.close | fixed value |
-| node | module.close | fixed value |
-| expander | module.open | fixed value |
-| node | module.open | fixed value |
+[module.Expander.getHandler]
+  node                     fixed value             (line 58)
+  self                     fixed value             (line 58)
+  possible                 fixed value             (line 59)
+
+[module.Expander.getResult]
+  self                     fixed value             (line 81)
+
+[module.Expander.hasHandler]
+  node                     fixed value             (line 52)
+  self                     fixed value             (line 52)
+
+[module.Expander.open]
+  node                     fixed value             (line 30)
+  self                     fixed value             (line 30)
+
+[module.Expander.output]
+  self                     fixed value             (line 78)
+  text                     fixed value             (line 78)
+
+[module.Expander.showTag]
+  closing                  fixed value             (line 68)
+  node                     fixed value             (line 68)
+  self                     fixed value             (line 68)
+  name                     stepper                 (line 73)
+```
 
 ## template.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| reader | module.main | fixed value |
-| variables | module.main | fixed value |
-| doc | module.main | fixed value |
-| template | module.main | fixed value |
-| expander | module.main | fixed value |
+```
+
+[module.main]
+  reader                   fixed value             (line 7)
+  variables                fixed value             (line 8)
+  doc                      fixed value             (line 11)
+  template                 fixed value             (line 12)
+  expander                 fixed value             (line 14)
+```
+
+## visitor.py
+
+```
+
+[module.Visitor.__init__]
+  root                     fixed value             (line 2)
+  self                     fixed value             (line 2)
+
+[module.Visitor.close]
+  node                     fixed value             (line 16)
+  self                     fixed value             (line 16)
+
+[module.Visitor.open]
+  node                     fixed value             (line 13)
+  self                     fixed value             (line 13)
+
+[module.Visitor.walk]
+  node                     fixed value             (line 5)
+  self                     fixed value             (line 5)
+  child                    stepper                 (line 9)
+```
 
 ## z_if.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| expander | module.close | fixed value |
-| node | module.close | fixed value |
-| expander | module.open | fixed value |
-| node | module.open | fixed value |
-| check | module.open | fixed value |
+```
+
+[module.close]
+  expander                 fixed value             (line 7)
+  node                     fixed value             (line 7)
+
+[module.open]
+  expander                 fixed value             (line 1)
+  node                     fixed value             (line 1)
+  check                    fixed value             (line 2)
+```
 
 ## z_loop.py
 
-| Variable | Scope | Role |
-|---|---|---|
-| expander | module.close | fixed value |
-| node | module.close | fixed value |
-| expander | module.open | fixed value |
-| node | module.open | fixed value |
-| index_name | module.open | fixed value |
-| target_name | module.open | fixed value |
-| target | module.open | fixed value |
-| value | module.open | stepper |
-| child | module.open | stepper |
+```
+
+[module.close]
+  expander                 fixed value             (line 12)
+  node                     fixed value             (line 12)
+
+[module.open]
+  expander                 fixed value             (line 1)
+  node                     fixed value             (line 1)
+  index_name               fixed value             (line 2)
+  target_name              fixed value             (line 2)
+  target                   fixed value             (line 4)
+  value                    stepper                 (line 5)
+  child                    stepper                 (line 7)
+```
+
+## z_num.py
+
+```
+
+[module.close]
+  expander                 fixed value             (line 5)
+  node                     fixed value             (line 5)
+
+[module.open]
+  expander                 fixed value             (line 1)
+  node                     fixed value             (line 1)
+```
+
+## z_var.py
+
+```
+
+[module.close]
+  expander                 fixed value             (line 5)
+  node                     fixed value             (line 5)
+
+[module.open]
+  expander                 fixed value             (line 1)
+  node                     fixed value             (line 1)
+```
 
