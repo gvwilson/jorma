@@ -1,4 +1,9 @@
 # template
+
+## env.py
+
+### Static analysis
+
 | Scope               | Variable | Role        | Location |
 | :-------------------| :--------| :-----------| :--------|
 | module.Env.__init__ | initial  | fixed value | line 2   |
@@ -10,6 +15,11 @@
 | module.Env.pop      | self     | fixed value | line 8   |
 | module.Env.push     | frame    | fixed value | line 5   |
 | module.Env.push     | self     | fixed value | line 5   |
+
+## expander.py
+
+### Static analysis
+
 | Scope                      | Variable  | Role        | Location |
 | :--------------------------| :---------| :-----------| :--------|
 | module                     | HANDLERS  | fixed value | line 10  |
@@ -32,6 +42,11 @@
 | module.Expander.showTag    | node      | fixed value | line 46  |
 | module.Expander.showTag    | self      | fixed value | line 46  |
 | module.Expander.showTag    | name      | stepper     | line 51  |
+
+## visitor.py
+
+### Static analysis
+
 | Scope                   | Variable | Role        | Location |
 | :-----------------------| :--------| :-----------| :--------|
 | module.Visitor.__init__ | root     | fixed value | line 2   |
@@ -43,6 +58,11 @@
 | module.Visitor.walk     | node     | fixed value | line 5   |
 | module.Visitor.walk     | self     | fixed value | line 5   |
 | module.Visitor.walk     | child    | stepper     | line 9   |
+
+## z_if.py
+
+### Static analysis
+
 | Scope        | Variable | Role        | Location |
 | :------------| :--------| :-----------| :--------|
 | module.close | expander | fixed value | line 8   |
@@ -50,6 +70,11 @@
 | module.open  | expander | fixed value | line 1   |
 | module.open  | node     | fixed value | line 1   |
 | module.open  | check    | fixed value | line 2   |
+
+## z_loop.py
+
+### Static analysis
+
 | Scope        | Variable    | Role        | Location |
 | :------------| :-----------| :-----------| :--------|
 | module.close | expander    | fixed value | line 13  |
@@ -61,15 +86,26 @@
 | module.open  | target      | fixed value | line 4   |
 | module.open  | value       | stepper     | line 5   |
 | module.open  | child       | stepper     | line 7   |
+
+## z_num.py
+
+### Static analysis
+
 | Scope        | Variable | Role        | Location |
 | :------------| :--------| :-----------| :--------|
 | module.close | expander | fixed value | line 6   |
 | module.close | node     | fixed value | line 6   |
 | module.open  | expander | fixed value | line 1   |
 | module.open  | node     | fixed value | line 1   |
+
+## z_var.py
+
+### Static analysis
+
 | Scope        | Variable | Role        | Location |
 | :------------| :--------| :-----------| :--------|
 | module.close | expander | fixed value | line 6   |
 | module.close | node     | fixed value | line 6   |
 | module.open  | expander | fixed value | line 1   |
 | module.open  | node     | fixed value | line 1   |
+

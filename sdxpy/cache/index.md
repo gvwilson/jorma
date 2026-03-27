@@ -1,4 +1,9 @@
 # cache
+
+## cache_base.py
+
+### Static analysis
+
 | Scope                             | Variable     | Role        | Location |
 | :---------------------------------| :------------| :-----------| :--------|
 | module.CacheBase                  | CACHE_SUFFIX | fixed value | line 9   |
@@ -21,12 +26,22 @@
 | module.CacheBase.has              | identifier   | fixed value | line 26  |
 | module.CacheBase.has              | self         | fixed value | line 26  |
 | module.CacheBase.known            | self         | fixed value | line 29  |
+
+## cache_filesystem.py
+
+### Static analysis
+
 | Scope                       | Variable   | Role        | Location |
 | :---------------------------| :----------| :-----------| :--------|
 | module.CacheFilesystem._add | identifier | fixed value | line 8   |
 | module.CacheFilesystem._add | local_path | fixed value | line 8   |
 | module.CacheFilesystem._add | self       | fixed value | line 8   |
 | module.CacheFilesystem._add | cache_path | fixed value | line 9   |
+
+## cache_io.py
+
+### Static analysis
+
 | Scope             | Variable        | Role        | Location |
 | :-----------------| :---------------| :-----------| :--------|
 | module.cache_open | cache           | fixed value | line 6   |
@@ -39,6 +54,11 @@
 | module.cache_save | identifier      | fixed value | line 19  |
 | module.cache_save | identifier_file | fixed value | line 20  |
 | module.cache_save | writer          | fixed value | line 21  |
+
+## cache_limited.py
+
+### Static analysis
+
 | Scope                                   | Variable     | Role        | Location |
 | :---------------------------------------| :------------| :-----------| :--------|
 | module.CacheLimited.__init__            | archive_dir  | fixed value | line 8   |
@@ -63,16 +83,31 @@
 | module.CacheLimited.get_cache_path      | self         | fixed value | line 13  |
 | module.CacheLimited.get_cache_path      | cache_path   | fixed value | line 14  |
 | module.CacheLimited.get_cache_path      | archive_path | fixed value | line 17  |
+
+## exceptions.py
+
+### Static analysis
+
 | Scope                          | Variable | Role        | Location |
 | :------------------------------| :--------| :-----------| :--------|
 | module.CacheException.__init__ | message  | fixed value | line 2   |
 | module.CacheException.__init__ | self     | fixed value | line 2   |
+
+## hash_stream.py
+
+### Static analysis
+
 | Scope              | Variable    | Role               | Location |
 | :------------------| :-----------| :------------------| :--------|
 | module             | BUFFER_SIZE | fixed value        | line 4   |
 | module.hash_stream | reader      | fixed value        | line 7   |
 | module.hash_stream | hasher      | container          | line 8   |
 | module.hash_stream | block       | most-recent holder | line 10  |
+
+## index_base.py
+
+### Static analysis
+
 | Scope                              | Variable    | Role        | Location |
 | :----------------------------------| :-----------| :-----------| :--------|
 | module                             | CacheEntry  | fixed value | line 6   |
@@ -94,6 +129,11 @@
 | module.IndexBase.save              | self        | fixed value | line 40  |
 | module.IndexBase.set_index_dir     | index_dir   | fixed value | line 18  |
 | module.IndexBase.set_index_dir     | self        | fixed value | line 18  |
+
+## index_csv.py
+
+### Static analysis
+
 | Scope                             | Variable   | Role               | Location |
 | :---------------------------------| :----------| :------------------| :--------|
 | module.IndexCSV                   | INDEX_FILE | fixed value        | line 36  |
@@ -110,6 +150,11 @@
 | module.IndexCSV.save              | writer     | fixed value        | line 31  |
 | module.IndexCSV.save              | entry      | stepper            | line 32  |
 | module.IndexCSV.save              | when       | most-recent holder | line 33  |
+
+## test_cache_filesystem.py
+
+### Static analysis
+
 | Scope                                                      | Variable     | Role               | Location |
 | :----------------------------------------------------------| :------------| :------------------| :--------|
 | module                                                     | CACHE_DIR    | fixed value        | line 9   |
@@ -138,6 +183,11 @@
 | module.test_filesystem_two_files_present_after_add         | names        | fixed value        | line 37  |
 | module.test_filesystem_two_files_present_after_add         | name         | stepper            | line 38  |
 | module.test_filesystem_two_files_present_after_add         | filename     | most-recent holder | line 39  |
+
+## test_cache_limited.py
+
+### Static analysis
+
 | Scope                                                   | Variable     | Role               | Location |
 | :-------------------------------------------------------| :------------| :------------------| :--------|
 | module                                                  | CACHE_DIR    | fixed value        | line 10  |
@@ -183,6 +233,11 @@
 | module.test_limited_two_files_present_after_add         | names        | fixed value        | line 44  |
 | module.test_limited_two_files_present_after_add         | name         | stepper            | line 46  |
 | module.test_limited_two_files_present_after_add         | filename     | most-recent holder | line 47  |
+
+## test_index_csv.py
+
+### Static analysis
+
 | Scope                           | Variable   | Role        | Location |
 | :-------------------------------| :----------| :-----------| :--------|
 | module                          | CACHE_DIR  | fixed value | line 9   |
@@ -197,3 +252,4 @@
 | module.test_csv_saves_changes   | disk       | fixed value | line 25  |
 | module.test_csv_saves_changes   | right_now  | fixed value | line 26  |
 | module.test_csv_saves_changes   | index      | container   | line 27  |
+

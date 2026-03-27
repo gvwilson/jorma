@@ -1,4 +1,9 @@
 # glob
+
+## glob_any.py
+
+### Static analysis
+
 | Scope               | Variable | Role        | Location |
 | :-------------------| :--------| :-----------| :--------|
 | module.Any.__init__ | rest     | fixed value | line 2   |
@@ -7,6 +12,11 @@
 | module.Any.match    | start    | fixed value | line 5   |
 | module.Any.match    | text     | fixed value | line 5   |
 | module.Any.match    | i        | stepper     | line 8   |
+
+## glob_either.py
+
+### Static analysis
+
 | Scope                  | Variable | Role        | Location |
 | :----------------------| :--------| :-----------| :--------|
 | module.Either.__init__ | left     | fixed value | line 2   |
@@ -16,6 +26,11 @@
 | module.Either.match    | self     | fixed value | line 7   |
 | module.Either.match    | start    | fixed value | line 7   |
 | module.Either.match    | text     | fixed value | line 7   |
+
+## glob_lit.py
+
+### Static analysis
+
 | Scope               | Variable | Role        | Location |
 | :-------------------| :--------| :-----------| :--------|
 | module.Lit.__init__ | chars    | fixed value | line 2   |
@@ -25,6 +40,11 @@
 | module.Lit.match    | start    | fixed value | line 6   |
 | module.Lit.match    | text     | fixed value | line 6   |
 | module.Lit.match    | end      | fixed value | line 7   |
+
+## glob_null.py
+
+### Static analysis
+
 | Scope                  | Variable | Role               | Location |
 | :----------------------| :--------| :------------------| :--------|
 | module.Any.__init__    | rest     | fixed value        | line 19  |
@@ -59,6 +79,11 @@
 | module.Null._match     | self     | fixed value        | line 14  |
 | module.Null._match     | start    | fixed value        | line 14  |
 | module.Null._match     | text     | fixed value        | line 14  |
+
+## simpler_match.py
+
+### Static analysis
+
 | Scope                    | Variable  | Role               | Location |
 | :------------------------| :---------| :------------------| :--------|
 | module.Any.__init__      | rest      | fixed value        | line 18  |
@@ -88,3 +113,34 @@
 | module.Nothing.__init__  | self      | fixed value        | line 10  |
 | module.Nothing._do_match | self      | fixed value        | line 13  |
 | module.Nothing._do_match | text      | fixed value        | line 13  |
+
+## test_glob_any.py
+
+### Static analysis
+
+
+## test_glob_either.py
+
+### Static analysis
+
+
+## test_glob_lit.py
+
+### Static analysis
+
+
+## test_glob_null.py
+
+### Static analysis
+
+
+## test_glob_problem.py
+
+### Static analysis
+
+
+## test_simpler_match.py
+
+### Static analysis
+
+

@@ -1,7 +1,17 @@
 # oop
+
+## func_obj.py
+
+### Static analysis
+
 | Scope  | Variable | Role        | Location |
 | :------| :--------| :-----------| :--------|
 | module | alias    | fixed value | line 5   |
+
+## inherit_class.py
+
+### Static analysis
+
 | Scope                   | Variable    | Role               | Location |
 | :-----------------------| :-----------| :------------------| :--------|
 | module                  | Shape       | fixed value        | line 8   |
@@ -28,6 +38,11 @@
 | module.square_new       | name        | fixed value        | line 31  |
 | module.square_new       | side        | fixed value        | line 31  |
 | module.square_perimeter | thing       | fixed value        | line 15  |
+
+## inherit_constructor.py
+
+### Static analysis
+
 | Scope                   | Variable    | Role               | Location |
 | :-----------------------| :-----------| :------------------| :--------|
 | module                  | Shape       | fixed value        | line 12  |
@@ -56,6 +71,11 @@
 | module.square_new       | name        | fixed value        | line 32  |
 | module.square_new       | side        | fixed value        | line 32  |
 | module.square_perimeter | thing       | fixed value        | line 24  |
+
+## inherit_original.py
+
+### Static analysis
+
 | Scope                   | Variable | Role               | Location |
 | :-----------------------| :--------| :------------------| :--------|
 | module                  | examples | fixed value        | line 42  |
@@ -78,6 +98,11 @@
 | module.Square.__init__  | side     | fixed value        | line 19  |
 | module.Square.area      | self     | fixed value        | line 26  |
 | module.Square.perimeter | self     | fixed value        | line 23  |
+
+## larger.py
+
+### Static analysis
+
 | Scope                   | Variable    | Role               | Location |
 | :-----------------------| :-----------| :------------------| :--------|
 | module                  | Square      | fixed value        | line 16  |
@@ -100,6 +125,11 @@
 | module.square_new       | name        | fixed value        | line 24  |
 | module.square_new       | side        | fixed value        | line 24  |
 | module.square_perimeter | thing       | fixed value        | line 4   |
+
+## shapes_class.py
+
+### Static analysis
+
 | Scope                   | Variable    | Role               | Location |
 | :-----------------------| :-----------| :------------------| :--------|
 | module                  | Square      | fixed value        | line 12  |
@@ -120,6 +150,17 @@
 | module.square_new       | name        | fixed value        | line 15  |
 | module.square_new       | side        | fixed value        | line 15  |
 | module.square_perimeter | thing       | fixed value        | line 4   |
+
+### Dynamic analysis
+
+| Variable    | Scope       | Role  |
+| :-----------| :-----------| :-----|
+| method_name | module.call | phase |
+
+## shapes_dict.py
+
+### Static analysis
+
 | Scope                   | Variable    | Role               | Location |
 | :-----------------------| :-----------| :------------------| :--------|
 | module                  | examples    | fixed value        | line 42  |
@@ -137,6 +178,17 @@
 | module.square_new       | name        | fixed value        | line 12  |
 | module.square_new       | side        | fixed value        | line 12  |
 | module.square_perimeter | thing       | fixed value        | line 4   |
+
+### Dynamic analysis
+
+| Variable    | Scope       | Role  |
+| :-----------| :-----------| :-----|
+| method_name | module.call | phase |
+
+## shapes_original.py
+
+### Static analysis
+
 | Scope                   | Variable | Role               | Location |
 | :-----------------------| :--------| :------------------| :--------|
 | module                  | examples | fixed value        | line 39  |
@@ -158,6 +210,11 @@
 | module.Square.__init__  | side     | fixed value        | line 16  |
 | module.Square.area      | self     | fixed value        | line 23  |
 | module.Square.perimeter | self     | fixed value        | line 20  |
+
+## spread.py
+
+### Static analysis
+
 | Scope              | Variable    | Role        | Location |
 | :------------------| :-----------| :-----------| :--------|
 | module             | all_in_list | fixed value | line 5   |
@@ -165,8 +222,14 @@
 | module.show_spread | left        | fixed value | line 1   |
 | module.show_spread | middle      | fixed value | line 1   |
 | module.show_spread | right       | fixed value | line 1   |
+
+## varargs.py
+
+### Static analysis
+
 | Scope            | Variable | Role        | Location |
 | :----------------| :--------| :-----------| :--------|
 | module.show_args | args     | fixed value | line 1   |
 | module.show_args | kwargs   | fixed value | line 1   |
 | module.show_args | title    | fixed value | line 1   |
+

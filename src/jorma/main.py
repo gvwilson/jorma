@@ -9,32 +9,7 @@ from .static import analyze, format_dynamic, format_static
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        prog="jorma",
-        description="Analyse variable roles in a Python program.",
-    )
-    parser.add_argument("program", type=Path, help="Python source file to analyse")
-    parser.add_argument("func_name", nargs="?", help="Function to trace dynamically")
-    parser.add_argument("func_args", nargs="*", help="Arguments to pass to func_name")
-    parser.add_argument(
-        "--format",
-        choices=["markdown", "html", "csv"],
-        default="markdown",
-        dest="fmt",
-        help="Output format (default: markdown)",
-    )
-    parser.add_argument(
-        "--run",
-        action="store_true",
-        help="Run file as __main__ to collect dynamic role information",
-    )
-    parser.add_argument(
-        "--suppress",
-        action="store_true",
-        help="Discard stdout from the program being examined; show only jorma's output",
-    )
-    args = parser.parse_args()
-
+    args = parse_args()
     path: Path = args.program
     if not path.exists():
         print(f"Error: '{path}' not found", file=sys.stderr)
@@ -66,7 +41,7 @@ def main() -> None:
             )
         except Exception as exc:
             print(
-                f"Error during dynamic analysis ({type(exc).__name__}): {exc}",
+                f"{path}: error during dynamic analysis ({type(exc).__name__}): {exc}",
                 file=sys.stderr,
             )
             sys.exit(1)
@@ -79,7 +54,7 @@ def main() -> None:
             dynamic = run_as_main(path, suppress=args.suppress)
         except Exception as exc:
             print(
-                f"Error during dynamic analysis ({type(exc).__name__}): {exc}",
+                f"{path}: error during dynamic analysis ({type(exc).__name__}): {exc}",
                 file=sys.stderr,
             )
             sys.exit(1)
@@ -87,3 +62,28 @@ def main() -> None:
         if dyn_output:
             print("\n### Dynamic analysis\n")
             print(dyn_output)
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(prog="jorma", description="Analyse variable roles",)
+    parser.add_argument("program", type=Path, help="Python source file to analyse")
+    parser.add_argument("func_name", nargs="?", help="Function to trace dynamically")
+    parser.add_argument("func_args", nargs="*", help="Arguments to pass to func_name")
+    parser.add_argument(
+        "--format",
+        choices=["markdown", "html", "csv"],
+        default="markdown",
+        dest="fmt",
+        help="Output format (default: markdown)",
+    )
+    parser.add_argument(
+        "--run",
+        action="store_true",
+        help="Run file as __main__ to collect dynamic role information",
+    )
+    parser.add_argument(
+        "--suppress",
+        action="store_true",
+        help="Discard stdout from the program being examined; show only jorma's output",
+    )
+    return parser.parse_args()

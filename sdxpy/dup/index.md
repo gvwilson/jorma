@@ -1,4 +1,9 @@
 # dup
+
+## brute_force_1.py
+
+### Static analysis
+
 | Scope                  | Variable    | Role        | Location |
 | :----------------------| :-----------| :-----------| :--------|
 | module                 | duplicates  | fixed value | line 20  |
@@ -12,6 +17,11 @@
 | module.same_bytes      | right_name  | fixed value | line 4   |
 | module.same_bytes      | left_bytes  | fixed value | line 5   |
 | module.same_bytes      | right_bytes | fixed value | line 6   |
+
+## brute_force_2.py
+
+### Static analysis
+
 | Scope                  | Variable    | Role               | Location |
 | :----------------------| :-----------| :------------------| :--------|
 | module                 | duplicates  | fixed value        | line 22  |
@@ -27,6 +37,11 @@
 | module.same_bytes      | right_name  | fixed value        | line 4   |
 | module.same_bytes      | left_bytes  | fixed value        | line 5   |
 | module.same_bytes      | right_bytes | fixed value        | line 6   |
+
+## dup.py
+
+### Static analysis
+
 | Scope              | Variable  | Role               | Location |
 | :------------------| :---------| :------------------| :--------|
 | module             | groups    | fixed value        | line 17  |
@@ -36,6 +51,11 @@
 | module.find_groups | fn        | stepper            | line 7   |
 | module.find_groups | data      | most-recent holder | line 8   |
 | module.find_groups | hash_code | most-recent holder | line 9   |
+
+## grouped.py
+
+### Static analysis
+
 | Scope                  | Variable    | Role               | Location |
 | :----------------------| :-----------| :------------------| :--------|
 | module                 | groups      | fixed value        | line 34  |
@@ -58,6 +78,11 @@
 | module.same_bytes      | right_name  | fixed value        | line 5   |
 | module.same_bytes      | left_bytes  | fixed value        | line 6   |
 | module.same_bytes      | right_bytes | fixed value        | line 7   |
+
+## naive_hash.py
+
+### Static analysis
+
 | Scope             | Variable  | Role               | Location |
 | :-----------------| :---------| :------------------| :--------|
 | module            | example   | fixed value        | line 6   |
@@ -65,9 +90,15 @@
 | module            | substring | most-recent holder | line 8   |
 | module            | hash      | most-recent holder | line 9   |
 | module.naive_hash | data      | fixed value        | line 1   |
+
+## using_sha256.py
+
+### Static analysis
+
 | Scope  | Variable  | Role               | Location |
 | :------| :---------| :------------------| :--------|
 | module | example   | fixed value        | line 4   |
 | module | i         | stepper            | line 5   |
 | module | substring | most-recent holder | line 6   |
 | module | hash      | most-recent holder | line 7   |
+

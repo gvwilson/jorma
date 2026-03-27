@@ -1,4 +1,9 @@
 # layout
+
+## easy_mode.py
+
+### Static analysis
+
 | Scope                   | Variable | Role        | Location |
 | :-----------------------| :--------| :-----------| :--------|
 | module.Block.__init__   | height   | fixed value | line 2   |
@@ -14,6 +19,11 @@
 | module.Row.__init__     | self     | fixed value | line 14  |
 | module.Row.get_height   | self     | fixed value | line 20  |
 | module.Row.get_width    | self     | fixed value | line 17  |
+
+## placed.py
+
+### Static analysis
+
 | Scope                       | Variable  | Role               | Location |
 | :---------------------------| :---------| :------------------| :--------|
 | module.PlacedBlock.__init__ | height    | fixed value        | line 5   |
@@ -41,6 +51,11 @@
 | module.PlacedRow.place      | child     | stepper            | line 55  |
 | module.PlacedRow.place      | child_y   | most-recent holder | line 56  |
 | module.PlacedRow.report     | self      | fixed value        | line 60  |
+
+## render.py
+
+### Static analysis
+
 | Scope              | Variable | Role        | Location |
 | :------------------| :--------| :-----------| :--------|
 | module.draw        | fill     | gatherer    | line 17  |
@@ -56,6 +71,11 @@
 | module.render      | width    | fixed value | line 3   |
 | module.render      | height   | fixed value | line 4   |
 | module.render      | screen   | fixed value | line 5   |
+
+## rendered.py
+
+### Static analysis
+
 | Scope                    | Variable | Role        | Location |
 | :------------------------| :--------| :-----------| :--------|
 | module.Renderable.render | fill     | fixed value | line 5   |
@@ -63,6 +83,11 @@
 | module.Renderable.render | self     | fixed value | line 5   |
 | module.Renderable.render | ix       | stepper     | line 6   |
 | module.Renderable.render | iy       | stepper     | line 7   |
+
+## test_easy_mode.py
+
+### Static analysis
+
 | Scope                                          | Variable | Role        | Location |
 | :----------------------------------------------| :--------| :-----------| :--------|
 | module.test_lays_out_a_column_of_two_blocks    | fixture  | fixed value | line 23  |
@@ -70,6 +95,11 @@
 | module.test_lays_out_a_large_block             | fixture  | fixed value | line 11  |
 | module.test_lays_out_a_row_of_two_blocks       | fixture  | fixed value | line 17  |
 | module.test_lays_out_a_single_unit_block       | fixture  | fixed value | line 5   |
+
+## test_placed.py
+
+### Static analysis
+
 | Scope                                        | Variable | Role        | Location |
 | :--------------------------------------------| :--------| :-----------| :--------|
 | module.test_places_a_column_of_two_blocks    | fixture  | fixed value | line 33  |
@@ -77,6 +107,11 @@
 | module.test_places_a_large_block             | fixture  | fixed value | line 13  |
 | module.test_places_a_row_of_two_blocks       | fixture  | fixed value | line 19  |
 | module.test_places_a_single_unit_block       | fixture  | fixed value | line 7   |
+
+## test_rendered.py
+
+### Static analysis
+
 | Scope                                         | Variable | Role        | Location |
 | :---------------------------------------------| :--------| :-----------| :--------|
 | module.test_renders_a_column_of_two_blocks    | fixture  | fixed value | line 26  |
@@ -85,6 +120,11 @@
 | module.test_renders_a_large_block             | fixture  | fixed value | line 14  |
 | module.test_renders_a_row_of_two_blocks       | fixture  | fixed value | line 20  |
 | module.test_renders_a_single_unit_block       | fixture  | fixed value | line 8   |
+
+## test_wrapped.py
+
+### Static analysis
+
 | Scope                                                                 | Variable | Role        | Location |
 | :---------------------------------------------------------------------| :--------| :-----------| :--------|
 | module.test_wrap_a_row_of_two_blocks_that_do_not_fit_on_one_row       | fixture  | fixed value | line 119 |
@@ -101,6 +141,11 @@
 | module.test_wraps_a_large_block                                       | wrapped  | fixed value | line 13  |
 | module.test_wraps_a_single_unit_block                                 | fixture  | fixed value | line 5   |
 | module.test_wraps_a_single_unit_block                                 | wrapped  | fixed value | line 6   |
+
+## wrapped.py
+
+### Static analysis
+
 | Scope                       | Variable    | Role               | Location |
 | :---------------------------| :-----------| :------------------| :--------|
 | module.WrappedBlock.wrap    | self        | fixed value        | line 5   |
@@ -121,3 +166,4 @@
 | module.WrappedRow.wrap      | rows        | fixed value        | line 25  |
 | module.WrappedRow.wrap      | new_rows    | fixed value        | line 26  |
 | module.WrappedRow.wrap      | new_col     | fixed value        | line 27  |
+

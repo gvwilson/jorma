@@ -1,10 +1,20 @@
 # parse
+
+## better_parser.py
+
+### Static analysis
+
 | Scope                                  | Variable | Role        | Location |
 | :--------------------------------------| :--------| :-----------| :--------|
 | module.BetterParser._parse_EitherStart | back     | stepper     | line 6   |
 | module.BetterParser._parse_EitherStart | rest     | fixed value | line 6   |
 | module.BetterParser._parse_EitherStart | self     | fixed value | line 6   |
 | module.BetterParser._parse_EitherStart | children | log         | line 7   |
+
+## match.py
+
+### Static analysis
+
 | Scope                  | Variable | Role        | Location |
 | :----------------------| :--------| :-----------| :--------|
 | module.Any.__init__    | rest     | fixed value | line 23  |
@@ -24,6 +34,11 @@
 | module.Match.__init__  | rest     | fixed value | line 2   |
 | module.Match.__init__  | self     | fixed value | line 2   |
 | module.Null.__init__   | self     | fixed value | line 37  |
+
+## parser.py
+
+### Static analysis
+
 | Scope                            | Variable | Role        | Location |
 | :--------------------------------| :--------| :-----------| :--------|
 | module.Parser._parse             | self     | fixed value | line 16  |
@@ -45,6 +60,26 @@
 | module.Parser.parse              | self     | fixed value | line 6   |
 | module.Parser.parse              | text     | fixed value | line 6   |
 | module.Parser.parse              | tokens   | fixed value | line 7   |
+
+## test_better_parser.py
+
+### Static analysis
+
+
+## test_parser.py
+
+### Static analysis
+
+
+## test_tokenizer.py
+
+### Static analysis
+
+
+## tokenizer.py
+
+### Static analysis
+
 | Scope                     | Variable | Role        | Location |
 | :-------------------------| :--------| :-----------| :--------|
 | module                    | CHARS    | fixed value | line 3   |
@@ -55,3 +90,4 @@
 | module.Tokenizer.tok      | self     | fixed value | line 14  |
 | module.Tokenizer.tok      | text     | fixed value | line 14  |
 | module.Tokenizer.tok      | ch       | stepper     | line 16  |
+

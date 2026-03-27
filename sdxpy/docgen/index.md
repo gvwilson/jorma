@@ -1,9 +1,19 @@
 # docgen
+
+## add_double.py
+
+### Static analysis
+
 | Scope         | Variable | Role        | Location |
 | :-------------| :--------| :-----------| :--------|
 | module.add    | left     | fixed value | line 1   |
 | module.add    | right    | fixed value | line 1   |
 | module.double | x        | fixed value | line 5   |
+
+## doc_extract.py
+
+### Static analysis
+
 | Scope                            | Variable    | Role               | Location |
 | :--------------------------------| :-----------| :------------------| :--------|
 | module                           | results     | fixed value        | line 55  |
@@ -29,6 +39,11 @@
 | module.Extract.visit_ClassDef    | self        | fixed value        | line 29  |
 | module.Extract.visit_FunctionDef | node        | fixed value        | line 47  |
 | module.Extract.visit_FunctionDef | self        | fixed value        | line 47  |
+
+## doc_format.py
+
+### Static analysis
+
 | Scope               | Variable   | Role        | Location |
 | :-------------------| :----------| :-----------| :--------|
 | module              | HEADING    | fixed value | line 8   |
@@ -44,6 +59,11 @@
 | module.main         | page       | fixed value | line 33  |
 | module.make_heading | key        | fixed value | line 27  |
 | module.make_heading | kind       | fixed value | line 27  |
+
+## doc_sample.py
+
+### Static analysis
+
 | Scope                  | Variable | Role        | Location |
 | :----------------------| :--------| :-----------| :--------|
 | module.Sample.__init__ | name     | fixed value | line 15  |
@@ -52,6 +72,12 @@
 | module.Sample.rename   | self     | fixed value | line 19  |
 | module.function        | param    | fixed value | line 4   |
 | module.undocumented    | param    | fixed value | line 8   |
+
+## double_and_print.py
+
+### Static analysis
+
 | Scope         | Variable | Role        | Location |
 | :-------------| :--------| :-----------| :--------|
 | module.double | x        | fixed value | line 1   |
+

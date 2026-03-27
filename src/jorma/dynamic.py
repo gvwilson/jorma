@@ -1,6 +1,7 @@
 """Dynamic analysis: sys.settrace-based tracer for phase and follower roles."""
 
 import importlib.util
+import inspect
 import os
 import sys
 import types
@@ -27,7 +28,8 @@ def _safe_eq(a: object, b: object) -> bool:
 class DynamicTracer:
     """Trace a function call and detect phase and follower roles."""
 
-    def __init__(self) -> None:
+    def __init__(self, target_file: str) -> None:
+        self._target_dir = str(Path(target_file).parent)
         # key = (var_name, scope_string)
         self.sequences: dict[tuple[str, str], list] = {}
         # context[key][i] = {other_name: value_before_i-th_change}
@@ -46,7 +48,7 @@ class DynamicTracer:
         event: str,
         arg: object,
     ) -> object:
-        if event == "call":
+        if event == "call" and str(Path(frame.f_code.co_filename).parent) == self._target_dir:
             self._prev[id(frame)] = {}
             return self._line_tracer
         return None
@@ -102,7 +104,7 @@ class DynamicTracer:
         """True if values look like a state-machine variable."""
         try:
             distinct: set = set(values)
-        except TypeError:
+        except (TypeError, ValueError):
             return False
         # Must not be boolean (those are one-way flags or toggles)
         if any(isinstance(v, bool) for v in distinct):
@@ -164,16 +166,22 @@ def run_dynamic(
     suppress: bool = False,
 ) -> dict[tuple[str, str], str]:
     """Import path, call func_name(*func_args) under tracing, return dynamic roles."""
+    script_dir = str(path.parent.resolve())
+    sys.path.insert(0, script_dir)
     spec = importlib.util.spec_from_file_location("_roles_target", path)
     if spec is None or spec.loader is None:
+        sys.path.pop(0)
         raise ImportError(f"Cannot load '{path}'")
     module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)  # type: ignore[union-attr]
+    try:
+        spec.loader.exec_module(module)  # type: ignore[union-attr]
+    finally:
+        sys.path.pop(0)
 
     if not hasattr(module, func_name):
         raise AttributeError(f"'{path}' has no function '{func_name}'")
     func = getattr(module, func_name)
-    tracer = DynamicTracer()
+    tracer = DynamicTracer(str(path.resolve()))
     old_trace = sys.gettrace()
     old_stdout = sys.stdout
     sys.settrace(tracer.tracer)
@@ -192,12 +200,15 @@ def run_dynamic(
 
 def run_as_main(path: Path, suppress: bool = False) -> dict[tuple[str, str], str]:
     """Run path as __main__ under tracing; return detected dynamic roles."""
+    script_dir = str(path.parent.resolve())
+    sys.path.insert(0, script_dir)
     spec = importlib.util.spec_from_file_location("__main__", path)
     if spec is None or spec.loader is None:
+        sys.path.pop(0)
         raise ImportError(f"Cannot load '{path}'")
     module = importlib.util.module_from_spec(spec)
     module.__name__ = "__main__"
-    tracer = DynamicTracer()
+    tracer = DynamicTracer(str(path.resolve()))
     old_trace = sys.gettrace()
     old_argv = sys.argv
     old_stdout = sys.stdout
@@ -212,6 +223,7 @@ def run_as_main(path: Path, suppress: bool = False) -> dict[tuple[str, str], str
     finally:
         sys.settrace(old_trace)
         sys.argv = old_argv
+        sys.path.pop(0)
         if suppress:
             sys.stdout.close()
             sys.stdout = old_stdout
@@ -226,7 +238,8 @@ def trace_function(
 
     Convenience wrapper used by tests.
     """
-    tracer = DynamicTracer()
+    target_file = inspect.getfile(func)  # type: ignore[arg-type]
+    tracer = DynamicTracer(target_file)
     old_trace = sys.gettrace()
     sys.settrace(tracer.tracer)
     try:

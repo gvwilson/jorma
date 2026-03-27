@@ -1,4 +1,9 @@
 # db
+
+## blocked.py
+
+### Static analysis
+
 | Scope                        | Variable          | Role        | Location |
 | :----------------------------| :-----------------| :-----------| :--------|
 | module.Blocked               | RECORDS_PER_BLOCK | fixed value | line 5   |
@@ -23,6 +28,11 @@
 | module.Blocked.get           | block             | fixed value | line 36  |
 | module.Blocked.num_blocks    | self              | fixed value | line 17  |
 | module.Blocked.num_records   | self              | fixed value | line 20  |
+
+## blocked_file.py
+
+### Static analysis
+
 | Scope                            | Variable   | Role               | Location |
 | :--------------------------------| :----------| :------------------| :--------|
 | module.BlockedFile.__init__      | db_dir     | fixed value        | line 7   |
@@ -64,6 +74,11 @@
 | module.BlockedFile.add           | self       | fixed value        | line 12  |
 | module.BlockedFile.get           | key        | fixed value        | line 16  |
 | module.BlockedFile.get           | self       | fixed value        | line 16  |
+
+## cleanup.py
+
+### Static analysis
+
 | Scope                         | Variable     | Role               | Location |
 | :-----------------------------| :------------| :------------------| :--------|
 | module.Cleanup._cleanup       | self         | fixed value        | line 11  |
@@ -84,6 +99,11 @@
 | module.Cleanup._rename_blocks | new_filename | most-recent holder | line 34  |
 | module.Cleanup.add            | record       | fixed value        | line 7   |
 | module.Cleanup.add            | self         | fixed value        | line 7   |
+
+## file_backed.py
+
+### Static analysis
+
 | Scope                      | Variable   | Role        | Location |
 | :--------------------------| :----------| :-----------| :--------|
 | module.FileBacked.__init__ | filename   | fixed value | line 7   |
@@ -101,6 +121,11 @@
 | module.FileBacked.add      | key        | fixed value | line 15  |
 | module.FileBacked.get      | key        | fixed value | line 19  |
 | module.FileBacked.get      | self       | fixed value | line 19  |
+
+## interface.py
+
+### Static analysis
+
 | Scope                    | Variable   | Role        | Location |
 | :------------------------| :----------| :-----------| :--------|
 | module.Database.__init__ | record_cls | fixed value | line 2   |
@@ -109,6 +134,11 @@
 | module.Database.add      | self       | fixed value | line 6   |
 | module.Database.get      | key        | fixed value | line 10  |
 | module.Database.get      | self       | fixed value | line 10  |
+
+## interface_original.py
+
+### Static analysis
+
 | Scope                    | Variable | Role        | Location |
 | :------------------------| :--------| :-----------| :--------|
 | module.Database.__init__ | key_func | fixed value | line 2   |
@@ -117,6 +147,11 @@
 | module.Database.add      | self     | fixed value | line 6   |
 | module.Database.get      | key      | fixed value | line 10  |
 | module.Database.get      | self     | fixed value | line 10  |
+
+## just_dict_original.py
+
+### Static analysis
+
 | Scope                    | Variable | Role        | Location |
 | :------------------------| :--------| :-----------| :--------|
 | module.JustDict.__init__ | key_func | fixed value | line 5   |
@@ -126,6 +161,11 @@
 | module.JustDict.add      | key      | fixed value | line 10  |
 | module.JustDict.get      | key      | fixed value | line 13  |
 | module.JustDict.get      | self     | fixed value | line 13  |
+
+## just_dict_refactored.py
+
+### Static analysis
+
 | Scope                              | Variable   | Role        | Location |
 | :----------------------------------| :----------| :-----------| :--------|
 | module.JustDictRefactored.__init__ | record_cls | fixed value | line 5   |
@@ -135,6 +175,11 @@
 | module.JustDictRefactored.add      | key        | fixed value | line 10  |
 | module.JustDictRefactored.get      | key        | fixed value | line 13  |
 | module.JustDictRefactored.get      | self       | fixed value | line 13  |
+
+## record.py
+
+### Static analysis
+
 | Scope                          | Variable   | Role        | Location |
 | :------------------------------| :----------| :-----------| :--------|
 | module.Experiment              | RECORD_LEN | fixed value | line 5   |
@@ -151,6 +196,11 @@
 | module.Experiment.unpack_multi | raw        | fixed value | line 46  |
 | module.Experiment.unpack_multi | size       | fixed value | line 47  |
 | module.Experiment.unpack_multi | split      | fixed value | line 48  |
+
+## record_original.py
+
+### Static analysis
+
 | Scope                    | Variable         | Role        | Location |
 | :------------------------| :----------------| :-----------| :--------|
 | module.BasicRec          | MAX_NAME_LEN     | fixed value | line 2   |
@@ -167,9 +217,26 @@
 | module.BasicRec.__str__  | self             | fixed value | line 21  |
 | module.BasicRec.__str__  | joined           | fixed value | line 22  |
 | module.BasicRec.key      | record           | fixed value | line 9   |
+
+## show_packed_records.py
+
+### Static analysis
+
 | Scope  | Variable | Role        | Location |
 | :------| :--------| :-----------| :--------|
 | module | ex       | fixed value | line 3   |
+
+### Dynamic analysis
+
+| Variable | Scope                     | Role  |
+| :--------| :-------------------------| :-----|
+| r        | module.__init__.<genexpr> | phase |
+| r        | module.pack.<genexpr>     | phase |
+
+## test_db_original.py
+
+### Static analysis
+
 | Scope                                 | Variable | Role        | Location |
 | :-------------------------------------| :--------| :-----------| :--------|
 | module.test_add_then_get              | db       | container   | line 30  |
@@ -181,3 +248,4 @@
 | module.test_add_two_then_get_both     | ex02     | fixed value | line 35  |
 | module.test_construct                 | db       | fixed value | line 22  |
 | module.test_get_nothing_from_empty_db | db       | fixed value | line 26  |
+

@@ -1,4 +1,9 @@
 # persist
+
+## aliasing.py
+
+### Static analysis
+
 | Scope                       | Variable | Role               | Location |
 | :---------------------------| :--------| :------------------| :--------|
 | module.LoadAlias.__init__   | reader   | fixed value        | line 54  |
@@ -66,6 +71,11 @@
 | module.SaveAlias.save_str   | thing    | fixed value        | line 40  |
 | module.SaveAlias.save_str   | lines    | fixed value        | line 41  |
 | module.SaveAlias.save_str   | line     | stepper            | line 43  |
+
+## aliasing_wrong.py
+
+### Static analysis
+
 | Scope                       | Variable | Role        | Location |
 | :---------------------------| :--------| :-----------| :--------|
 | module.LoadAlias.__init__   | reader   | fixed value | line 54  |
@@ -105,6 +115,11 @@
 | module.SaveAlias.save_str   | thing    | fixed value | line 40  |
 | module.SaveAlias.save_str   | lines    | fixed value | line 41  |
 | module.SaveAlias.save_str   | line     | stepper     | line 43  |
+
+## attr.py
+
+### Static analysis
+
 | Scope                   | Variable | Role        | Location |
 | :-----------------------| :--------| :-----------| :--------|
 | module                  | ex       | fixed value | line 9   |
@@ -112,6 +127,11 @@
 | module.Example.__init__ | label    | fixed value | line 2   |
 | module.Example.__init__ | self     | fixed value | line 2   |
 | module.Example.get_size | self     | fixed value | line 5   |
+
+## builtin.py
+
+### Static analysis
+
 | Scope       | Variable | Role               | Location |
 | :-----------| :--------| :------------------| :--------|
 | module.load | reader   | fixed value        | line 36  |
@@ -132,13 +152,28 @@
 | module.save | item     | stepper            | line 19  |
 | module.save | key      | stepper            | line 29  |
 | module.save | value    | stepper            | line 29  |
+
+## ex_aliasing.py
+
+### Static analysis
+
 | Scope  | Variable | Role        | Location |
 | :------| :--------| :-----------| :--------|
 | module | shared   | fixed value | line 1   |
 | module | fixture  | fixed value | line 2   |
+
+## ex_circular.py
+
+### Static analysis
+
 | Scope  | Variable | Role | Location |
 | :------| :--------| :----| :--------|
 | module | fixture  | log  | line 1   |
+
+## objects.py
+
+### Static analysis
+
 | Scope                         | Variable | Role               | Location |
 | :-----------------------------| :--------| :------------------| :--------|
 | module.LoadObjects.__init__   | reader   | fixed value        | line 47  |
@@ -196,16 +231,46 @@
 | module.SaveObjects.save_str   | thing    | fixed value        | line 23  |
 | module.SaveObjects.save_str   | lines    | fixed value        | line 24  |
 | module.SaveObjects.save_str   | line     | stepper            | line 26  |
+
+## save_aliasing.py
+
+### Static analysis
+
 | Scope  | Variable | Role        | Location |
 | :------| :--------| :-----------| :--------|
 | module | word     | fixed value | line 4   |
 | module | child    | fixed value | line 5   |
 | module | parent   | log         | line 6   |
 | module | saver    | fixed value | line 10  |
+
+### Dynamic analysis
+
+| Variable | Scope                                                               | Role  |
+| :--------| :-------------------------------------------------------------------| :-----|
+| f        | module.save.save_list._write.<genexpr>                              | phase |
+| f        | module.save.save_list.save._write.<genexpr>                         | phase |
+| f        | module.save.save_list.save.save_list._write.<genexpr>               | phase |
+| f        | module.save.save_list.save.save_list.save._write.<genexpr>          | phase |
+| f        | module.save.save_list.save.save_list.save.save_str._write.<genexpr> | phase |
+
+## save_builtin.py
+
+### Static analysis
+
+
+## shared.py
+
+### Static analysis
+
 | Scope  | Variable | Role        | Location |
 | :------| :--------| :-----------| :--------|
 | module | shared   | fixed value | line 1   |
 | module | fixture  | fixed value | line 2   |
+
+## test_aliasing.py
+
+### Static analysis
+
 | Scope                         | Variable | Role        | Location |
 | :-----------------------------| :--------| :-----------| :--------|
 | module.roundtrip              | fixture  | fixed value | line 6   |
@@ -215,6 +280,11 @@
 | module.test_aliased_list      | result   | fixed value | line 26  |
 | module.test_duplicated_string | fixture  | fixed value | line 19  |
 | module.test_no_aliasing       | fixture  | fixed value | line 14  |
+
+## test_aliasing_wrong.py
+
+### Static analysis
+
 | Scope                             | Variable | Role        | Location |
 | :---------------------------------| :--------| :-----------| :--------|
 | module.roundtrip                  | fixture  | fixed value | line 7   |
@@ -226,6 +296,11 @@
 | module.test_aliasing_shared_child | shared   | fixed value | line 20  |
 | module.test_aliasing_shared_child | fixture  | fixed value | line 21  |
 | module.test_aliasing_shared_child | result   | fixed value | line 22  |
+
+## test_builtin.py
+
+### Static analysis
+
 | Scope                         | Variable | Role        | Location |
 | :-----------------------------| :--------| :-----------| :--------|
 | module.test_load_bool_single  | fixture  | fixed value | line 98  |
@@ -259,3 +334,4 @@
 | module.test_save_str_single   | fixture  | fixed value | line 60  |
 | module.test_save_str_single   | expected | fixed value | line 65  |
 | module.test_save_str_single   | output   | fixed value | line 72  |
+
