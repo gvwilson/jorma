@@ -159,7 +159,33 @@ These are reserved for the dynamic analysis phase.
    concepts explicit in their type systems (Rust, Kotlin, Dafny,
    Eiffel, LiquidHaskell, Clean, Plaid).
 
-5. Current work: Added static detection of Toggle, Log, and Lazy
-   Value; added Phase, Snapshot, and Generator State as named roles
-   pending dynamic analysis; extended CLI to accept an optional
-   function name and arguments for future dynamic analysis.
+5. Role refinement: Added static detection of Toggle, Log, and Lazy
+   Value; added Phase, Snapshot, and Generator State as named roles;
+   extended CLI to accept an optional function name and arguments.
+
+6. Dynamic analysis: Implemented `DynamicTracer` in `roles.py` using
+   `sys.settrace` to detect Phase and Follower roles at runtime.
+   The tracer snapshots `frame.f_locals` on every line and return event,
+   records value sequences and pre-change context for each variable, then
+   applies two detectors:
+   - **Follower**: every update (not initialization) to variable A gives A
+     the value that some consistent other variable B held just before the
+     change.  Initial sentinel assignments (e.g. `prev = None`) are excluded
+     from the check so they do not break detection.
+   - **Phase**: variable holds 2–6 distinct non-boolean scalar values and
+     revisits at least one state (total observations exceed distinct count).
+   One subtle issue fixed during implementation: Python's `sys.settrace`
+   fires a `"line"` event *before* the line executes, so the pre-change
+   snapshot must be taken on the previous event and compared on the current
+   one.  A second non-obvious issue: `-1` in Python's AST is
+   `UnaryOp(USub, Constant(1))`, not `Constant(-1)`, requiring a special
+   case in `_is_sentinel`.
+
+7. Test suite: Created `tests/test_static.py` (29 tests covering all 13
+   static classifiers) and `tests/test_dynamic.py` (7 tests for Phase and
+   Follower detection).  Tests are run with `uv run pytest tests/`.
+   A `conftest.py` provides `role_of` and `dynamic_role_of` helpers.
+   One design note: a test case initially used `mode = t` (direct copy from
+   loop variable) to exercise numeric phase states; this correctly classified
+   as Follower rather than Phase, so the test was rewritten to use
+   if-else transitions where the next state is computed from the current one.
