@@ -33,6 +33,13 @@ coverage:
 	@python -m coverage run -m pytest tests
 	@python -m coverage report --show-missing
 
+## analyze: regenerate jorma analysis for all sdxpy subdirectories
+analyze:
+	@for dir in sdxpy/*/; do \
+		echo $$dir; \
+		$(MAKE) -C $$dir; \
+	done
+
 ## package: build support package
 package:
 	python -m build

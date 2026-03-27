@@ -3,7 +3,11 @@ name = "jorma"
 description = "roles of variables"
 dynamic = ["version"]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "beautifulsoup4>=4.14.3",
+    "markdown>=3.10.2",
+    "prettytable>=3.17.0",
+]
 
 [project.scripts]
 jorma = "jorma.main:main"
@@ -22,7 +26,7 @@ path = "src/jorma/__init__.py"
 dev = [
     "build>=1.4.2",
     "coverage>=7.13.5",
-    "pytest",
-    "ruff",
+    "pytest>=9.0.2",
+    "ruff>=0.15.8",
     "twine>=6.2.0",
 ]

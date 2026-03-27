@@ -40,14 +40,19 @@ based on Sajaniemi's theory of roles of variables.
 ## Usage
 
 ```
-python roles.py target.py                      # static analysis only
-python roles.py target.py func_name [arg …]    # static + dynamic
+jorma target.py                      # static analysis only
+jorma target.py func_name [arg …]    # static + dynamic
 ```
 
-When a function name is supplied, `roles.py` will run static analysis, then
-import `target.py` and call `func_name` with the given arguments (all passed as
+Install with `uv` from the project root:
+
+```
+uv pip install -e .
+```
+
+When a function name is supplied, `jorma` runs static analysis, then imports
+`target.py` and calls `func_name` with the given arguments (all passed as
 strings) so that dynamic analysis can observe actual value sequences at runtime.
-Dynamic analysis is not yet implemented.
 
 ## Sajaniemi's Roles
 
@@ -141,7 +146,42 @@ information (to recognise pointer/linked-list traversal) or runtime value
 sequences (to observe state-machine transitions and data-flow dependencies).
 These are reserved for the dynamic analysis phase.
 
-## Project History
+## Analysis of *Software Design by Example* (Python)
+
+`sdxpy/` contains copies of Python programs from each chapter of
+[*Software Design by Example* (Python)](https://third-bit.com/sdxpy/),
+together with variable-role analysis reports.
+
+Each `sdxpy/{lesson}/` directory contains:
+
+- The final versions of the lesson's Python programs.
+- `index.md` — variable role analysis report (one table per file).
+- `jorma.mk` — standalone `make -f jorma.mk` target that regenerates `index.md`.
+
+### Missing files
+
+Some programs referenced in lesson `Makefile` targets are not present in their
+`sdxpy/` subdirectory.  Each `jorma.mk` lists them in a `MISSING` variable and
+the generated `index.md` includes a **Programs Not Analyzed** section.  The
+reasons are summarised below:
+
+| Directory | Missing file(s) | Reason |
+|---|---|---|
+| `archive` | `sample_dir.py` | Does not exist in the original lesson |
+| `binary` | `dynamic_format.py`, `hex_notation.py`, `pack_unicode.py` | Not referenced as final versions in the lesson narrative |
+| `cache` | `test_io.py` | Not referenced as a final version in the lesson narrative |
+| `dup` | `brute_force_1.py` | Superseded by `brute_force_2.py` (only final version kept) |
+| `func` | `adder.py`, `closure_list.py` | Not referenced as final versions in the lesson narrative |
+| `func` | `dynamic.py` | Lesson target built from a `.tll` source file; no `.py` counterpart exists |
+| `interp` | `doubling.py`, `repeat_zero.py` | Lesson targets built from `.tll` source files; no `.py` counterparts exist |
+| `lint` | `double.py` | Input file for `dump_ast.py`; not copied here |
+| `lint` | `dump_ast_double.py`, `dump_ast_simple.py` | Targets built by shell scripts running `dump_ast.py`; no standalone `.py` files exist |
+| `pack` | `incremental_reverse.py` | Does not exist in the original lesson |
+| `perf` | `analysis.py`, `make.py` | Not referenced as final versions in the lesson narrative |
+| `persist` | `test_aliasing.py` | Not referenced as a final version in the lesson narrative |
+| `vm` | `count_up.py`, `fill_array.py`, `halt.py`, `print_r1.py` | Programs written in assembly language (`.as` files); no `.py` counterparts exist |
+
+## Original History
 
 1. Literature review: Read three papers by Sajaniemi et al. (PPIG 2002,
    PPIG 2005, 2006) describing the roles of variables and their application
@@ -189,3 +229,14 @@ These are reserved for the dynamic analysis phase.
    loop variable) to exercise numeric phase states; this correctly classified
    as Follower rather than Phase, so the test was rewritten to use
    if-else transitions where the next state is computed from the current one.
+
+8. Packaging: Converted to a `src`-layout Python package using `hatchling`.
+   The CLI entry point became `jorma = "jorma.main:main"` in `pyproject.toml`.
+   Source split into five modules (`constants`, `varinfo`, `static`, `dynamic`,
+   `main`) plus `__init__.py` for re-exports.
+
+9. SDX analysis: Copied final-version Python programs from 26 chapters of
+   *Software Design by Example* (Python) into `sdxpy/`.  Generated per-lesson
+   `index.md` variable-role reports and standalone `jorma.mk` Makefiles for
+   regenerating them.  Missing-file issues are documented per lesson in
+   `jorma.mk` comments and in each `index.md`.

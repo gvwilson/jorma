@@ -1,6 +1,7 @@
 """Dynamic analysis: sys.settrace-based tracer for phase and follower roles."""
 
 import importlib.util
+import os
 import sys
 import types
 from pathlib import Path
@@ -72,9 +73,7 @@ class DynamicTracer:
                 self.is_update[key] = []
             self.sequences[key].append(new_val)
             # Context snapshot: values of all *other* locals just before this change
-            self.contexts[key].append(
-                {k: prev[k] for k in prev if k != name}
-            )
+            self.contexts[key].append({k: prev[k] for k in prev if k != name})
             # Track whether this is an update (variable already existed) or
             # a first assignment; follower detection skips first assignments.
             self.is_update[key].append(name in prev)
@@ -120,9 +119,7 @@ class DynamicTracer:
             return False
         return True
 
-    def _check_follower(
-        self, key: tuple[str, str], values: list
-    ) -> bool:
+    def _check_follower(self, key: tuple[str, str], values: list) -> bool:
         """True if var consistently receives the previous value of some other var.
 
         Only update observations (not first-assignments) are considered, so
@@ -132,9 +129,7 @@ class DynamicTracer:
         contexts = self.contexts.get(key, [])
         updates = self.is_update.get(key, [])
         # Gather only the (value, context) pairs where the variable was updated
-        update_pairs = [
-            (v, c) for v, c, u in zip(values, contexts, updates) if u
-        ]
+        update_pairs = [(v, c) for v, c, u in zip(values, contexts, updates) if u]
         if len(update_pairs) < 2:
             return False
         candidates: set | None = None
@@ -166,6 +161,7 @@ def run_dynamic(
     path: Path,
     func_name: str,
     func_args: list[str],
+    suppress: bool = False,
 ) -> dict[tuple[str, str], str]:
     """Import path, call func_name(*func_args) under tracing, return dynamic roles."""
     spec = importlib.util.spec_from_file_location("_roles_target", path)
@@ -174,15 +170,51 @@ def run_dynamic(
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)  # type: ignore[union-attr]
 
+    if not hasattr(module, func_name):
+        raise AttributeError(f"'{path}' has no function '{func_name}'")
     func = getattr(module, func_name)
     tracer = DynamicTracer()
     old_trace = sys.gettrace()
+    old_stdout = sys.stdout
     sys.settrace(tracer.tracer)
+    if suppress:
+        sys.stdout = open(os.devnull, "w")
     try:
         func(*func_args)
     finally:
         sys.settrace(old_trace)
+        if suppress:
+            sys.stdout.close()
+            sys.stdout = old_stdout
 
+    return tracer.detect_roles()
+
+
+def run_as_main(path: Path, suppress: bool = False) -> dict[tuple[str, str], str]:
+    """Run path as __main__ under tracing; return detected dynamic roles."""
+    spec = importlib.util.spec_from_file_location("__main__", path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Cannot load '{path}'")
+    module = importlib.util.module_from_spec(spec)
+    module.__name__ = "__main__"
+    tracer = DynamicTracer()
+    old_trace = sys.gettrace()
+    old_argv = sys.argv
+    old_stdout = sys.stdout
+    sys.argv = [str(path)]
+    sys.settrace(tracer.tracer)
+    if suppress:
+        sys.stdout = open(os.devnull, "w")
+    try:
+        spec.loader.exec_module(module)  # type: ignore[union-attr]
+    except SystemExit:
+        pass  # scripts that call sys.exit() are fine
+    finally:
+        sys.settrace(old_trace)
+        sys.argv = old_argv
+        if suppress:
+            sys.stdout.close()
+            sys.stdout = old_stdout
     return tracer.detect_roles()
 
 

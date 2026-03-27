@@ -1,21 +1,41 @@
 """Command-line entry point for jorma."""
 
+import argparse
 import sys
 from pathlib import Path
 
-from .dynamic import run_dynamic
-from .static import analyze, _print_static
+from .dynamic import run_as_main, run_dynamic
+from .static import analyze, format_dynamic, format_static
 
 
 def main() -> None:
-    if len(sys.argv) < 2:
-        print(f"Usage: {sys.argv[0]} <program.py> [func_name [arg …]]", file=sys.stderr)
-        sys.exit(1)
+    parser = argparse.ArgumentParser(
+        prog="jorma",
+        description="Analyse variable roles in a Python program.",
+    )
+    parser.add_argument("program", type=Path, help="Python source file to analyse")
+    parser.add_argument("func_name", nargs="?", help="Function to trace dynamically")
+    parser.add_argument("func_args", nargs="*", help="Arguments to pass to func_name")
+    parser.add_argument(
+        "--format",
+        choices=["markdown", "html", "csv"],
+        default="markdown",
+        dest="fmt",
+        help="Output format (default: markdown)",
+    )
+    parser.add_argument(
+        "--run",
+        action="store_true",
+        help="Run file as __main__ to collect dynamic role information",
+    )
+    parser.add_argument(
+        "--suppress",
+        action="store_true",
+        help="Discard stdout from the program being examined; show only jorma's output",
+    )
+    args = parser.parse_args()
 
-    path = Path(sys.argv[1])
-    func_name = sys.argv[2] if len(sys.argv) > 2 else None
-    func_args = sys.argv[3:] if len(sys.argv) > 3 else []
-
+    path: Path = args.program
     if not path.exists():
         print(f"Error: '{path}' not found", file=sys.stderr)
         sys.exit(1)
@@ -32,19 +52,38 @@ def main() -> None:
         print(f"Syntax error in '{path}': {exc}", file=sys.stderr)
         sys.exit(1)
 
-    if func_name is not None:
-        print("=== Static Analysis ===")
-    _print_static(results)
+    wants_dynamic = args.run or args.func_name is not None
+    if wants_dynamic:
+        print("### Static analysis\n")
+    output = format_static(results, args.fmt)
+    if output:
+        print(output)
 
-    if func_name is not None:
-        print("\n=== Dynamic Analysis ===")
+    if args.func_name is not None:
         try:
-            dynamic = run_dynamic(path, func_name, func_args)
+            dynamic = run_dynamic(
+                path, args.func_name, args.func_args, suppress=args.suppress
+            )
         except Exception as exc:
-            print(f"Error during dynamic analysis: {exc}", file=sys.stderr)
+            print(
+                f"Error during dynamic analysis ({type(exc).__name__}): {exc}",
+                file=sys.stderr,
+            )
             sys.exit(1)
-        if not dynamic:
-            print("  (no phase or follower variables detected)")
-        else:
-            for (name, scope), role in sorted(dynamic.items()):
-                print(f"  [{scope}]  {name:<24} {role}")
+        dyn_output = format_dynamic(dynamic, args.fmt)
+        if dyn_output:
+            print("\n### Dynamic analysis\n")
+            print(dyn_output)
+    elif args.run:
+        try:
+            dynamic = run_as_main(path, suppress=args.suppress)
+        except Exception as exc:
+            print(
+                f"Error during dynamic analysis ({type(exc).__name__}): {exc}",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        dyn_output = format_dynamic(dynamic, args.fmt)
+        if dyn_output:
+            print("\n### Dynamic analysis\n")
+            print(dyn_output)
