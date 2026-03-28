@@ -1,4 +1,4 @@
-"""Dynamic analysis: sys.settrace-based tracer for phase and follower roles."""
+"""Dynamic analysis: sys.settrace-based tracer for roles."""
 
 import importlib.util
 import inspect
@@ -10,7 +10,6 @@ from pathlib import Path
 from .constants import FOLLOWER, GENERATOR_STATE, PHASE, SNAPSHOT
 
 # Maximum number of distinct scalar states to still classify as a phase variable.
-# Sajaniemi's definition implies a small, enumerated set; 6 is a practical limit.
 _PHASE_MAX_STATES = 6
 
 
@@ -30,15 +29,20 @@ class DynamicTracer:
 
     def __init__(self, target_file: str) -> None:
         self._target_dir = str(Path(target_file).parent)
+
         # key = (var_name, scope_string)
         self.sequences: dict[tuple[str, str], list] = {}
+
         # context[key][i] = {other_name: value_before_i-th_change}
         self.contexts: dict[tuple[str, str], list[dict]] = {}
+
         # curr_contexts[key][i] = {other_name: value_after_i-th_change}
         self.curr_contexts: dict[tuple[str, str], list[dict]] = {}
+
         # is_update[key][i] = True if this was an update to an existing var
         # (False = first assignment / initialization)
         self.is_update: dict[tuple[str, str], list[bool]] = {}
+
         # snapshot of f_locals before each line, keyed by frame id
         self._prev: dict[int, dict[str, object]] = {}
 
@@ -80,13 +84,17 @@ class DynamicTracer:
                 self.curr_contexts[key] = []
                 self.is_update[key] = []
             self.sequences[key].append(new_val)
+
             # Context snapshot: values of all *other* locals just before this change
             self.contexts[key].append({k: prev[k] for k in prev if k != name})
+
             # Current context: values of all *other* locals just after this change
             self.curr_contexts[key].append({k: curr[k] for k in curr if k != name})
+
             # Track whether this is an update (variable already existed) or
             # a first assignment; follower detection skips first assignments.
             self.is_update[key].append(name in prev)
+
         self._prev[id(frame)] = curr
         if event == "return":
             self._prev.pop(id(frame), None)
@@ -114,19 +122,24 @@ class DynamicTracer:
             distinct: set = set(values)
         except (TypeError, ValueError):
             return False
+
         # Must not be boolean (those are one-way flags or toggles)
         if any(isinstance(v, bool) for v in distinct):
             return False
+
         # States must be simple scalars
         if not all(isinstance(v, (int, str, float, type(None))) for v in distinct):
             return False
+
         # Need at least 2 and at most _PHASE_MAX_STATES distinct values
         if not (2 <= len(distinct) <= _PHASE_MAX_STATES):
             return False
+
         # Must revisit states (more observations than distinct values).
         # This already excludes simple steppers, which never revisit a value.
         if len(values) <= len(distinct):
             return False
+
         return True
 
     def _check_follower(self, key: tuple[str, str], values: list) -> bool:
@@ -138,6 +151,7 @@ class DynamicTracer:
         """
         contexts = self.contexts.get(key, [])
         updates = self.is_update.get(key, [])
+
         # Gather only the (value, context) pairs where the variable was updated
         update_pairs = [(v, c) for v, c, u in zip(values, contexts, updates) if u]
         if len(update_pairs) < 2:
@@ -152,6 +166,7 @@ class DynamicTracer:
             candidates = matching if candidates is None else candidates & matching
             if not candidates:
                 return False
+
         return bool(candidates)
 
     def _check_snapshot(self, key: tuple[str, str], values: list) -> bool:
@@ -250,6 +265,7 @@ def run_as_main(path: Path, suppress: bool = False) -> dict[tuple[str, str], str
     old_stdout = sys.stdout
     sys.argv = [str(path)]
     sys.settrace(tracer.tracer)
+
     if suppress:
         sys.stdout = open(os.devnull, "w")
     try:
@@ -263,6 +279,7 @@ def run_as_main(path: Path, suppress: bool = False) -> dict[tuple[str, str], str
         if suppress:
             sys.stdout.close()
             sys.stdout = old_stdout
+
     return tracer.detect_roles()
 
 
@@ -274,12 +291,12 @@ def trace_function(
 
     Convenience wrapper used by tests.
     """
-    target_file = inspect.getfile(func)  # type: ignore[arg-type]
+    target_file = inspect.getfile(func)
     tracer = DynamicTracer(target_file)
     old_trace = sys.gettrace()
     sys.settrace(tracer.tracer)
     try:
-        func(*args)  # type: ignore[operator]
+        func(*args)
     finally:
         sys.settrace(old_trace)
     return tracer.detect_roles()

@@ -1,3 +1,5 @@
+CODE := src tests  # exclude sdxpy from checking
+
 all: commands
 
 ## commands: show available commands (*)
@@ -8,21 +10,22 @@ commands:
 
 ## check: check code issues
 check:
-	@ruff check .
+	@ruff check ${CODE}
 
 ## clean: clean up
 clean:
 	@find . -path ./.venv -prune -o -type d -name __pycache__ -exec rm -rf {} +
 	@find . -path ./.venv -prune -o -type d -name .ruff_cache -exec rm -rf {} +
 	@find . -path ./.venv -prune -o -type f -name '*~' -exec rm {} +
+	@rm -rf ./dist
 
 ## fix: fix code issues
 fix:
-	@ruff check --fix .
+	@ruff check --fix ${CODE}
 
 ## format: format code
 format:
-	@ruff format .
+	@ruff format ${CODE}
 
 ## test: test code
 test:

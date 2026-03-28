@@ -1,6 +1,5 @@
 """Tests for static role classifiers in roles.py."""
 
-import pytest
 from conftest import role_of
 
 from jorma import (
@@ -330,3 +329,140 @@ x = 0
 x = x + y
 """
     assert role_of(src, "x") == UNKNOWN
+
+
+# ---------------------------------------------------------------------------
+# AST node coverage: visit_ClassDef
+# ---------------------------------------------------------------------------
+
+
+def test_class_def_variable_inside_class():
+    src = """
+class Foo:
+    x = 1
+"""
+    assert role_of(src, "x", "module.Foo") == FIXED_VALUE
+
+
+# ---------------------------------------------------------------------------
+# AST node coverage: for-loop tuple unpacking target
+# ---------------------------------------------------------------------------
+
+
+def test_for_tuple_unpack_target():
+    src = """
+pairs = [(1, 2), (3, 4)]
+for a, b in pairs:
+    pass
+"""
+    assert role_of(src, "a") == STEPPER
+    assert role_of(src, "b") == STEPPER
+
+
+# ---------------------------------------------------------------------------
+# AST node coverage: starred assignment target
+# ---------------------------------------------------------------------------
+
+
+def test_starred_assignment_target():
+    src = """
+items = [1, 2, 3, 4]
+first, *rest = items
+"""
+    assert role_of(src, "first") == FIXED_VALUE
+    assert role_of(src, "rest") == FIXED_VALUE
+
+
+# ---------------------------------------------------------------------------
+# AST node coverage: visit_AugAssign first_line and cond tracking
+# ---------------------------------------------------------------------------
+
+
+def test_aug_assign_no_prior_assignment():
+    # x += 1 with no prior assignment: first_line must still be recorded.
+    src = """
+x = 0
+x += 1
+"""
+    from jorma import analyze
+    results = {v.name: v for v, _ in analyze(src)}
+    assert results["x"].first_line > 0
+
+
+def test_aug_assign_inside_if_inside_loop():
+    # "+=" inside an if inside a loop exercises cond_depth tracking.
+    src = """
+total = 0
+for x in range(10):
+    if x % 2 == 0:
+        total += x
+"""
+    assert role_of(src, "total") == GATHERER
+
+
+def test_aug_assign_inside_if_outside_loop():
+    # "+=" inside an if outside a loop exercises any_cond_depth tracking.
+    # x += 1 sets aug_assigns, so it is not fixed value and falls through to unknown.
+    src = """
+x = 0
+flag = True
+if flag:
+    x += 1
+"""
+    assert role_of(src, "x") == UNKNOWN
+
+
+# ---------------------------------------------------------------------------
+# AST node coverage: visit_AnnAssign
+# ---------------------------------------------------------------------------
+
+
+def test_annotated_assignment():
+    src = "x: int = 5"
+    assert role_of(src, "x") == FIXED_VALUE
+
+
+# ---------------------------------------------------------------------------
+# AST node coverage: visit_NamedExpr (walrus operator)
+# ---------------------------------------------------------------------------
+
+
+def test_walrus_operator():
+    src = """
+items = [1, 2, 3]
+if (n := len(items)) > 0:
+    pass
+"""
+    assert role_of(src, "n") == FIXED_VALUE
+
+
+# ---------------------------------------------------------------------------
+# AST node coverage: visit_With
+# ---------------------------------------------------------------------------
+
+
+def test_with_statement_bound_variable():
+    src = """
+with open("f") as fh:
+    pass
+"""
+    from jorma import analyze
+    results = {v.name: v for v, _ in analyze(src)}
+    assert "fh" in results
+
+
+# ---------------------------------------------------------------------------
+# AST node coverage: visit_ExceptHandler
+# ---------------------------------------------------------------------------
+
+
+def test_except_handler_bound_variable():
+    src = """
+try:
+    pass
+except ValueError as e:
+    pass
+"""
+    from jorma import analyze
+    results = {v.name: v for v, _ in analyze(src)}
+    assert "e" in results

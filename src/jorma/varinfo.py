@@ -17,12 +17,12 @@ class VarInfo:
 
     # Augmented assignments (+=, -=, *=, …)
     aug_assigns: int = 0
-    aug_by_const: int = 0  # rhs is a literal constant
-    aug_by_var: int = 0  # rhs contains another variable
+    aug_by_const: int = 0  # RHS is a literal constant
+    aug_by_var: int = 0  # RHS contains another variable
 
     # Non-augmented self-referential assignments (x = x + 1, x = f(x, y))
-    self_ref_const: int = 0  # rhs uses only self and literals
-    self_ref_var: int = 0  # rhs uses self plus at least one other variable
+    self_ref_const: int = 0  # RHS uses only self and literals
+    self_ref_var: int = 0  # RHS uses self plus at least one other variable
 
     # Toggle pattern: x = not x  |  x = C - x  |  x ^= 1
     toggle_pattern: int = 0
